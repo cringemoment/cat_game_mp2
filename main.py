@@ -22,13 +22,16 @@ test_spritelist = {
 }
 
 test_controller_spritelist = {
-"idle": "player2_idle".png
+"idle": "player2_idle.png"
 }
 
-testplayer = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
-testplayer2 = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
+testcontroller = pygame.joystick.Joystick(0)
+testcontroller.init()
 
-player_group = pygame.sprite.Group(testplayer)
+testplayer = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
+testplayer2 = Player((100, 100), {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_controller_spritelist, testcontroller)
+
+sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
 s.fill(background_color)
 
@@ -48,8 +51,8 @@ while running:
     #getting the change in time between frames
     dt = clock.tick(MAX_FRAMES) / 1000
 
-    player_group.update(testlevel.collision_tiles, dt)
-    player_group.draw(s)
+    sprites.update(testlevel.collision_tiles, dt)
+    sprites.draw(s)
 
     testlevel.draw(s)
     pygame.display.flip()

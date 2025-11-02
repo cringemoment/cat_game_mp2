@@ -1,6 +1,8 @@
 import pygame
+import math
 
-from src.spriteobject import SpriteObject
+from src.spriteobject import Sprite
+from src.gun import Gun
 
 #each tile is 32 pixels
 #time is measured in seconds
@@ -10,16 +12,18 @@ FRICTION = 0.8
 MAXX_VELO = 10
 JUMP_POWER = 12
 COYOTE_TIME = 0.1
-X_ACEL = 1.3
+X_ACEL = 1.4
 
-class Player(SpriteObject):
-    def __init__(self, coords, controls, sprites):
+CONTROLLER_DEADZONE = 0.08 #avoid controller drift, just in case
+
+class Player(Sprite):
+    def __init__(self, coords, controls, sprites, joystick = None):
         super().__init__(sprites)
 
         #handling controls
-        self.jump = controls["jump"]
-        self.left = controls["left"]
-        self.right = controls["right"]
+        self.controls = controls
+        self.joystick = joystick
+        self.leftclick_down = False
 
         #temp image
         # self.image = pygame.Surface((32, 32))
@@ -39,20 +43,48 @@ class Player(SpriteObject):
         self.on_ground = False
         self.coyote_time = 0
 
+        self.gun = Gun(self)
+        self.aim_angle = 0
+
+    def shoot(self):
+        self.gun.shoot()
+
     def handle_input(self):
-        keys = pygame.key.get_pressed()
+        if not self.joystick: #handling kb first
+            keys = pygame.key.get_pressed()
 
-        # Horizontal movement
-        if keys[self.left]:
-            self.velx -= self.accel
-        if keys[self.right]:
-            self.velx += self.accel
+            # Horizontal movement
+            if keys[self.controls["left"]]:
+                self.velx -= self.accel
+            if keys[self.controls["right"]]:
+                self.velx += self.accel
 
-        # Jumping
-        if keys[self.jump] and (self.on_ground or self.coyote_time > 0):
-            self.vely = -JUMP_POWER
-            self.on_ground = False
-            self.coyote_time = 0
+            # Jumping
+            if keys[self.controls["jump"]] and (self.on_ground or self.coyote_time > 0):
+                self.vely = -JUMP_POWER
+                self.on_ground = False
+                self.coyote_time = 0
+
+            mouse_pressed = pygame.mouse.get_pressed()
+            if mouse_pressed[0]:  # left click
+                if not self.leftclick_down:
+                    self.shoot()
+                self.leftclick_down = True
+            else:
+                self.leftclick_down = False
+
+        else:
+            axis_x = self.joystick.get_axis(0) #the left-right motion of the first (left) joystick
+            if abs(axis_x) > CONTROLLER_DEADZONE:
+                self.velx += self.accel * axis_x
+
+            if self.joystick.get_button(0) and (self.on_ground or self.coyote_time > 0):
+                self.vely = -JUMP_POWER
+                self.on_ground = False
+                self.coyote_time = 0
+
+            if self.joystick.get_button(5):
+                self.shoot()
 
         # Clamp horizontal velocity
         if self.velx > MAXX_VELO:
@@ -70,7 +102,7 @@ class Player(SpriteObject):
             if self.velx > 0:
                 self.velx = 0
 
-    def update_pos(self, tiles, dt):
+    def update_pos(self, tiles, dt, *args):
         #dealing with horizontal movement first
         self.x += self.velx
         self.rect.x = int(self.x)
@@ -107,6 +139,21 @@ class Player(SpriteObject):
         elif self.coyote_time > 0:
             self.coyote_time -= dt
 
+    def update_aim(self):
+        if self.joystick:
+            axis_x = self.joystick.get_axis(2)
+            axis_y = self.joystick.get_axis(3)
+
+            if abs(axis_x) > CONTROLLER_DEADZONE or abs(axis_y) > CONTROLLER_DEADZONE:
+                self.aim_angle = math.degrees(math.atan2(-axis_y, axis_x))
+        else:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            dx = mouse_x - self.rect.centerx
+            dy = mouse_y - self.rect.centery
+            self.aim_angle = math.degrees(math.atan2(-dy, dx))
+
     def update(self, tiles, dt):
         self.handle_input()
         self.update_pos(tiles, dt)
+        self.update_aim()
+        self.gun.update()
