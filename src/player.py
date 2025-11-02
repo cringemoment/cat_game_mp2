@@ -1,13 +1,20 @@
 import pygame
 
+from src.spriteobject import SpriteObject
+
+#each tile is 32 pixels
+#time is measured in seconds
+#acceleration is measured in pixels per frame
 GRAVITY = 0.5
 FRICTION = 0.8
 MAXX_VELO = 10
 JUMP_POWER = 12
+COYOTE_TIME = 0.1
+X_ACEL = 1.3
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self, coords, controls):
-        super().__init__()
+class Player(SpriteObject):
+    def __init__(self, coords, controls, sprites):
+        super().__init__(sprites)
 
         #handling controls
         self.jump = controls["jump"]
@@ -15,16 +22,22 @@ class Player(pygame.sprite.Sprite):
         self.right = controls["right"]
 
         #temp image
-        self.image = pygame.Surface((32, 32))
-        self.image.fill((255, 0, 0))
-        self.rect = self.image.get_rect(topleft=coords)
+        # self.image = pygame.Surface((32, 32))
+        # self.image.fill((255, 0, 0))
+        # self.rect = self.image.get_rect(topleft = coords)
+
+        self.change_image("idle")
+        self.rect = self.image.get_rect(topleft = coords)
 
         #movement stuff
         self.x, self.y = coords
         self.velx = 0
         self.vely = 0
+        self.accel = X_ACEL
+
+        #Coyote time implementation
         self.on_ground = False
-        self.accel = 1.5
+        self.coyote_time = 0
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
@@ -36,9 +49,10 @@ class Player(pygame.sprite.Sprite):
             self.velx += self.accel
 
         # Jumping
-        if keys[self.jump] and self.on_ground:
+        if keys[self.jump] and (self.on_ground or self.coyote_time > 0):
             self.vely = -JUMP_POWER
             self.on_ground = False
+            self.coyote_time = 0
 
         # Clamp horizontal velocity
         if self.velx > MAXX_VELO:
@@ -47,18 +61,17 @@ class Player(pygame.sprite.Sprite):
             self.velx = -MAXX_VELO
 
         # Friction
-        if not keys[pygame.K_a] and not keys[pygame.K_d]:
+        if self.velx > 0:
+            self.velx -= FRICTION
+            if self.velx < 0:
+                self.velx = 0
+        elif self.velx < 0:
+            self.velx += FRICTION
             if self.velx > 0:
-                self.velx -= FRICTION
-                if self.velx < 0:
-                    self.velx = 0
-            elif self.velx < 0:
-                self.velx += FRICTION
-                if self.velx > 0:
-                    self.velx = 0
+                self.velx = 0
 
-    def update_pos(self, tiles):
-        # --- Horizontal movement ---
+    def update_pos(self, tiles, dt):
+        #dealing with horizontal movement first
         self.x += self.velx
         self.rect.x = int(self.x)
 
@@ -71,7 +84,7 @@ class Player(pygame.sprite.Sprite):
                 self.velx = 0
                 self.x = self.rect.x
 
-        # --- Vertical movement ---
+        #then vertical acceleration
         self.vely += GRAVITY
         self.y += self.vely
         self.rect.y = int(self.y)
@@ -88,6 +101,12 @@ class Player(pygame.sprite.Sprite):
                     self.vely = 0
                 self.y = self.rect.y
 
-    def update(self, tiles):
+        #dealing with coyote time
+        if self.on_ground:
+            self.coyote_time = COYOTE_TIME
+        elif self.coyote_time > 0:
+            self.coyote_time -= dt
+
+    def update(self, tiles, dt):
         self.handle_input()
-        self.update_pos(tiles)
+        self.update_pos(tiles, dt)

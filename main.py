@@ -16,7 +16,17 @@ pygame.display.set_caption(WINDOW_TITLE)
 background_color = (30, 30, 30)
 
 testlevel = load_tilemap(s, "levels/testlevel.tmx")
-testplayer = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d})
+
+test_spritelist = {
+"idle": "player1_idle.png"
+}
+
+test_controller_spritelist = {
+"idle": "player2_idle".png
+}
+
+testplayer = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
+testplayer2 = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
 
 player_group = pygame.sprite.Group(testplayer)
 
@@ -27,7 +37,6 @@ clock = pygame.time.Clock()
 
 while running:
     for event in pygame.event.get():
-        #debug to see whats being printed
         # if event.type == pygame.KEYDOWN:
         #     print(f"Key pressed: {pygame.key.name(event.key)}")
 
@@ -36,12 +45,13 @@ while running:
 
     s.fill(background_color)
 
-    player_group.update(testlevel.collision_tiles)
+    #getting the change in time between frames
+    dt = clock.tick(MAX_FRAMES) / 1000
+
+    player_group.update(testlevel.collision_tiles, dt)
     player_group.draw(s)
 
     testlevel.draw(s)
     pygame.display.flip()
-
-    clock.tick(MAX_FRAMES)
 
 pygame.quit()

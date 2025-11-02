@@ -7,7 +7,7 @@ class Tile(pygame.sprite.Sprite):
         self.image = image
         self.rect = self.image.get_rect(topleft=(x * tile_size, y * tile_size))
 
-
+#lot of copy pasted boilerplate
 class TileMap:
     def __init__(self, tmx_data):
         self.tmx_data = tmx_data
@@ -16,8 +16,8 @@ class TileMap:
         self.height = tmx_data.height * self.tile_size
 
         # Separate sprite groups for collisions vs visuals
-        self.collision_tiles = pygame.sprite.Group()  # only collidable tiles
-        self.decorations = pygame.sprite.Group()      # visual only tiles
+        self.collision_tiles = pygame.sprite.Group()  #collision tiles
+        self.decorations = pygame.sprite.Group()      #bg tiles
 
         self.spawn_pos = (0, 0)
         self.load_tiles()
