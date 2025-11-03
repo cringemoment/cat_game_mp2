@@ -25,11 +25,11 @@ test_controller_spritelist = {
 "idle": "player2_idle.png"
 }
 
-testcontroller = pygame.joystick.Joystick(0)
-testcontroller.init()
+# testcontroller = pygame.joystick.Joystick(0)
+# testcontroller.init()
 
 testplayer = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
-testplayer2 = Player((100, 100), {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_controller_spritelist, testcontroller)
+testplayer2 = Player((100, 100), {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_controller_spritelist)
 
 sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
