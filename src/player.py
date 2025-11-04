@@ -1,7 +1,7 @@
 import pygame
 import math
 
-from src.spriteobject import Sprite
+from src.physicsobject import PhysicsObject
 from src.gun import Gun
 
 #each tile is 32 pixels
@@ -14,9 +14,9 @@ JUMP_POWER = 12
 COYOTE_TIME = 0.1
 X_ACEL = 1.4
 
-CONTROLLER_DEADZONE = 0.08 #avoid controller drift, just in case
+CONTROLLER_DEADZONE = 0.05 #avoid controller drift, just in case
 
-class Player(Sprite):
+class Player(PhysicsObject):
     def __init__(self, coords, controls, sprites, joystick = None):
         super().__init__(sprites)
 
@@ -24,6 +24,7 @@ class Player(Sprite):
         self.controls = controls
         self.joystick = joystick
         self.leftclick_down = False
+        self.keys_pressed = []
 
         #temp image
         # self.image = pygame.Surface((32, 32))
@@ -49,21 +50,74 @@ class Player(Sprite):
     def shoot(self):
         self.gun.shoot()
 
+    def go_horizontal(self, dir = None):
+        if dir:
+            self.velx += self.accel * dir
+        else:
+            self.velx += self.accel * self.joystick.get_axis(0)
+
+    def jump(self):
+        self.vely = -JUMP_POWER
+        self.on_ground = False
+        self.coyote_time = 0
+
+    def crouch(self):
+        bottom = self.rect.bottom
+        self.change_image("crouch")
+        self.rect.bottom = bottom
+
+    def uncrouch(self):
+        self.change_image("idle")
+
     def handle_input(self):
-        if not self.joystick: #handling kb first
+        held_controls = {
+            "left": lambda: self.go_horizontal(-1),
+            "right": lambda: self.go_horizontal(1)
+        }
+
+        keydown_events = {
+            "left": lambda: self.set_facing(-1),
+            "right": lambda: self.set_facing(1),
+            "crouch": lambda: self.crouch()
+        }
+
+        keyup_events = {
+            "crouch": lambda: self.uncrouch()
+        }
+
+        if not self.joystick: #handl ing kb first
             keys = pygame.key.get_pressed()
 
             # Horizontal movement
-            if keys[self.controls["left"]]:
-                self.velx -= self.accel
-            if keys[self.controls["right"]]:
-                self.velx += self.accel
+            # if keys[self.controls["left"]]:
+            #     self.go_horizontal(-1)
+            # if keys[self.controls["right"]]:
+            #     self.go_horizontal(1)
+
+            for control in held_controls:
+                if keys[self.controls[control]]:
+                    held_controls[control]()
+
+            for control in keydown_events:
+                if keys[self.controls[control]]:
+                    if control not in self.keys_pressed:
+                        keydown_events[control]()
+                        self.keys_pressed.append(control)
+                else:
+                    if control in self.keys_pressed:
+                        self.keys_pressed.remove(control)
+                        if control in keyup_events:
+                            keyup_events[control]()
 
             # Jumping
             if keys[self.controls["jump"]] and (self.on_ground or self.coyote_time > 0):
-                self.vely = -JUMP_POWER
-                self.on_ground = False
-                self.coyote_time = 0
+                self.jump()
+
+            # Crouching
+            # if keys[self.controls["crouch"]]:
+            #     self.crouch()
+            # else:
+            #     self.uncrouch()
 
             mouse_pressed = pygame.mouse.get_pressed()
             if mouse_pressed[0]:  # left click
@@ -76,7 +130,7 @@ class Player(Sprite):
         else:
             axis_x = self.joystick.get_axis(0) #the left-right motion of the first (left) joystick
             if abs(axis_x) > CONTROLLER_DEADZONE:
-                self.velx += self.accel * axis_x
+                self.go_horizontal()
 
             if self.joystick.get_button(0) and (self.on_ground or self.coyote_time > 0):
                 self.vely = -JUMP_POWER
@@ -102,38 +156,7 @@ class Player(Sprite):
             if self.velx > 0:
                 self.velx = 0
 
-    def update_pos(self, tiles, dt, *args):
-        #dealing with horizontal movement first
-        self.x += self.velx
-        self.rect.x = int(self.x)
-
-        for tile in tiles:
-            if self.rect.colliderect(tile.rect):
-                if self.velx > 0:  # moving right
-                    self.rect.right = tile.rect.left
-                elif self.velx < 0:  # moving left
-                    self.rect.left = tile.rect.right
-                self.velx = 0
-                self.x = self.rect.x
-
-        #then vertical acceleration
-        self.vely += GRAVITY
-        self.y += self.vely
-        self.rect.y = int(self.y)
-        self.on_ground = False
-
-        for tile in tiles:
-            if self.rect.colliderect(tile.rect):
-                if self.vely > 0:  # falling
-                    self.rect.bottom = tile.rect.top
-                    self.vely = 0
-                    self.on_ground = True
-                elif self.vely < 0:  # jumping
-                    self.rect.top = tile.rect.bottom
-                    self.vely = 0
-                self.y = self.rect.y
-
-        #dealing with coyote time
+    def update_timers(self, dt):
         if self.on_ground:
             self.coyote_time = COYOTE_TIME
         elif self.coyote_time > 0:
@@ -155,5 +178,6 @@ class Player(Sprite):
     def update(self, tiles, dt):
         self.handle_input()
         self.update_pos(tiles, dt)
+        self.update_timers(dt)
         self.update_aim()
         self.gun.update()

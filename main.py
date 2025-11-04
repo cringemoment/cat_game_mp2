@@ -18,20 +18,34 @@ background_color = (30, 30, 30)
 testlevel = load_tilemap(s, "levels/testlevel.tmx")
 
 test_spritelist = {
-"idle": "player1_idle.png"
+"idle": "smaller_test.png",
+"crouch": "smaller_crouch.png"
 }
 
 test_controller_spritelist = {
-"idle": "player2_idle.png"
+"idle": "player2_idle.png",
+"crouch": "player2_idle.png"
 }
 
-# testcontroller = pygame.joystick.Joystick(0)
-# testcontroller.init()
+test_controls = {
+    "jump": pygame.K_SPACE,
+    "left": pygame.K_a,
+    "right": pygame.K_d,
+    "crouch": pygame.K_s
+}
 
-testplayer = Player(testlevel.spawn_pos, {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_spritelist)
-testplayer2 = Player((100, 100), {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_controller_spritelist)
+try:
+    testcontroller = pygame.joystick.Joystick(0)
+    testcontroller.init()
 
-sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
+    testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
+    testplayer2 = Player((100, 100), {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_controller_spritelist)
+except:
+    print("controller no work")
+    testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
+    testplayer2 = Player((100, 100), test_controls, test_controller_spritelist)
+
+sprites = pygame.sprite.Group(testplayer, testplayer2)
 
 s.fill(background_color)
 
