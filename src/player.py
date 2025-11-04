@@ -1,6 +1,8 @@
 import pygame
 import math
 
+from src.playerinput import InputHandler, CONTROLLER_DEADZONE
+
 from src.physicsobject import PhysicsObject
 from src.gun import Gun
 
@@ -12,13 +14,12 @@ JUMP_POWER = 12
 COYOTE_TIME = 0.15
 X_ACEL = 1.6
 
-CONTROLLER_DEADZONE = 0.05 #avoid controller drift, just in case
-
 class Player(PhysicsObject):
     def __init__(self, coords, controls, sprites, joystick = None):
         super().__init__(sprites)
 
         #handling controls
+        self.input_handler = InputHandler(self, controls, joystick)
         self.controls = controls
         self.joystick = joystick
         self.leftclick_down = False
@@ -47,11 +48,11 @@ class Player(PhysicsObject):
     def shoot(self):
         self.gun.shoot()
 
-    def go_horizontal(self, dir = None):
-        if dir:
-            self.velx += self.accel * dir
-        else:
+    def go_horizontal(self, dir):
+        if self.joystick:
             self.velx += self.accel * self.joystick.get_axis(0)
+        else:
+            self.velx += self.accel * dir
 
     def jump(self):
         if self.on_ground or self.coyote_time > 0:
@@ -66,78 +67,6 @@ class Player(PhysicsObject):
 
     def uncrouch(self):
         self.change_image("idle")
-
-    def handle_input(self):
-        held_controls = {
-            "left": lambda: self.go_horizontal(-1),
-            "right": lambda: self.go_horizontal(1),
-            "jump": lambda: self.jump()
-        }
-
-        keydown_events = {
-            "left": lambda: self.set_facing(-1),
-            "right": lambda: self.set_facing(1),
-            "crouch": lambda: self.crouch()
-        }
-
-        keyup_events = {
-            "crouch": lambda: self.uncrouch()
-        }
-
-        if not self.joystick: #handl ing kb first
-            keys = pygame.key.get_pressed()
-
-            # Horizontal movement
-            # if keys[self.controls["left"]]:
-            #     self.go_horizontal(-1)
-            # if keys[self.controls["right"]]:
-            #     self.go_horizontal(1)
-
-            for control in held_controls:
-                if keys[self.controls[control]]:
-                    held_controls[control]()
-
-            for control in keydown_events:
-                if keys[self.controls[control]]:
-                    if control not in self.keys_pressed:
-                        keydown_events[control]()
-                        self.keys_pressed.append(control)
-                else:
-                    if control in self.keys_pressed:
-                        self.keys_pressed.remove(control)
-                        if control in keyup_events:
-                            keyup_events[control]()
-
-            # Jumping
-            # if keys[self.controls["jump"]] and (self.on_ground or self.coyote_time > 0):
-            #     self.jump()
-
-            # Crouching
-            # if keys[self.controls["crouch"]]:
-            #     self.crouch()
-            # else:
-            #     self.uncrouch()
-
-            mouse_pressed = pygame.mouse.get_pressed()
-            if mouse_pressed[0]:  # left click
-                if not self.leftclick_down:
-                    self.shoot()
-                self.leftclick_down = True
-            else:
-                self.leftclick_down = False
-
-        else:
-            axis_x = self.joystick.get_axis(0) #the left-right motion of the first (left) joystick
-            if abs(axis_x) > CONTROLLER_DEADZONE:
-                self.go_horizontal()
-
-            if self.joystick.get_button(0) and (self.on_ground or self.coyote_time > 0):
-                self.vely = -JUMP_POWER
-                self.on_ground = False
-                self.coyote_time = 0
-
-            if self.joystick.get_button(5):
-                self.shoot()
 
     def update_timers(self, dt):
         if self.on_ground:
@@ -159,7 +88,7 @@ class Player(PhysicsObject):
             self.aim_angle = math.degrees(math.atan2(-dy, dx))
 
     def update(self, tiles, dt):
-        self.handle_input()
+        self.input_handler.handle_inputs()
         self.update_pos(tiles, dt)
         self.update_aim()
         self.gun.update()

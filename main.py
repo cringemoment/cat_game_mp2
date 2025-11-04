@@ -2,6 +2,8 @@ import pygame
 from src.loadtilemap import load_tilemap
 from src.player import Player
 
+from src.playerinput import Controller, Keyboard
+
 pygame.init()
 
 WINDOW_WIDTH = 960
@@ -23,29 +25,41 @@ test_spritelist = {
 }
 
 test_controller_spritelist = {
-"idle": "player2_idle.png",
-"crouch": "player2_idle.png"
+"idle": "player2_smaller.png",
+"crouch": "player2_crouch.png"
 }
 
+keyboard = Keyboard()
 test_controls = {
-    "jump": pygame.K_SPACE,
-    "left": pygame.K_a,
-    "right": pygame.K_d,
-    "crouch": pygame.K_s
+    "jump": keyboard.get_key(pygame.K_SPACE),
+    "left": keyboard.get_key(pygame.K_a),
+    "right": keyboard.get_key(pygame.K_d),
+    "crouch": keyboard.get_key(pygame.K_s),
+    "shoot": keyboard.lmb
 }
 
 try:
     testcontroller = pygame.joystick.Joystick(0)
     testcontroller.init()
 
+    controller = Controller(testcontroller)
+    test_controller_controls = {
+        "jump": controller.B_down,
+        "left": controller.J1_left,
+        "right": controller.J1_right,
+        "crouch": controller.J1_down,
+        "shoot": controller.RB
+    }
+
     testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
-    testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist, testcontroller)
-except:
+    testplayer2 = Player(testlevel.second_spawn_pos, test_controller_controls, test_controller_spritelist, testcontroller)
+except Exception as e:
+    print(e)
     print("controller no work")
     testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
     testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist)
 
-sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
+sprites = pygame.sprite.Group(testplayer, testplayer2)
 
 s.fill(background_color)
 
@@ -53,20 +67,18 @@ running = True
 clock = pygame.time.Clock()
 
 debugs = {
-    "velx": lambda: testplayer.velx,
-    "vely": lambda: testplayer.vely,
-    "grounded": lambda: testplayer.on_ground,
-    "coyote": lambda: testplayer.coyote_time
+    # "velx": lambda: testplayer.velx,
+    # "vely": lambda: testplayer.vely,
+    # "grounded": lambda: testplayer.on_ground,
+    # "coyote": lambda: testplayer.coyote_time
 }
 
 def print_debugs():
     font = pygame.font.SysFont('Comic Sans MS', 20)
-    top = font.render("Debug", False, (255, 255, 255), (0, 0, 0))
-    s.blit(top, (10, 10))
     for i, var in enumerate(debugs):
         color = (0, 255, 0) if bool(debugs[var]()) else (255, 0, 0)
-        text = font.render(f"{var}: {debugs[var]()}", False, color)
-        s.blit(text, (10, i * 30 + 30))
+        text = font.render(f"{var}: {debugs[var]()}", False, color, (0, 0, 0))
+        s.blit(text, (10, i * 30 + 10))
     # s.blit(test)
 
 while running:
