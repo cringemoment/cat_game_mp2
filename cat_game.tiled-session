@@ -1,0 +1,54 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "levels/testlevel.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "levels/shootingpractice.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 224.66666666666663,
+                "y": 363.33333333333326
+            }
+        },
+        "levels/test.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "levels/testlevel.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 391.5,
+                "y": 263.5
+            }
+        },
+        "levels/testplayer.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        }
+    },
+    "last.imagePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/tilesets",
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+        "levels/testlevel.tmx",
+        "levels/test.tsx",
+        "levels/testplayer.tsx"
+    ],
+    "project": "cat_game.tiled-project",
+    "recentFiles": [
+        "levels/testplayer.tsx",
+        "levels/shootingpractice.tmx",
+        "levels/test.tsx",
+        "levels/testlevel.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}

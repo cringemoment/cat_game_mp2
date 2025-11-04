@@ -7,12 +7,10 @@ from src.gun import Gun
 #each tile is 32 pixels
 #time is measured in seconds
 #acceleration is measured in pixels per frame
-GRAVITY = 0.5
-FRICTION = 0.8
-MAXX_VELO = 10
+MAXX_VELO = 8
 JUMP_POWER = 12
-COYOTE_TIME = 0.1
-X_ACEL = 1.4
+COYOTE_TIME = 0.15
+X_ACEL = 1.6
 
 CONTROLLER_DEADZONE = 0.05 #avoid controller drift, just in case
 
@@ -36,8 +34,7 @@ class Player(PhysicsObject):
 
         #movement stuff
         self.x, self.y = coords
-        self.velx = 0
-        self.vely = 0
+        self.maxx_velo = MAXX_VELO
         self.accel = X_ACEL
 
         #Coyote time implementation
@@ -57,9 +54,10 @@ class Player(PhysicsObject):
             self.velx += self.accel * self.joystick.get_axis(0)
 
     def jump(self):
-        self.vely = -JUMP_POWER
-        self.on_ground = False
-        self.coyote_time = 0
+        if self.on_ground or self.coyote_time > 0:
+            self.vely = -JUMP_POWER
+            self.on_ground = False
+            self.coyote_time = 0
 
     def crouch(self):
         bottom = self.rect.bottom
@@ -72,7 +70,8 @@ class Player(PhysicsObject):
     def handle_input(self):
         held_controls = {
             "left": lambda: self.go_horizontal(-1),
-            "right": lambda: self.go_horizontal(1)
+            "right": lambda: self.go_horizontal(1),
+            "jump": lambda: self.jump()
         }
 
         keydown_events = {
@@ -110,8 +109,8 @@ class Player(PhysicsObject):
                             keyup_events[control]()
 
             # Jumping
-            if keys[self.controls["jump"]] and (self.on_ground or self.coyote_time > 0):
-                self.jump()
+            # if keys[self.controls["jump"]] and (self.on_ground or self.coyote_time > 0):
+            #     self.jump()
 
             # Crouching
             # if keys[self.controls["crouch"]]:
@@ -140,22 +139,6 @@ class Player(PhysicsObject):
             if self.joystick.get_button(5):
                 self.shoot()
 
-        # Clamp horizontal velocity
-        if self.velx > MAXX_VELO:
-            self.velx = MAXX_VELO
-        elif self.velx < -MAXX_VELO:
-            self.velx = -MAXX_VELO
-
-        # Friction
-        if self.velx > 0:
-            self.velx -= FRICTION
-            if self.velx < 0:
-                self.velx = 0
-        elif self.velx < 0:
-            self.velx += FRICTION
-            if self.velx > 0:
-                self.velx = 0
-
     def update_timers(self, dt):
         if self.on_ground:
             self.coyote_time = COYOTE_TIME
@@ -178,6 +161,5 @@ class Player(PhysicsObject):
     def update(self, tiles, dt):
         self.handle_input()
         self.update_pos(tiles, dt)
-        self.update_timers(dt)
         self.update_aim()
         self.gun.update()

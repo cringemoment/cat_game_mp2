@@ -3,6 +3,7 @@ import pygame
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, sprites):
         super().__init__()
+
         self.sprites = {}
         self.facing = 1 #1 is right
         #by default all sprites should face right

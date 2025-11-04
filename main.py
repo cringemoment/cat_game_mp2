@@ -39,18 +39,35 @@ try:
     testcontroller.init()
 
     testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
-    testplayer2 = Player((100, 100), {"jump": pygame.K_SPACE, "left": pygame.K_a, "right": pygame.K_d}, test_controller_spritelist)
+    testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist, testcontroller)
 except:
     print("controller no work")
     testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
-    testplayer2 = Player((100, 100), test_controls, test_controller_spritelist)
+    testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist)
 
-sprites = pygame.sprite.Group(testplayer, testplayer2)
+sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
 s.fill(background_color)
 
 running = True
 clock = pygame.time.Clock()
+
+debugs = {
+    "velx": lambda: testplayer.velx,
+    "vely": lambda: testplayer.vely,
+    "grounded": lambda: testplayer.on_ground,
+    "coyote": lambda: testplayer.coyote_time
+}
+
+def print_debugs():
+    font = pygame.font.SysFont('Comic Sans MS', 20)
+    top = font.render("Debug", False, (255, 255, 255), (0, 0, 0))
+    s.blit(top, (10, 10))
+    for i, var in enumerate(debugs):
+        color = (0, 255, 0) if bool(debugs[var]()) else (255, 0, 0)
+        text = font.render(f"{var}: {debugs[var]()}", False, color)
+        s.blit(text, (10, i * 30 + 30))
+    # s.blit(test)
 
 while running:
     for event in pygame.event.get():
@@ -69,6 +86,9 @@ while running:
     sprites.draw(s)
 
     testlevel.draw(s)
+
+    print_debugs()
+
     pygame.display.flip()
 
 pygame.quit()

@@ -20,6 +20,7 @@ class TileMap:
         self.decorations = pygame.sprite.Group()      #bg tiles
 
         self.spawn_pos = (0, 0)
+        self.second_spawn_pos = (0, 0)
         self.load_tiles()
 
     def load_tiles(self):
@@ -39,6 +40,8 @@ class TileMap:
                 for obj in layer:
                     if obj.name == "player":
                         self.spawn_pos = (obj.x, obj.y)
+                    if obj.name == "player_2":
+                        self.second_spawn_pos = (obj.x, obj.y)
 
     def draw(self, surface):
         self.decorations.draw(surface)  # draw decorations first

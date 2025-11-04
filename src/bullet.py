@@ -1,9 +1,11 @@
 import pygame
 import math
 
-from src.physicsobject import PhysicsObject
+from src.physicsobject import PhysicsObject, GRAVITY, FRICTION
 
-BULLET_SPEED = 800  # pixels per second
+BULLET_SPEED = 2000
+PLAYER_HIT_STRENGTH = 25
+BULLET_LIFETIME = 1
 
 class Bullet(PhysicsObject):
     def __init__(self, pos, angle):
@@ -12,6 +14,7 @@ class Bullet(PhysicsObject):
         self.image = pygame.Surface((3, 3))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect(center=pos)
+        self.lifetime = BULLET_LIFETIME
 
         self.x, self.y = pos
 
@@ -22,5 +25,20 @@ class Bullet(PhysicsObject):
 
         self.update_pos(tiles, dt)
 
-    def on_collision(self, tiles):
+    def tile_collision(self, tiles):
+        self.kill()
+
+    def update_timers(self, dt):
+        self.lifetime -= dt
+        if self.lifetime < 0:
+            self.kill()
+
+    def sprite_collision(self, sprite):
+        if type(sprite).__name__ == "Player": #checking if it hit a player
+            rad = math.radians(self.angle)
+            sprite.velx += math.cos(rad) * PLAYER_HIT_STRENGTH
+            sprite.vely -= math.sin(rad) * PLAYER_HIT_STRENGTH / 1.5 + 2
+
+            sprite.on_ground = False
+
         self.kill()
