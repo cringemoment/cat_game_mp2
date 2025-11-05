@@ -1,8 +1,13 @@
+#rn each layer is treated by its class
+#class physics_object are for physics objects
+#class level is for immovable tangible stuff
+#class decoration is for intangible stuff
+#class positions is for positions and stuff
+
 import pygame
 import pytmx
 
-#rn naming convention for levels is
-#any tile in "deco" is ignored
+from src.physicsobject import PhysicsObject
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self, image, x, y, tile_size):
@@ -18,9 +23,10 @@ class TileMap:
         self.width = tmx_data.width * self.tile_size
         self.height = tmx_data.height * self.tile_size
 
-        # Separate sprite groups for collisions vs visuals
-        self.collision_tiles = pygame.sprite.Group()  #collision tiles
-        self.decorations = pygame.sprite.Group()      #bg tiles
+        #separate sprite groups
+        self.collision_tiles = pygame.sprite.Group()
+        self.decorations = pygame.sprite.Group()
+        self.physics_objects = pygame.sprite.Group()
 
         self.spawn_pos = (0, 0)
         self.second_spawn_pos = (0, 0)
@@ -28,25 +34,30 @@ class TileMap:
 
     def load_tiles(self):
         for layer in self.tmx_data.visible_layers:
-            print(layer.name)
-            print(dir(layer))
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid in layer:
                     tile_image = self.tmx_data.get_tile_image_by_gid(gid)
                     if tile_image:
                         tile = Tile(tile_image, x, y, self.tile_size)
-                        # Collidable only if layer name is "level"
-                        if layer.name.lower() == "level":
+                        # Collidable only if layer class is "level"
+                        if getattr(layer, "class", None) == "level":
                             self.collision_tiles.add(tile)
                         else:
                             self.decorations.add(tile)
 
             elif isinstance(layer, pytmx.TiledObjectGroup):
-                for obj in layer:
-                    if obj.name == "player":
-                        self.spawn_pos = (obj.x, obj.y)
-                    if obj.name == "player_2":
-                        self.second_spawn_pos = (obj.x, obj.y)
+                if getattr(layer, "class", None) == "positions":
+                    for obj in layer:
+                        if obj.name == "player":
+                            self.spawn_pos = (obj.x, obj.y)
+                        if obj.name == "player_2":
+                            self.second_spawn_pos = (obj.x, obj.y)
+
+                elif getattr(layer, "class", None) == "physics_objects":
+                    for obj in layer:
+                        # physics_object = PhysicsObject({"default": "box.png"})
+                        print(obj)
+                        print(dir(obj))
 
     def draw(self, surface):
         self.decorations.draw(surface)  # draw decorations first

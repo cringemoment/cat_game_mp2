@@ -20,12 +20,12 @@ background_color = (30, 30, 30)
 testlevel = load_tilemap(s, "levels/testlevel.tmx")
 
 test_spritelist = {
-"idle": "smaller_test.png",
+"default": "smaller_test.png",
 "crouch": "smaller_crouch.png"
 }
 
 test_controller_spritelist = {
-"idle": "player2_smaller.png",
+"default": "player2_smaller.png",
 "crouch": "player2_crouch.png"
 }
 

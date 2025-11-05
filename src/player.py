@@ -25,7 +25,6 @@ class Player(PhysicsObject):
         self.leftclick_down = False
         self.keys_pressed = []
 
-        self.change_image("idle")
         self.rect = self.image.get_rect(topleft = coords)
 
         #movement stuff
@@ -60,12 +59,10 @@ class Player(PhysicsObject):
             self.coyote_time = 0
 
     def crouch(self):
-        bottom = self.rect.bottom
         self.change_image("crouch")
-        self.rect.bottom = bottom
 
     def uncrouch(self):
-        self.change_image("idle")
+        self.change_image("default")
 
     def update_timers(self, dt):
         if self.on_ground:
