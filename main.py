@@ -40,7 +40,6 @@ test_controls = {
 
 try:
     testcontroller = pygame.joystick.Joystick(0)
-    testcontroller.init()
 
     controller = Controller(testcontroller)
     test_controller_controls = {

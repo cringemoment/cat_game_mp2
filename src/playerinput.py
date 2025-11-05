@@ -53,14 +53,14 @@ class InputHandler:
         held_events = {
             "left": lambda: self.player.go_horizontal(-1),
             "right": lambda: self.player.go_horizontal(1),
-            "jump": lambda: self.player.jump()
         }
 
         keydown_events = {
             "left": lambda: self.player.set_facing(-1),
             "right": lambda: self.player.set_facing(1),
             "crouch": lambda: self.player.crouch(),
-            "shoot": lambda: self.player.shoot()
+            "shoot": lambda: self.player.shoot(),
+            "jump": lambda: self.player.jump()
         }
 
         keyup_events = {

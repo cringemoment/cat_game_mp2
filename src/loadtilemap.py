@@ -1,6 +1,9 @@
 import pygame
 import pytmx
 
+#rn naming convention for levels is
+#any tile in "deco" is ignored
+
 class Tile(pygame.sprite.Sprite):
     def __init__(self, image, x, y, tile_size):
         super().__init__()
@@ -25,6 +28,8 @@ class TileMap:
 
     def load_tiles(self):
         for layer in self.tmx_data.visible_layers:
+            print(layer.name)
+            print(dir(layer))
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid in layer:
                     tile_image = self.tmx_data.get_tile_image_by_gid(gid)

@@ -25,11 +25,6 @@ class Player(PhysicsObject):
         self.leftclick_down = False
         self.keys_pressed = []
 
-        #temp image
-        # self.image = pygame.Surface((32, 32))
-        # self.image.fill((255, 0, 0))
-        # self.rect = self.image.get_rect(topleft = coords)
-
         self.change_image("idle")
         self.rect = self.image.get_rect(topleft = coords)
 
@@ -41,6 +36,10 @@ class Player(PhysicsObject):
         #Coyote time implementation
         self.on_ground = False
         self.coyote_time = 0
+
+        #anti spam stuff
+        self.jump_timer = 0
+        self.shoot_timer = 0
 
         self.gun = Gun(self)
         self.aim_angle = 0
