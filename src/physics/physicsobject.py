@@ -9,7 +9,6 @@ AIR_RESISTANCE = 0.8
 MAXX_VELO = 20
 MAXY_VELO = 20
 
-
 class PhysicsObject(Sprite):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,6 +20,8 @@ class PhysicsObject(Sprite):
 
         self.maxx_velo = MAXX_VELO
         self.maxy_velo = MAXY_VELO
+
+        self.collision = False
 
     def touching_ground(self, rect2): #when on the ground, technically the rectangles are not colliding (they're touching)
         #a custom function is needed
@@ -36,48 +37,59 @@ class PhysicsObject(Sprite):
     def update_timers(self, dt):
         pass
 
-    def update_pos(self, tiles, dt):
-        #dealing with horizontal movement first
+    def handle_collisions(self, colliders):
         self.x += self.velx
         self.rect.x = int(self.x)
 
-        #checking for tile collision
-        for tile in tiles:
-            if self.rect.colliderect(tile.rect):
+        for obj in colliders:
+            if self.rect.colliderect(obj.rect):
                 if self.velx > 0:  # moving right
-                    self.rect.right = tile.rect.left
+                    self.rect.right = obj.rect.left
                 elif self.velx < 0:  # moving left
-                    self.rect.left = tile.rect.right
+                    self.rect.left = obj.rect.right
                 self.velx = 0
                 self.x = self.rect.x
 
-                self.tile_collision(tile)
+                if isinstance(obj, pygame.sprite.Sprite):
+                    self.sprite_collision(obj)
+                else:
+                    self.tile_collision(obj)
 
-        #then vertical acceleration
         self.vely += GRAVITY
-
-        self.y += int(self.vely)
-        self.rect.y = self.y
-
+        self.y += self.vely
+        self.rect.y = int(self.y)
         self.on_ground = False
 
-        for tile in tiles:
-            if self.rect.colliderect(tile):
+        for obj in colliders:
+            if self.rect.colliderect(obj.rect):
                 if self.vely <= 0:  # jumping
-                    self.rect.top = tile.rect.bottom
+                    self.rect.top = obj.rect.bottom
                     self.vely = 0
+                    if isinstance(obj, pygame.sprite.Sprite):
+                        self.sprite_collision(obj)
+                    else:
+                        self.tile_collision(obj)
 
-                self.tile_collision(tile)
-
-            if self.touching_ground(tile.rect):
-                if self.vely >= 0:  # falling
-                    self.rect.bottom = tile.rect.top + 0.1
-                    self.vely = 0
-                    self.on_ground = True
-
-                self.tile_collision(tile)
+                elif self.touching_ground(obj.rect):
+                    if self.vely >= 0:  # falling
+                        self.rect.bottom = obj.rect.top + 0.1
+                        self.vely = 0
+                        self.on_ground = True
+                        if isinstance(obj, pygame.sprite.Sprite):
+                            self.sprite_collision(obj)
+                        else:
+                            self.tile_collision(obj)
 
             self.y = self.rect.y
+
+    def update_pos(self, level, dt):
+        colliders = []
+        for i in self.groups():
+            colliders.extend([s for s in i if s is not self and getattr(s, "collision", False)])
+
+        colliders.extend(level.collision_tiles)
+
+        self.handle_collisions(colliders)
 
         if self.on_ground:
             dv = FRICTION
@@ -99,9 +111,7 @@ class PhysicsObject(Sprite):
         elif self.velx < -self.maxx_velo:
             self.velx = -self.maxx_velo
 
-        if self.groups(): #checking for if the sprite is in any groups because apparently itll still update after its killed :(((
-            for sprite in self.groups()[0]:
-                if sprite != self and self.rect.colliderect(sprite.rect):
-                    self.sprite_collision(sprite)
-
         self.update_timers(dt)
+
+    def update(self, level, dt):
+        self.update_pos(level, dt)

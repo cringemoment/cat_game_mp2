@@ -17,7 +17,7 @@ pygame.display.set_caption(WINDOW_TITLE)
 
 background_color = (30, 30, 30)
 
-testlevel = load_tilemap(s, "levels/testlevel.tmx")
+testlevel = load_tilemap(s, "levels/boxworld.tmx")
 
 test_spritelist = {
 "default": "smaller_test.png",
@@ -58,7 +58,9 @@ except Exception as e:
     testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
     testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist)
 
-sprites = pygame.sprite.Group(testplayer, testplayer2)
+sprites = testlevel.physics_objects
+sprites.add(testplayer, testplayer2)
+sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
 s.fill(background_color)
 
@@ -66,10 +68,8 @@ running = True
 clock = pygame.time.Clock()
 
 debugs = {
-    # "velx": lambda: testplayer.velx,
-    # "vely": lambda: testplayer.vely,
-    # "grounded": lambda: testplayer.on_ground,
-    # "coyote": lambda: testplayer.coyote_time
+    "box_x": lambda: testlevel.physics_objects.sprites()[0].x,
+    "box_y": lambda: testlevel.physics_objects.sprites()[0].y
 }
 
 def print_debugs():
@@ -93,10 +93,10 @@ while running:
     #getting the change in time between frames
     dt = clock.tick(MAX_FRAMES) / 1000
 
-    sprites.update(testlevel.collision_tiles, dt)
-    sprites.draw(s)
+    testlevel.draw(s, dt)
 
-    testlevel.draw(s)
+    # sprites.update(testlevel, dt)
+    sprites.draw(s)
 
     print_debugs()
 

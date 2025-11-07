@@ -3,13 +3,15 @@ import pygame
 #if the image is called default itll automatically be set
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, sprites = None):
+    def __init__(self):
         super().__init__()
 
         self.sprites = {}
+
         self.facing = 1 #1 is right
         #by default all sprites should face right
 
+    def set_sprites(self, sprites):
         if sprites:
             for sprite in sprites:
                 self.sprites[sprite] = pygame.image.load(f"assets/sprites/{sprites[sprite]}")
@@ -17,9 +19,19 @@ class Sprite(pygame.sprite.Sprite):
             if "default" in sprites:
                 self.change_image("default")
 
+    def set_loaded_sprites(self, sprites):
+        for sprite in sprites:
+            self.sprites[sprite] = sprites[sprite]
+
+        if "default" in sprites:
+            self.change_image("default")
+
     def change_image(self, new_sprite):
         bottom = self.rect.bottom if getattr(self, "rect", None) else getattr(self, "y", 0) #to make the bounding box stay on the bottom instead of the top
+        # print(f"bruh {self.y} {getattr(self, "rect", None)}")
+        # print(f"bottom {bottom}")
         center = self.rect.centerx if getattr(self, "rect", None) else getattr(self, "x", 0)
+        # print(f"center {center}")
         self.image = self.sprites[new_sprite]
         self.rect = self.image.get_rect()
         self.rect.bottom = bottom

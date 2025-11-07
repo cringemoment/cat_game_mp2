@@ -7,7 +7,8 @@
 import pygame
 import pytmx
 
-from src.physicsobject import PhysicsObject
+# from src.physicsobject import PhysicsObject
+from src.physics.objectfactory import ObjectFactory
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self, image, x, y, tile_size):
@@ -55,17 +56,24 @@ class TileMap:
 
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
-                        # physics_object = PhysicsObject({"default": "box.png"})
-                        print(obj)
-                        print(dir(obj))
+                        physics_object = ObjectFactory(getattr(obj, "type", None))
+                        # print(self.tmx_data.get_tile_image_by_gid(obj.gid))
+                        physics_object.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
+                        physics_object.x = obj.x
+                        physics_object.y = obj.y
+                        physics_object.rect.x = obj.x
+                        physics_object.rect.y = obj.y
+                        physics_object.change_image("default")
+                        self.physics_objects.add(physics_object)
 
-    def draw(self, surface):
-        self.decorations.draw(surface)  # draw decorations first
-        self.collision_tiles.draw(surface)  # draw level on top if desired
+    def draw(self, surface, dt):
+        self.decorations.draw(surface)
+        self.collision_tiles.draw(surface)
+        self.physics_objects.draw(surface)
+        self.physics_objects.update(self, dt)
 
     def get_size(self):
         return self.width, self.height
-
 
 def load_tilemap(window, path):
     tmx_data = pytmx.util_pygame.load_pygame(path)

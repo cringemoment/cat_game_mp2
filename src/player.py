@@ -3,20 +3,21 @@ import math
 
 from src.playerinput import InputHandler, CONTROLLER_DEADZONE
 
-from src.physicsobject import PhysicsObject
-from src.gun import Gun
+from src.physics.physicsobject import PhysicsObject
+from src.physics.gun import Gun
 
 #each tile is 32 pixels
 #time is measured in seconds
 #acceleration is measured in pixels per frame
-MAXX_VELO = 8
+MAXX_VELO = 3
 JUMP_POWER = 12
 COYOTE_TIME = 0.15
-X_ACEL = 1.6
+X_ACEL = 3
 
 class Player(PhysicsObject):
     def __init__(self, coords, controls, sprites, joystick = None):
-        super().__init__(sprites)
+        super().__init__()
+        self.set_sprites(sprites)
 
         #handling controls
         self.input_handler = InputHandler(self, controls, joystick)

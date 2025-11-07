@@ -1,12 +1,12 @@
 import pygame
 import math
 
-from src.bullet import Bullet
+from src.physics.bullet import Bullet
 from src.spriteobject import Sprite
 
 class Gun(Sprite):
     def __init__(self, player):
-        super().__init__({})
+        super().__init__()
         self.player = player
 
         self.original_image = pygame.Surface((60, 12), pygame.SRCALPHA)
