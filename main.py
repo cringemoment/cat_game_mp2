@@ -17,7 +17,7 @@ pygame.display.set_caption(WINDOW_TITLE)
 
 background_color = (30, 30, 30)
 
-testlevel = load_tilemap(s, "levels/boxworld.tmx")
+testlevel = load_tilemap(s, "levels/collision_test.tmx")
 
 test_spritelist = {
 "default": "smaller_test.png",
@@ -68,8 +68,10 @@ running = True
 clock = pygame.time.Clock()
 
 debugs = {
-    "box_x": lambda: testlevel.physics_objects.sprites()[0].x,
-    "box_y": lambda: testlevel.physics_objects.sprites()[0].y
+    "hit": lambda: testplayer2.bullet_physics,
+    "friction": lambda: testplayer2.friction,
+    "air": lambda: testplayer2.air_resistance
+
 }
 
 def print_debugs():
@@ -96,7 +98,7 @@ while running:
     testlevel.draw(s, dt)
 
     # sprites.update(testlevel, dt)
-    sprites.draw(s)
+    # sprites.draw(s)
 
     print_debugs()
 

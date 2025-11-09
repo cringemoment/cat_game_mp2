@@ -6,9 +6,8 @@ class Box(PhysicsObject):
     def __init__(self):
         super().__init__()
         self.collision = True
+        self.pushable = True
 
     def sprite_collision(self, sprite):
-        # print("bruh")
         if type(sprite).__name__ == "Bullet":
-            print("ow")
             self.vely -= 5

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "levels/testlevel.tmx",
+    "activeFile": "levels/boxworld.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -13,15 +13,29 @@
             "scaleInEditor": 1
         },
         "levels/boxworld.tmx": {
-            "scale": 0.75,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 397.9999999999999,
-                "y": 415.33333333333326
+                "x": 594.5,
+                "y": 331
             }
         },
         "levels/cat.tsx": {
             "scaleInDock": 1
+        },
+        "levels/collision_test.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 348.5,
+                "y": 257
+            }
         },
         "levels/orange.tsx": {
             "scaleInDock": 1,
@@ -42,8 +56,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 522.6666666666666,
-                "y": 319.3333333333333
+                "x": 526,
+                "y": 318.6666666666667
             }
         },
         "levels/test.tsx": {
@@ -52,13 +66,13 @@
         },
         "levels/testlevel.tmx": {
             "expandedObjectLayers": [
-                2,
-                5
+                5,
+                2
             ],
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 350.5,
+                "x": 480,
                 "y": 320.5
             }
         },
@@ -75,15 +89,17 @@
         "levels/shootingpractice.tmx",
         "levels/orange.tsx",
         "levels/box.tsx",
-        "levels/testlevel.tmx"
+        "levels/testlevel.tmx",
+        "levels/boxworld.tmx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
-        "levels/box.tsx",
-        "levels/orange.tsx",
-        "levels/testlevel.tmx",
-        "levels/shootingpractice.tmx",
         "levels/test.tsx",
+        "levels/shootingpractice.tmx",
+        "levels/orange.tsx",
+        "levels/box.tsx",
+        "levels/testlevel.tmx",
+        "levels/boxworld.tmx",
         "levels/testplayer.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"

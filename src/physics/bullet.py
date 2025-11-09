@@ -6,7 +6,7 @@ from src.physics.physicsobject import PhysicsObject, GRAVITY, FRICTION
 BULLET_SPEED = 2000
 PLAYER_HIT_STRENGTH = 25
 BULLET_LIFETIME = 10
-BULLET_EXPIRY = 0.05
+BULLET_EXPIRY = 0
 
 class Bullet(PhysicsObject):
     def __init__(self, pos, angle):
@@ -30,7 +30,6 @@ class Bullet(PhysicsObject):
         self.update_pos(tiles, dt)
 
     def tile_collision(self, tiles):
-        print("ow")
         self.kill()
 
     def update_timers(self, dt):
@@ -47,11 +46,11 @@ class Bullet(PhysicsObject):
 
 
     def sprite_collision(self, sprite):
-        print(f"colliding with {type(sprite).__name__}")
         if type(sprite).__name__ == "Player": #checking if it hit a player
             rad = math.radians(self.angle)
             sprite.velx += math.cos(rad) * PLAYER_HIT_STRENGTH
             sprite.vely -= math.sin(rad) * PLAYER_HIT_STRENGTH / 1.5 + 2
+            sprite.bullet_physics = True
 
             sprite.on_ground = False
 

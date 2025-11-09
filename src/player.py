@@ -3,7 +3,7 @@ import math
 
 from src.playerinput import InputHandler, CONTROLLER_DEADZONE
 
-from src.physics.physicsobject import PhysicsObject
+from src.physics.physicsobject import PhysicsObject, AIR_RESISTANCE
 from src.physics.gun import Gun
 
 #each tile is 32 pixels
@@ -13,6 +13,8 @@ MAXX_VELO = 3
 JUMP_POWER = 12
 COYOTE_TIME = 0.15
 X_ACEL = 3
+BULLET_HIT_MAXVELO = 10
+BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
     def __init__(self, coords, controls, sprites, joystick = None):
@@ -32,6 +34,9 @@ class Player(PhysicsObject):
         self.x, self.y = coords
         self.maxx_velo = MAXX_VELO
         self.accel = X_ACEL
+        self.collision = True
+        self.bullet_physics = False #lower friction after being hit by a bullet
+        self.pushable = True
 
         #Coyote time implementation
         self.on_ground = False
@@ -86,6 +91,14 @@ class Player(PhysicsObject):
 
     def update(self, tiles, dt):
         self.input_handler.handle_inputs()
+
+        if self.bullet_physics:
+            self.maxx_velo = BULLET_HIT_MAXVELO
+            self.air_resistance = BULLET_HIT_AR
+        else:
+            self.maxx_velo = MAXX_VELO
+            self.air_resistance = AIR_RESISTANCE
+
         self.update_pos(tiles, dt)
         self.update_aim()
         self.gun.update()

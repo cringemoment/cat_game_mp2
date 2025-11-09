@@ -7,7 +7,7 @@ FRICTION = 1.2
 AIR_RESISTANCE = 0.8
 
 MAXX_VELO = 20
-MAXY_VELO = 20
+MAXY_VELO = 12
 
 class PhysicsObject(Sprite):
     def __init__(self, *args, **kwargs):
@@ -18,10 +18,15 @@ class PhysicsObject(Sprite):
 
         self.on_ground = False
 
+        #movement
         self.maxx_velo = MAXX_VELO
         self.maxy_velo = MAXY_VELO
+        self.friction = FRICTION
+        self.air_resistance = AIR_RESISTANCE
 
+        #interactions with other sprites
         self.collision = False
+        self.pushable = False
 
     def touching_ground(self, rect2): #when on the ground, technically the rectangles are not colliding (they're touching)
         #a custom function is needed
@@ -37,21 +42,35 @@ class PhysicsObject(Sprite):
     def update_timers(self, dt):
         pass
 
+    def collide_objects(self, obj):
+        pass
+
+
     def handle_collisions(self, colliders):
         self.x += self.velx
         self.rect.x = int(self.x)
 
         for obj in colliders:
             if self.rect.colliderect(obj.rect):
-                if self.velx > 0:  # moving right
-                    self.rect.right = obj.rect.left
-                elif self.velx < 0:  # moving left
-                    self.rect.left = obj.rect.right
-                self.velx = 0
-                self.x = self.rect.x
+                if getattr(obj, "pushable", None):
+                    if self.velx > 0:
+                        obj.rect.left = self.rect.right
+                    elif self.velx < 0:
+                        obj.rect.right = self.rect.left
+                    obj.x = obj.rect.x
+                else:
+                    if self.velx > 0:  # moving right
+                        self.rect.right = obj.rect.left
+                    elif self.velx < 0:  # moving left
+                        self.rect.left = obj.rect.right
+                    self.velx = 0
+                    self.x = self.rect.x
 
                 if isinstance(obj, pygame.sprite.Sprite):
                     self.sprite_collision(obj)
+
+                    if getattr(obj, "sprite_collision", None): #this is SO TERRIBLEEEEE
+                        obj.sprite_collision(self)
                 else:
                     self.tile_collision(obj)
 
@@ -65,20 +84,21 @@ class PhysicsObject(Sprite):
                 if self.vely <= 0:  # jumping
                     self.rect.top = obj.rect.bottom
                     self.vely = 0
-                    if isinstance(obj, pygame.sprite.Sprite):
-                        self.sprite_collision(obj)
-                    else:
-                        self.tile_collision(obj)
 
                 elif self.touching_ground(obj.rect):
                     if self.vely >= 0:  # falling
                         self.rect.bottom = obj.rect.top + 0.1
                         self.vely = 0
                         self.on_ground = True
-                        if isinstance(obj, pygame.sprite.Sprite):
-                            self.sprite_collision(obj)
-                        else:
-                            self.tile_collision(obj)
+                else:
+                    continue
+
+                if isinstance(obj, pygame.sprite.Sprite):
+                    self.sprite_collision(obj)
+                    if getattr(obj, "sprite_collision", None):
+                        obj.sprite_collision(self)
+                else:
+                    self.tile_collision(obj)
 
             self.y = self.rect.y
 
@@ -92,9 +112,9 @@ class PhysicsObject(Sprite):
         self.handle_collisions(colliders)
 
         if self.on_ground:
-            dv = FRICTION
+            dv = self.friction
         else:
-            dv = AIR_RESISTANCE
+            dv = self.air_resistance
 
         if self.velx > 0:
             self.velx -= dv
@@ -110,6 +130,11 @@ class PhysicsObject(Sprite):
             self.velx = self.maxx_velo
         elif self.velx < -self.maxx_velo:
             self.velx = -self.maxx_velo
+
+        if self.vely > self.maxy_velo:
+            self.vely = self.maxy_velo
+        elif self.vely < -self.maxy_velo:
+            self.vely = -self.maxy_velo
 
         self.update_timers(dt)
 

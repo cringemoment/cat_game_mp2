@@ -1,6 +1,6 @@
 import pygame
 
-CONTROLLER_DEADZONE = 0.05 #avoid controller drift, just in case
+CONTROLLER_DEADZONE = 0.2 #avoid controller drift, just in case
 
 class Keyboard():
     def __init__(self):
@@ -69,10 +69,10 @@ class InputHandler:
 
         keys = pygame.key.get_pressed()
 
-        # if self.joystick:
         for control in held_events:
             if self.controls[control]():
                 held_events[control]()
+                self.player.bullet_physics = False
 
         for control in keydown_events:
             if self.controls[control]():
