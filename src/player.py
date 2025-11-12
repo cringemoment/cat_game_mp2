@@ -9,10 +9,14 @@ from src.physics.gun import Gun
 #each tile is 32 pixels
 #time is measured in seconds
 #acceleration is measured in pixels per frame
-MAXX_VELO = 3
 JUMP_POWER = 12
 COYOTE_TIME = 0.15
-X_ACEL = 3
+
+MAXX_VELO = 5
+X_ACCEL = 2
+CROUCHING_ACCEL = 1.4
+CROUCHING_MAXX_VELO = 3
+
 BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
@@ -33,10 +37,13 @@ class Player(PhysicsObject):
         #movement stuff
         self.x, self.y = coords
         self.maxx_velo = MAXX_VELO
-        self.accel = X_ACEL
+        self.accel = X_ACCEL
         self.collision = True
         self.bullet_physics = False #lower friction after being hit by a bullet
         self.pushable = True
+        self.pushback_factor = 0
+
+        self.uncrouch_queued = False
 
         #Coyote time implementation
         self.on_ground = False
@@ -66,9 +73,13 @@ class Player(PhysicsObject):
 
     def crouch(self):
         self.change_image("crouch")
+        self.accel = CROUCHING_ACCEL
+        self.maxx_velo = CROUCHING_MAXX_VELO
 
     def uncrouch(self):
         self.change_image("default")
+        self.accel = X_ACCEL
+        self.maxx_velo = MAXX_VELO
 
     def update_timers(self, dt):
         if self.on_ground:
@@ -90,6 +101,7 @@ class Player(PhysicsObject):
             self.aim_angle = math.degrees(math.atan2(-dy, dx))
 
     def update(self, tiles, dt):
+        self.tiles = tiles
         self.input_handler.handle_inputs()
 
         if self.bullet_physics:

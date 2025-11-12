@@ -17,7 +17,7 @@ pygame.display.set_caption(WINDOW_TITLE)
 
 background_color = (30, 30, 30)
 
-testlevel = load_tilemap(s, "levels/collision_test.tmx")
+testlevel = load_tilemap(s, "levels/boxworld.tmx")
 
 test_spritelist = {
 "default": "smaller_test.png",
@@ -60,18 +60,25 @@ except Exception as e:
 
 sprites = testlevel.physics_objects
 sprites.add(testplayer, testplayer2)
-sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
+# sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
 s.fill(background_color)
+
+h = testplayer.groups()[0]
+print(h)
+for i, x in enumerate(h):
+    if i == 0:
+        box = x
+
+print(box)
 
 running = True
 clock = pygame.time.Clock()
 
 debugs = {
-    "hit": lambda: testplayer2.bullet_physics,
-    "friction": lambda: testplayer2.friction,
-    "air": lambda: testplayer2.air_resistance
-
+    "ground": lambda: testplayer.on_ground,
+    "x": lambda: testplayer2.x,
+    "velx": lambda: testplayer2. velx,
 }
 
 def print_debugs():

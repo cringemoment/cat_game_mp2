@@ -54,4 +54,4 @@ class Bullet(PhysicsObject):
 
             sprite.on_ground = False
 
-        self.death = True
+        self.kill()

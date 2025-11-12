@@ -14,7 +14,13 @@ class Tile(pygame.sprite.Sprite):
     def __init__(self, image, x, y, tile_size):
         super().__init__()
         self.image = image
-        self.rect = self.image.get_rect(topleft=(x * tile_size, y * tile_size))
+        self.rect = self.image.get_rect(topleft = (x * tile_size, y * tile_size))
+        self.x = x * tile_size
+        self.y = y * tile_size
+        self.left = self.x
+        self.right = self.x + tile_size
+        self.top = self.y
+        self.bottom = self.y + tile_size
 
 #lot of copy pasted boilerplate
 class TileMap:
@@ -28,6 +34,9 @@ class TileMap:
         self.collision_tiles = pygame.sprite.Group()
         self.decorations = pygame.sprite.Group()
         self.physics_objects = pygame.sprite.Group()
+
+        #positions
+        self.camera_positions = []
 
         self.spawn_pos = (0, 0)
         self.second_spawn_pos = (0, 0)
@@ -65,6 +74,10 @@ class TileMap:
                         physics_object.rect.y = obj.y
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
+
+                elif getattr(layer, "class", None) == "camera_positions":
+                    for obj in layer:
+                        self.camera_positions.append({"x": obj.x, "y": obj.y})
 
     def draw(self, surface, dt):
         self.decorations.draw(surface)

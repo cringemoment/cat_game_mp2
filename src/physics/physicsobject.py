@@ -9,10 +9,24 @@ AIR_RESISTANCE = 0.8
 MAXX_VELO = 20
 MAXY_VELO = 12
 
+MAX_PHYSICS_CHECKS = 10
+MYSTERY_PHYSICS_CONSTANT = 0.1 #no comment needed
+
+def minimum_push(n, x): #sometimes collision doesn't push out enough
+    #easy fix!
+    if x == 0:
+        return 0
+    return n * x/abs(x) if abs(x) < n else x
+
 class PhysicsObject(Sprite):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.x, self.y = (0, 0) #should be set elsewhere
+        self.left = 0
+        self.right = 0
+        self.top = 0
+        self.bottom = 0
+
         self.velx = 0
         self.vely = 0
 
@@ -27,11 +41,20 @@ class PhysicsObject(Sprite):
         #interactions with other sprites
         self.collision = False
         self.pushable = False
+        self.pushback_factor = 1
 
-    def touching_ground(self, rect2): #when on the ground, technically the rectangles are not colliding (they're touching)
+    def update_bounds(self):
+        self.left = self.x
+        self.right = self.x + self.rect.width
+        self.top = self.y
+        self.bottom = self.y + self.rect.height
+
+    def colliding(self, obj):
+        return self.right > obj.left and self.left < obj.right and self.bottom > obj.top and self.top < obj.bottom
+
+    def touching_ground(self, obj): #when on the ground, technically the rectangles are not colliding (they're touching)
         #a custom function is needed
-        rect1 = self.rect
-        return rect1.right > rect2.left and rect1.left < rect2.right and rect1.bottom >= rect2.top and rect1.top < rect2.bottom
+        return self.right > obj.left and self.left < obj.right and self.bottom >= obj.top and self.top < obj.bottom
 
     def tile_collision(self, tile): #exists to be overwrriten
         pass
@@ -42,65 +65,91 @@ class PhysicsObject(Sprite):
     def update_timers(self, dt):
         pass
 
-    def collide_objects(self, obj):
-        pass
+    def collide_x(self, obj, iteration):
+        if not self.colliding(obj):
+            return
 
+        pushback_factor = getattr(obj, "pushback_factor", 1)
+
+        if self.right > obj.left and self.left < obj.left: #going right
+            dx = self.right - obj.left
+
+        elif self.left < obj.right and self.right > obj.right: #going left
+            dx = self.left - obj.right
+
+        else:
+            return
+
+        self.x -= minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * pushback_factor)
+        obj.x += minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * (1 - pushback_factor))
+
+        if type(self).__name__ == "Player" and hasattr(obj, "velx"):
+            obj.velx = dx * (1 - pushback_factor)
+
+        self.update_bounds()
+        if getattr(obj, "update_bounds", None):
+            obj.update_bounds()
+
+        if iteration == MAX_PHYSICS_CHECKS - 1:
+            print("whee")
+            if isinstance(obj, pygame.sprite.Sprite):
+                self.sprite_collision(obj)
+
+                if getattr(obj, "sprite_collision", None):
+                    obj.sprite_collision(self)
+            else:
+                self.tile_collision(obj)
+
+    def collide_y(self, obj):
+        if not self.touching_ground(obj):
+            return
+
+        pushback_factor = getattr(obj, "pushback_factor", 1)
+
+        if self.top < obj.bottom and self.bottom > obj.bottom: #going up
+            dy = obj.bottom - self.top
+            self.y += dy * pushback_factor
+            obj.y -= dy * (1 - pushback_factor)
+            self.vely = 0
+
+        elif self.bottom >= obj.top and self.top < obj.top: #going down
+            dy = self.bottom - obj.top
+            self.y -= dy
+
+            self.on_ground = True
+            self.vely = 0
+
+        self.update_bounds()
+        if getattr(obj, "update_bounds", None):
+            obj.update_bounds()
+
+        if isinstance(obj, pygame.sprite.Sprite):
+            self.sprite_collision(obj)
+
+            if getattr(obj, "sprite_collision", None):
+                obj.sprite_collision(self)
+        else:
+            self.tile_collision(obj)
 
     def handle_collisions(self, colliders):
         self.x += self.velx
-        self.rect.x = int(self.x)
+        self.update_bounds()
 
-        for obj in colliders:
-            if self.rect.colliderect(obj.rect):
-                if getattr(obj, "pushable", None):
-                    if self.velx > 0:
-                        obj.rect.left = self.rect.right
-                    elif self.velx < 0:
-                        obj.rect.right = self.rect.left
-                    obj.x = obj.rect.x
-                else:
-                    if self.velx > 0:  # moving right
-                        self.rect.right = obj.rect.left
-                    elif self.velx < 0:  # moving left
-                        self.rect.left = obj.rect.right
-                    self.velx = 0
-                    self.x = self.rect.x
+        for i in range(MAX_PHYSICS_CHECKS):
+            for obj in colliders:
+                self.collide_x(obj, i)
 
-                if isinstance(obj, pygame.sprite.Sprite):
-                    self.sprite_collision(obj)
-
-                    if getattr(obj, "sprite_collision", None): #this is SO TERRIBLEEEEE
-                        obj.sprite_collision(self)
-                else:
-                    self.tile_collision(obj)
+        self.rect.x = self.x
 
         self.vely += GRAVITY
         self.y += self.vely
-        self.rect.y = int(self.y)
+        self.update_bounds()
         self.on_ground = False
 
         for obj in colliders:
-            if self.rect.colliderect(obj.rect):
-                if self.vely <= 0:  # jumping
-                    self.rect.top = obj.rect.bottom
-                    self.vely = 0
+            self.collide_y(obj)
 
-                elif self.touching_ground(obj.rect):
-                    if self.vely >= 0:  # falling
-                        self.rect.bottom = obj.rect.top + 0.1
-                        self.vely = 0
-                        self.on_ground = True
-                else:
-                    continue
-
-                if isinstance(obj, pygame.sprite.Sprite):
-                    self.sprite_collision(obj)
-                    if getattr(obj, "sprite_collision", None):
-                        obj.sprite_collision(self)
-                else:
-                    self.tile_collision(obj)
-
-            self.y = self.rect.y
+        self.rect.y = self.y
 
     def update_pos(self, level, dt):
         colliders = []
@@ -109,7 +158,11 @@ class PhysicsObject(Sprite):
 
         colliders.extend(level.collision_tiles)
 
+        colliders.sort(key = lambda x: abs(x.velx) if hasattr(x, "velx") else 0)
+
         self.handle_collisions(colliders)
+
+        self.rect.x = int(self.x)
 
         if self.on_ground:
             dv = self.friction
