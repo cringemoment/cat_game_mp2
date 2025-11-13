@@ -2,6 +2,8 @@ import pygame
 from src.loadtilemap import load_tilemap
 from src.player import Player
 
+from src.level import testlevel
+
 from src.playerinput import Controller, Keyboard
 
 pygame.init()
@@ -17,7 +19,8 @@ pygame.display.set_caption(WINDOW_TITLE)
 
 background_color = (30, 30, 30)
 
-testlevel = load_tilemap(s, "levels/boxworld.tmx")
+# testlevel = load_tilemap(s, "levels/boxworld.tmx")
+testlevel.load_window(s)
 
 test_spritelist = {
 "default": "smaller_test.png",
@@ -50,27 +53,19 @@ try:
         "shoot": controller.RB
     }
 
-    testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
-    testplayer2 = Player(testlevel.second_spawn_pos, test_controller_controls, test_controller_spritelist, testcontroller)
+    testplayer = Player(testlevel.level.spawn_pos_1, test_controls, test_spritelist)
+    testplayer2 = Player(testlevel.level.spawn_pos_2, test_controller_controls, test_controller_spritelist, testcontroller)
 except Exception as e:
     print(e)
     print("controller no work")
-    testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
-    testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist)
+    testplayer = Player(testlevel.level.spawn_pos_1, test_controls, test_spritelist)
+    testplayer2 = Player(testlevel.level.spawn_pos_2, test_controls, test_controller_spritelist)
 
-sprites = testlevel.physics_objects
+sprites = testlevel.level.physics_objects
 sprites.add(testplayer, testplayer2)
 # sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
 s.fill(background_color)
-
-h = testplayer.groups()[0]
-print(h)
-for i, x in enumerate(h):
-    if i == 0:
-        box = x
-
-print(box)
 
 running = True
 clock = pygame.time.Clock()

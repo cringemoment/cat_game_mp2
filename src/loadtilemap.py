@@ -36,10 +36,10 @@ class TileMap:
         self.physics_objects = pygame.sprite.Group()
 
         #positions
-        self.camera_positions = []
+        self.camera_positions = [0 for i in range(100)] #idk i need some number here don't have more than
 
-        self.spawn_pos = (0, 0)
-        self.second_spawn_pos = (0, 0)
+        self.spawn_pos_1 = (0, 0)
+        self.spawn_pos_2 = (0, 0)
         self.load_tiles()
 
     def load_tiles(self):
@@ -63,6 +63,10 @@ class TileMap:
                         if obj.name == "player_2":
                             self.second_spawn_pos = (obj.x, obj.y)
 
+                        if obj.name == "camera_positions":
+                            self.camerapositions[obj.index] = (obj.x, obj.y)
+
+
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
                         physics_object = ObjectFactory(getattr(obj, "type", None))
@@ -75,15 +79,11 @@ class TileMap:
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
 
-                elif getattr(layer, "class", None) == "camera_positions":
-                    for obj in layer:
-                        self.camera_positions.append({"x": obj.x, "y": obj.y})
-
-    def draw(self, surface, dt):
-        self.decorations.draw(surface)
-        self.collision_tiles.draw(surface)
-        self.physics_objects.draw(surface)
-        self.physics_objects.update(self, dt)
+    # def draw(self, surface, dt):
+    #     self.decorations.draw(surface)
+    #     self.collision_tiles.draw(surface)
+    #     self.physics_objects.draw(surface)
+    #     self.physics_objects.update(self, dt)
 
     def get_size(self):
         return self.width, self.height

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
  <tileset firstgid="1" source="test.tsx"/>
  <layer id="1" name="Tile Layer 1" class="level" width="50" height="40">
   <data encoding="csv">
@@ -51,6 +51,12 @@
    <properties>
     <property name="index" value="0"/>
    </properties>
+   <point/>
+  </object>
+  <object id="4" name="player" x="64" y="1184">
+   <point/>
+  </object>
+  <object id="5" name="player2" x="128" y="1184">
    <point/>
   </object>
  </objectgroup>
