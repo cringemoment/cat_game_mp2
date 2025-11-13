@@ -28,10 +28,7 @@ class Sprite(pygame.sprite.Sprite):
 
     def change_image(self, new_sprite):
         bottom = self.rect.bottom if getattr(self, "rect", None) else getattr(self, "y", 0) #to make the bounding box stay on the bottom instead of the top
-        # print(f"bruh {self.y} {getattr(self, "rect", None)}")
-        # print(f"bottom {bottom}")
         center = self.rect.centerx if getattr(self, "rect", None) else getattr(self, "x", 0)
-        # print(f"center {center}")
         self.image = self.sprites[new_sprite]
         self.rect = self.image.get_rect()
         self.rect.bottom = bottom

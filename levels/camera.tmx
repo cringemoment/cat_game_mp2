@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="7">
  <tileset firstgid="1" source="test.tsx"/>
  <layer id="1" name="Tile Layer 1" class="level" width="50" height="40">
   <data encoding="csv">
@@ -46,17 +46,25 @@
 </data>
  </layer>
  <objectgroup id="2" name="positions" class="positions">
-  <object id="2" type="camera_trigger" x="416" y="928" width="96" height="96"/>
-  <object id="3" type="camera_position" x="0" y="928">
+  <object id="2" name="second_room" type="camera_trigger" x="416" y="928" width="96" height="96"/>
+  <object id="3" name="default" type="camera_position" x="0" y="864">
    <properties>
-    <property name="index" value="0"/>
+    <property name="screen_height" value="11"/>
+    <property name="screen_width" value="20"/>
    </properties>
    <point/>
   </object>
-  <object id="4" name="player" x="64" y="1184">
+  <object id="4" name="player" x="173.333" y="1077.33">
    <point/>
   </object>
-  <object id="5" name="player2" x="128" y="1184">
+  <object id="5" name="player_2" x="298.667" y="1065.33">
+   <point/>
+  </object>
+  <object id="6" name="second_room" type="camera_position" x="0" y="640">
+   <properties>
+    <property name="screen_height" value="20"/>
+    <property name="screen_width" value="30"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

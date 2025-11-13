@@ -72,8 +72,11 @@ clock = pygame.time.Clock()
 
 debugs = {
     "ground": lambda: testplayer.on_ground,
-    "x": lambda: testplayer2.x,
-    "velx": lambda: testplayer2. velx,
+    "x": lambda: testplayer.x,
+    "velx": lambda: testplayer.velx,
+    "vely": lambda: testplayer.vely,
+    "camerax": lambda: testlevel.camera.x,
+    "cameray": lambda: testlevel.camera.y
 }
 
 def print_debugs():

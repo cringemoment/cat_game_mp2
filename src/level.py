@@ -12,14 +12,13 @@ class Level:
 
         self.camera = Camera()
         self.camera.set_level(self.level)
-        print(self.camera.x)
-        print(self.camera.y)
 
     def draw(self, surface, dt):
-        self.level.decorations.draw(surface)
-        self.level.collision_tiles.draw(surface)
-        self.level.physics_objects.draw(surface)
         self.level.physics_objects.update(self.level, dt)
+        self.camera.draw(surface, self.level.physics_objects)
+        self.camera.draw(surface, self.level.decorations)
+        self.camera.draw(surface, self.level.collision_tiles)
+        self.camera.draw(surface, self.level.physics_objects)
 
 testlevel = Level("levels/camera.tmx")
 # testlevel = 2

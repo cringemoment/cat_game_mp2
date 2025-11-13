@@ -36,7 +36,7 @@ class TileMap:
         self.physics_objects = pygame.sprite.Group()
 
         #positions
-        self.camera_positions = [0 for i in range(100)] #idk i need some number here don't have more than
+        self.camera_positions = {}
 
         self.spawn_pos_1 = (0, 0)
         self.spawn_pos_2 = (0, 0)
@@ -55,22 +55,26 @@ class TileMap:
                         else:
                             self.decorations.add(tile)
 
-            elif isinstance(layer, pytmx.TiledObjectGroup):
+            elif isinstance(layer, pytmx.TiledObjectGroup): #REMEMBER THAT THE CLASS OF AN OBJECT IS "type" AND NOT "class"
                 if getattr(layer, "class", None) == "positions":
                     for obj in layer:
                         if obj.name == "player":
-                            self.spawn_pos = (obj.x, obj.y)
+                            self.spawn_pos_1 = (obj.x, obj.y)
                         if obj.name == "player_2":
-                            self.second_spawn_pos = (obj.x, obj.y)
+                            self.spawn_pos_2 = (obj.x, obj.y)
 
-                        if obj.name == "camera_positions":
-                            self.camerapositions[obj.index] = (obj.x, obj.y)
+                        if getattr(obj, "type", None) == "camera_position":
+                            self.camera_positions[obj.name] = {
+                            "x": obj.x,
+                            "y": obj.y,
+                            "width": int(obj.screen_width),
+                            "height": int(obj.screen_height)
+                            }
 
 
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
                         physics_object = ObjectFactory(getattr(obj, "type", None))
-                        # print(self.tmx_data.get_tile_image_by_gid(obj.gid))
                         physics_object.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
                         physics_object.x = obj.x
                         physics_object.y = obj.y
@@ -78,12 +82,6 @@ class TileMap:
                         physics_object.rect.y = obj.y
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
-
-    # def draw(self, surface, dt):
-    #     self.decorations.draw(surface)
-    #     self.collision_tiles.draw(surface)
-    #     self.physics_objects.draw(surface)
-    #     self.physics_objects.update(self, dt)
 
     def get_size(self):
         return self.width, self.height
