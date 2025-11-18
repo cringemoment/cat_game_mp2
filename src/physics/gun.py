@@ -2,7 +2,7 @@ import pygame
 import math
 
 from src.physics.bullet import Bullet
-from src.spriteobject import Sprite
+from src.renderer.spriteobject import Sprite
 
 class Gun(Sprite):
     def __init__(self, player):

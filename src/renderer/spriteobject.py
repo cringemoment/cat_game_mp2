@@ -1,7 +1,30 @@
 import pygame
 
-#if the image is called default itll automatically be set
+class Animation:
+    def __init__(self, frames, delay):
+        self.frames = []
 
+        for frame in frames:
+            self.frames.append(pygame.image.load(f"assets/{frame}"))
+
+        self.index = 0
+        self.delay = delay
+        self.timer = self.delay
+
+    def get_image(self):
+        return self.frames[self.index]
+
+    def next_frame(self):
+        self.index = (self.index + 1) % len(self.frames)
+
+    def update_timers(self, dt):
+        self.timer -= dt
+
+        if self.timer <= 0:
+            self.timer = self.delay
+            self.next_frame()
+
+#if the image is called default itll automatically be set
 class Sprite(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -14,7 +37,7 @@ class Sprite(pygame.sprite.Sprite):
     def set_sprites(self, sprites):
         if sprites:
             for sprite in sprites:
-                self.sprites[sprite] = pygame.image.load(f"assets/sprites/{sprites[sprite]}")
+                self.sprites[sprite] = pygame.image.load(f"assets/{sprites[sprite]}")
 
             if "default" in sprites:
                 self.change_image("default")

@@ -3,8 +3,9 @@ from src.loadtilemap import load_tilemap
 from src.player import Player
 
 from src.level import testlevel
-
 from src.playerinput import Controller, Keyboard
+
+#FIX MOUSE AIMING WITH CAMERA ZOOMED IN !!!!!
 
 pygame.init()
 
@@ -23,13 +24,13 @@ background_color = (30, 30, 30)
 testlevel.load_window(s)
 
 test_spritelist = {
-"default": "smaller_test.png",
-"crouch": "smaller_crouch.png"
+"default": "sprites/smaller_test.png",
+"crouch": "sprites/smaller_crouch.png"
 }
 
 test_controller_spritelist = {
-"default": "player2_smaller.png",
-"crouch": "player2_crouch.png"
+"default": "sprites/player2_smaller.png",
+"crouch": "sprites/player2_crouch.png"
 }
 
 keyboard = Keyboard()
@@ -53,15 +54,15 @@ try:
         "shoot": controller.RB
     }
 
-    testplayer = Player(testlevel.level.spawn_pos_1, test_controls, test_spritelist)
-    testplayer2 = Player(testlevel.level.spawn_pos_2, test_controller_controls, test_controller_spritelist, testcontroller)
+    testplayer = Player(0, testlevel.tiles.spawn_pos_1, test_controls, test_spritelist)
+    testplayer2 = Player(1, testlevel.tiles.spawn_pos_2, test_controller_controls, test_controller_spritelist, testcontroller)
 except Exception as e:
     print(e)
     print("controller no work")
-    testplayer = Player(testlevel.level.spawn_pos_1, test_controls, test_spritelist)
-    testplayer2 = Player(testlevel.level.spawn_pos_2, test_controls, test_controller_spritelist)
+    testplayer = Player(0, testlevel.tiles.spawn_pos_1, test_controls, test_spritelist)
+    testplayer2 = Player(1, testlevel.tiles.spawn_pos_2, test_controls, test_controller_spritelist)
 
-sprites = testlevel.level.physics_objects
+sprites = testlevel.tiles.physics_objects
 sprites.add(testplayer, testplayer2)
 # sprites = pygame.sprite.Group(testplayer, testplayer2, testplayer.gun, testplayer2.gun)
 
@@ -85,7 +86,6 @@ def print_debugs():
         color = (0, 255, 0) if bool(debugs[var]()) else (255, 0, 0)
         text = font.render(f"{var}: {debugs[var]()}", False, color, (0, 0, 0))
         s.blit(text, (10, i * 30 + 10))
-    # s.blit(test)
 
 while running:
     for event in pygame.event.get():

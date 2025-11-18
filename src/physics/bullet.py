@@ -22,13 +22,6 @@ class Bullet(PhysicsObject):
 
         self.x, self.y = pos
 
-    def update(self, tiles, dt):
-        rad = math.radians(self.angle)
-        self.velx = math.cos(rad) * BULLET_SPEED * dt
-        self.vely = -math.sin(rad) * BULLET_SPEED * dt
-
-        self.update_pos(tiles, dt)
-
     def tile_collision(self, tiles):
         self.kill()
 
@@ -55,3 +48,10 @@ class Bullet(PhysicsObject):
             sprite.on_ground = False
 
         self.kill()
+
+    def update(self, level, dt):
+        rad = math.radians(self.angle)
+        self.velx = math.cos(rad) * BULLET_SPEED * dt
+        self.vely = -math.sin(rad) * BULLET_SPEED * dt
+
+        self.update_pos(level.tiles, dt)

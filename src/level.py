@@ -8,17 +8,21 @@ class Level:
         self.level_path = level_path
 
     def load_window(self, s):
-        self.level = load_tilemap(s, self.level_path)
+        self.tiles = load_tilemap(s, self, self.level_path)
 
         self.camera = Camera()
-        self.camera.set_level(self.level)
+        self.camera.set_level(self.tiles)
 
     def draw(self, surface, dt):
-        self.level.physics_objects.update(self.level, dt)
-        self.camera.draw(surface, self.level.physics_objects)
-        self.camera.draw(surface, self.level.decorations)
-        self.camera.draw(surface, self.level.collision_tiles)
-        self.camera.draw(surface, self.level.physics_objects)
+        self.tiles.physics_objects.update(self, dt)
+        self.camera.draw(surface, self.tiles.physics_objects)
+        self.camera.draw(surface, self.tiles.decorations)
+        self.camera.draw(surface, self.tiles.collision_tiles)
+        self.camera.draw(surface, self.tiles.physics_objects)
+        self.camera.draw(surface, self.tiles.area_triggers)
+
+        for trigger in self.tiles.area_triggers:
+            trigger.update_players()
 
 testlevel = Level("levels/camera.tmx")
 # testlevel = 2

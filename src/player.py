@@ -21,9 +21,11 @@ BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
-    def __init__(self, coords, controls, sprites, joystick = None):
+    def __init__(self, index, coords, controls, sprites, joystick = None):
         super().__init__()
         self.set_sprites(sprites)
+
+        self.index = index
 
         #handling controls
         self.input_handler = InputHandler(self, controls, joystick)
@@ -41,7 +43,7 @@ class Player(PhysicsObject):
         self.collision = True
         self.bullet_physics = False #lower friction after being hit by a bullet
         self.pushable = True
-        self.pushback_factor = 0
+        self.pushback_factor = 0.01
 
         self.uncrouch_queued = False
 
@@ -100,8 +102,8 @@ class Player(PhysicsObject):
             dy = mouse_y - self.rect.centery
             self.aim_angle = math.degrees(math.atan2(-dy, dx))
 
-    def update(self, tiles, dt):
-        self.tiles = tiles
+    def update(self, level, dt):
+        self.tiles = level.tiles
         self.input_handler.handle_inputs()
 
         if self.bullet_physics:
@@ -111,6 +113,6 @@ class Player(PhysicsObject):
             self.maxx_velo = MAXX_VELO
             self.air_resistance = AIR_RESISTANCE
 
-        self.update_pos(tiles, dt)
+        self.update_pos(self.tiles, dt)
         self.update_aim()
         self.gun.update()

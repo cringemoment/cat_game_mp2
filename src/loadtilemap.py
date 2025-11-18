@@ -9,6 +9,7 @@ import pytmx
 
 # from src.physicsobject import PhysicsObject
 from src.physics.objectfactory import ObjectFactory
+from src.triggers.triggerfactory import TriggerFactory
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self, image, x, y, tile_size):
@@ -24,11 +25,12 @@ class Tile(pygame.sprite.Sprite):
 
 #lot of copy pasted boilerplate
 class TileMap:
-    def __init__(self, tmx_data):
+    def __init__(self, level, tmx_data):
         self.tmx_data = tmx_data
         self.tile_size = tmx_data.tilewidth
         self.width = tmx_data.width * self.tile_size
         self.height = tmx_data.height * self.tile_size
+        self.level = level
 
         #separate sprite groups
         self.collision_tiles = pygame.sprite.Group()
@@ -36,7 +38,9 @@ class TileMap:
         self.physics_objects = pygame.sprite.Group()
 
         #positions
-        self.camera_positions = {}
+        self.area_triggers = []
+        self.triggers = []
+        self.activated_objects = []
 
         self.spawn_pos_1 = (0, 0)
         self.spawn_pos_2 = (0, 0)
@@ -63,19 +67,23 @@ class TileMap:
                         if obj.name == "player_2":
                             self.spawn_pos_2 = (obj.x, obj.y)
 
-                        if getattr(obj, "type", None) == "camera_position":
-                            self.camera_positions[obj.name] = {
-                            "x": obj.x,
-                            "y": obj.y,
-                            "width": int(obj.screen_width),
-                            "height": int(obj.screen_height)
-                            }
+                        if getattr(obj, "trigger_type", None) == "activated":
+                            self.activated_objects.append(TriggerFactory(obj.type, name = obj.name, x = obj.x, y = obj.y, level = self.level, properties = obj.properties))
 
+                        if getattr(obj, "trigger_type", None) == "trigger":
+                            rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
+                            trigger = TriggerFactory(obj.type, name = obj.name, rect = rect, level = self.level)
+
+                            if self.tmx_data.get_tile_image_by_gid(obj.gid):
+                                trigger.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
+
+                            self.area_triggers.append(trigger)
 
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
                         physics_object = ObjectFactory(getattr(obj, "type", None))
                         physics_object.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
+                        physics_object.name = obj.name
                         physics_object.x = obj.x
                         physics_object.y = obj.y
                         physics_object.rect.x = obj.x
@@ -83,10 +91,14 @@ class TileMap:
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
 
+        print(self.activated_objects)
+        print(self.area_triggers)
+
+
     def get_size(self):
         return self.width, self.height
 
-def load_tilemap(window, path):
+def load_tilemap(window, level, path):
     tmx_data = pytmx.util_pygame.load_pygame(path)
-    tilemap = TileMap(tmx_data)
+    tilemap = TileMap(level, tmx_data)
     return tilemap

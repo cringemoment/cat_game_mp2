@@ -1,6 +1,6 @@
 import pygame
 
-from src.spriteobject import Sprite
+from src.renderer.spriteobject import Sprite
 
 GRAVITY = 0.5
 FRICTION = 1.2
@@ -37,11 +37,13 @@ class PhysicsObject(Sprite):
         self.maxy_velo = MAXY_VELO
         self.friction = FRICTION
         self.air_resistance = AIR_RESISTANCE
+        self.gravity = GRAVITY
 
         #interactions with other sprites
-        self.collision = False
+        self.collision = True
         self.pushable = False
         self.pushback_factor = 1
+        self.name = None
 
     def update_bounds(self):
         self.left = self.x
@@ -69,6 +71,18 @@ class PhysicsObject(Sprite):
         if not self.colliding(obj):
             return
 
+        if iteration == MAX_PHYSICS_CHECKS - 1:
+            if isinstance(obj, pygame.sprite.Sprite):
+                self.sprite_collision(obj)
+
+                if getattr(obj, "sprite_collision", None):
+                    obj.sprite_collision(self)
+            else:
+                self.tile_collision(obj)
+
+        if self.collision == False or getattr(obj, "collision", True) == False:
+            return
+
         pushback_factor = getattr(obj, "pushback_factor", 1)
 
         if self.right > obj.left and self.left < obj.left: #going right
@@ -90,8 +104,11 @@ class PhysicsObject(Sprite):
         if getattr(obj, "update_bounds", None):
             obj.update_bounds()
 
+    def collide_y(self, obj, iteration):
+        if not self.touching_ground(obj):
+            return
+
         if iteration == MAX_PHYSICS_CHECKS - 1:
-            print("whee")
             if isinstance(obj, pygame.sprite.Sprite):
                 self.sprite_collision(obj)
 
@@ -100,36 +117,26 @@ class PhysicsObject(Sprite):
             else:
                 self.tile_collision(obj)
 
-    def collide_y(self, obj):
-        if not self.touching_ground(obj):
+        if self.collision == False or getattr(obj, "collision", True) == False:
             return
 
         pushback_factor = getattr(obj, "pushback_factor", 1)
 
-        if self.top < obj.bottom and self.bottom > obj.bottom: #going up
+        if self.bottom >= obj.top and self.top < obj.top: #going down
+            dy = self.bottom - obj.top
+            self.y -= dy
+            self.on_ground = True
+            self.vely = 0
+
+        elif self.top < obj.bottom and self.bottom > obj.bottom: #going up
             dy = obj.bottom - self.top
+            # if type(self).__name__ == "Player" and type(obj).__name__ == "Player":
+                # print(f"Pushing player up {dy * (1 - pushback_factor)}, to {obj.y - dy * (1 - pushback_factor)}")
             self.y += dy * pushback_factor
             obj.y -= dy * (1 - pushback_factor)
             self.vely = 0
 
-        elif self.bottom >= obj.top and self.top < obj.top: #going down
-            dy = self.bottom - obj.top
-            self.y -= dy
-
-            self.on_ground = True
-            self.vely = 0
-
         self.update_bounds()
-        if getattr(obj, "update_bounds", None):
-            obj.update_bounds()
-
-        if isinstance(obj, pygame.sprite.Sprite):
-            self.sprite_collision(obj)
-
-            if getattr(obj, "sprite_collision", None):
-                obj.sprite_collision(self)
-        else:
-            self.tile_collision(obj)
 
     def handle_collisions(self, colliders):
         self.x += self.velx
@@ -139,16 +146,16 @@ class PhysicsObject(Sprite):
             for obj in colliders:
                 self.collide_x(obj, i)
 
-        self.rect.x = self.x
-
-        self.vely += GRAVITY
+        self.vely += self.gravity
         self.y += self.vely
         self.update_bounds()
         self.on_ground = False
 
-        for obj in colliders:
-            self.collide_y(obj)
+        for i in range(MAX_PHYSICS_CHECKS):
+            for obj in colliders:
+                self.collide_y(obj, i)
 
+        self.rect.x = self.x
         self.rect.y = self.y
 
     def update_pos(self, level, dt):
@@ -192,4 +199,5 @@ class PhysicsObject(Sprite):
         self.update_timers(dt)
 
     def update(self, level, dt):
-        self.update_pos(level, dt)
+        self.update_pos(level.tiles, dt)
+        self.update_sprites(dt)
