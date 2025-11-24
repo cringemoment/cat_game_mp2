@@ -43,8 +43,8 @@
         },
         "levels/boxworld.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 1,
             "selectedLayer": 2,
@@ -55,11 +55,11 @@
         },
         "levels/button_test.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 436.66666666666663,
                 "y": 317.99999999999994
@@ -69,11 +69,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 285,
-                "y": 979.6666666666666
+                "x": 762.6666666666666,
+                "y": 640.6666666666667
             }
         },
         "levels/cat.tsx": {
@@ -81,14 +81,14 @@
         },
         "levels/collision_test.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 0.25,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.5,
-                "y": 319.5
+                "x": 480,
+                "y": 318
             }
         },
         "levels/heavybox.tsx": {

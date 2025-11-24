@@ -21,8 +21,8 @@ BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
-    def __init__(self, index, coords, controls, sprites, joystick = None):
-        super().__init__()
+    def __init__(self, index, level, coords, controls, sprites, joystick = None):
+        super().__init__(level)
         self.set_sprites(sprites)
 
         self.index = index
@@ -42,7 +42,6 @@ class Player(PhysicsObject):
         self.accel = X_ACCEL
         self.collision = True
         self.bullet_physics = False #lower friction after being hit by a bullet
-        self.pushable = True
         self.pushback_factor = 0.01
 
         self.uncrouch_queued = False
@@ -55,17 +54,24 @@ class Player(PhysicsObject):
         self.jump_timer = 0
         self.shoot_timer = 0
 
-        self.gun = Gun(self)
+        self.gun = Gun(level, self)
         self.aim_angle = 0
 
     def shoot(self):
         self.gun.shoot()
 
     def go_horizontal(self, dir):
+        if self.current_sprite == "default":
+            self.change_image("running")
+
         if self.joystick:
             self.velx += self.accel * self.joystick.get_axis(0)
         else:
             self.velx += self.accel * dir
+
+    def reset_run(self):
+        if self.current_sprite == "running":
+            self.change_image("default")
 
     def jump(self):
         if self.on_ground or self.coyote_time > 0:
@@ -74,14 +80,36 @@ class Player(PhysicsObject):
             self.coyote_time = 0
 
     def crouch(self):
+        # self.play_anim("crouchanim", play_once = True)
         self.change_image("crouch")
         self.accel = CROUCHING_ACCEL
         self.maxx_velo = CROUCHING_MAXX_VELO
 
     def uncrouch(self):
+        self.uncrouch_queued = True
+
+    def check_uncrouch(self):
+        colliders = [i for i in self.level.tiles.physics_objects if i is not self and getattr(i, "collision", False)]
+        colliders.extend(self.level.tiles.collision_tiles)
+
         self.change_image("default")
-        self.accel = X_ACCEL
-        self.maxx_velo = MAXX_VELO
+        self.update_bounds()
+
+        for obj in colliders:
+            if self.colliding(obj):
+                if getattr(obj, "pushback_factor", 1) != 1:
+                    obj.y -= (obj.y + obj.rect.height) - self.y
+                    obj.update_bounds()
+                else:
+                    self.change_image("crouch")
+                    self.uncrouch_queued = True
+                    
+                break
+
+        else:
+            self.change_image("default")
+            self.update_bounds()
+            self.uncrouch_queued = False
 
     def update_timers(self, dt):
         if self.on_ground:
@@ -116,3 +144,7 @@ class Player(PhysicsObject):
         self.update_pos(self.tiles, dt)
         self.update_aim()
         self.gun.update()
+        self.update_sprites(dt)
+
+        if self.uncrouch_queued:
+            self.check_uncrouch()

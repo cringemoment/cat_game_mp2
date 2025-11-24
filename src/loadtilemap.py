@@ -81,7 +81,7 @@ class TileMap:
 
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
-                        physics_object = ObjectFactory(getattr(obj, "type", None))
+                        physics_object = ObjectFactory(getattr(obj, "type", None), self.level)
                         physics_object.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
                         physics_object.name = obj.name
                         physics_object.x = obj.x
@@ -90,10 +90,6 @@ class TileMap:
                         physics_object.rect.y = obj.y
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
-
-        print(self.activated_objects)
-        print(self.area_triggers)
-
 
     def get_size(self):
         return self.width, self.height

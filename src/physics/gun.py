@@ -5,8 +5,8 @@ from src.physics.bullet import Bullet
 from src.renderer.spriteobject import Sprite
 
 class Gun(Sprite):
-    def __init__(self, player):
-        super().__init__()
+    def __init__(self, level, player):
+        super().__init__(level)
         self.player = player
 
         self.original_image = pygame.Surface((60, 12), pygame.SRCALPHA)
@@ -40,5 +40,5 @@ class Gun(Sprite):
 
     def shoot(self):
         start_pos = self.get_tip_position()
-        bullet = Bullet(start_pos, self.player.aim_angle)
+        bullet = Bullet(self.level, start_pos, self.player.aim_angle)
         self.player.groups()[0].add(bullet) #adding it to the main sprites list

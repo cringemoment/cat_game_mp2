@@ -35,7 +35,7 @@ class Controller():
         self.B_up = lambda: self.joystick.get_button(3)
 
         #bumpers and triggers
-        self.LB = lambda: self.joystick.get_button(5)
+        self.LB = lambda: self.joystick.get_button(4)
         self.RB = lambda: self.joystick.get_button(5)
 
         self.LT = lambda: self.joystick.get_axis(4) if self.joystick.get_axis(4) > 0 else 0 #idk why theyre axises
@@ -64,7 +64,9 @@ class InputHandler:
         }
 
         keyup_events = {
-            "crouch": lambda: self.player.uncrouch()
+            "crouch": lambda: self.player.uncrouch(),
+            "left": lambda: self.player.reset_run(),
+            "right": lambda: self.player.reset_run()
         }
 
         keys = pygame.key.get_pressed()

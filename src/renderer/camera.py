@@ -42,6 +42,12 @@ class Camera:
 
             surface.blit(scaled_image, screen_pos)
 
+            if type(sprite).__name__ == "Button":
+                # print("button")
+                pass
+
+            # print(screen_pos)
+
 class CameraPos(ActivatedObject):
     def on_trigger(self):
         self.level.camera.x = self.x
@@ -49,6 +55,4 @@ class CameraPos(ActivatedObject):
         self.level.camera.width = int(self.properties["screen_width"])
 
 class CameraTrigger(Trigger):
-    def on_enter(self, player):
-        print("g")
     pass

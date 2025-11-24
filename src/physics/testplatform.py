@@ -2,15 +2,15 @@ from src.physics.physicsobject import PhysicsObject
 from src.triggers.triggerobject import ActivatedObject
 
 class Platform(PhysicsObject, ActivatedObject):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         sprites = {
             "gone": "objects/platform_gone.png"
         }
 
         self.set_sprites(sprites)
 
-        self.pushback_factor = 1
+        self.pushback_factor = 0.5
         self.collision = True
         self.gravity = 0
 

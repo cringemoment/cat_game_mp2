@@ -19,6 +19,10 @@ def minimum_push(n, x): #sometimes collision doesn't push out enough
     return n * x/abs(x) if abs(x) < n else x
 
 class PhysicsObject(Sprite):
+    """
+    object with physics
+    """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.x, self.y = (0, 0) #should be set elsewhere
@@ -41,7 +45,6 @@ class PhysicsObject(Sprite):
 
         #interactions with other sprites
         self.collision = True
-        self.pushable = False
         self.pushback_factor = 1
         self.name = None
 
@@ -71,14 +74,14 @@ class PhysicsObject(Sprite):
         if not self.colliding(obj):
             return
 
-        if iteration == MAX_PHYSICS_CHECKS - 1:
-            if isinstance(obj, pygame.sprite.Sprite):
-                self.sprite_collision(obj)
+        if not obj.alive() or not self.alive():
+            return
 
-                if getattr(obj, "sprite_collision", None):
-                    obj.sprite_collision(self)
-            else:
-                self.tile_collision(obj)
+        if getattr(obj, "sprite_collision", None):
+            self.sprite_collision(obj)
+            obj.sprite_collision(self)
+        else:
+            self.tile_collision(obj)
 
         if self.collision == False or getattr(obj, "collision", True) == False:
             return
@@ -97,25 +100,25 @@ class PhysicsObject(Sprite):
         self.x -= minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * pushback_factor)
         obj.x += minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * (1 - pushback_factor))
 
-        if type(self).__name__ == "Player" and hasattr(obj, "velx"):
-            obj.velx = dx * (1 - pushback_factor)
+        # if type(self).__name__ == "Player" and hasattr(obj, "velx"):
+            # obj.velx = dx * (1 - pushback_factor)
 
         self.update_bounds()
         if getattr(obj, "update_bounds", None):
             obj.update_bounds()
 
     def collide_y(self, obj, iteration):
-        if not self.touching_ground(obj):
+        if not self.touching_ground(obj) or not self.colliding(obj):
             return
 
-        if iteration == MAX_PHYSICS_CHECKS - 1:
-            if isinstance(obj, pygame.sprite.Sprite):
-                self.sprite_collision(obj)
+        if not obj.alive() or not self.alive():
+            return
 
-                if getattr(obj, "sprite_collision", None):
-                    obj.sprite_collision(self)
-            else:
-                self.tile_collision(obj)
+        if getattr(obj, "sprite_collision", None):
+            self.sprite_collision(obj)
+            obj.sprite_collision(self)
+        else:
+            self.tile_collision(obj)
 
         if self.collision == False or getattr(obj, "collision", True) == False:
             return
@@ -131,7 +134,7 @@ class PhysicsObject(Sprite):
         elif self.top < obj.bottom and self.bottom > obj.bottom: #going up
             dy = obj.bottom - self.top
             # if type(self).__name__ == "Player" and type(obj).__name__ == "Player":
-                # print(f"Pushing player up {dy * (1 - pushback_factor)}, to {obj.y - dy * (1 - pushback_factor)}")
+            #     print(f"Pushing player up {dy * (1 - pushback_factor)}, to {obj.y - dy * (1 - pushback_factor)}")
             self.y += dy * pushback_factor
             obj.y -= dy * (1 - pushback_factor)
             self.vely = 0
@@ -139,19 +142,20 @@ class PhysicsObject(Sprite):
         self.update_bounds()
 
     def handle_collisions(self, colliders):
-        self.x += self.velx
-        self.update_bounds()
-
         for i in range(MAX_PHYSICS_CHECKS):
+            self.x += self.velx / MAX_PHYSICS_CHECKS
+            self.update_bounds()
+
             for obj in colliders:
                 self.collide_x(obj, i)
 
         self.vely += self.gravity
-        self.y += self.vely
-        self.update_bounds()
         self.on_ground = False
 
         for i in range(MAX_PHYSICS_CHECKS):
+            self.y += self.vely / MAX_PHYSICS_CHECKS
+            self.update_bounds()
+
             for obj in colliders:
                 self.collide_y(obj, i)
 

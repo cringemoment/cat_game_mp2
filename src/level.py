@@ -5,6 +5,7 @@ from src.renderer.camera import Camera
 
 class Level:
     def __init__(self, level_path):
+        self.paused = True
         self.level_path = level_path
 
     def load_window(self, s):
@@ -14,7 +15,9 @@ class Level:
         self.camera.set_level(self.tiles)
 
     def draw(self, surface, dt):
-        self.tiles.physics_objects.update(self, dt)
+        if not self.paused:
+            self.tiles.physics_objects.update(self, dt)
+
         self.camera.draw(surface, self.tiles.physics_objects)
         self.camera.draw(surface, self.tiles.decorations)
         self.camera.draw(surface, self.tiles.collision_tiles)
@@ -24,5 +27,5 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-testlevel = Level("levels/camera.tmx")
+testlevel = Level("levels/button_test.tmx")
 # testlevel = 2
