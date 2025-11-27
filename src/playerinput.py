@@ -41,6 +41,10 @@ class Controller():
         self.LT = lambda: self.joystick.get_axis(4) if self.joystick.get_axis(4) > 0 else 0 #idk why theyre axises
         self.RT = lambda: self.joystick.get_axis(5) if self.joystick.get_axis(5) > 0 else 0
 
+        #auxiliary buttons
+        self.minus = lambda: self.joystick.get_button(6)
+        self.plus = lambda: self.joystick.get_button(7)
+
 class InputHandler:
     def __init__(self, player, controls, joystick = None):
         self.player = player

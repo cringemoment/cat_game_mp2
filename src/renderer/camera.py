@@ -11,6 +11,8 @@ class Camera:
         self.height = 20
 
     def set_level(self, level):
+        self.positions = {}
+
         for obj in level.activated_objects:
             if type(obj).__name__ == "CameraPos":
                 self.positions[obj.name] = obj
@@ -22,9 +24,6 @@ class Camera:
     def draw(self, surface, group):
         screen_width, screen_height = surface.get_size()
 
-        # tile_width = screen_width / self.width
-        # tile_height = screen_height / self.height
-        # tile_size = min(tile_width, tile_height)
         tile_size = screen_width / self.width #will always use the width for the size so that it fills horizontally
 
         offset = pygame.Vector2(self.x, self.y)
@@ -41,12 +40,6 @@ class Camera:
             scaled_image = pygame.transform.scale(sprite.image, (int(sprite.rect.width * scale_factor), int(sprite.rect.height * scale_factor)))
 
             surface.blit(scaled_image, screen_pos)
-
-            if type(sprite).__name__ == "Button":
-                # print("button")
-                pass
-
-            # print(screen_pos)
 
 class CameraPos(ActivatedObject):
     def on_trigger(self):

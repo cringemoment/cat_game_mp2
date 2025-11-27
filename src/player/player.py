@@ -21,7 +21,7 @@ BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
-    def __init__(self, index, level, coords, controls, sprites, joystick = None):
+    def __init__(self, index = 0, level = None, controls = None, sprites = None, joystick = None):
         super().__init__(level)
         self.set_sprites(sprites)
 
@@ -34,10 +34,10 @@ class Player(PhysicsObject):
         self.leftclick_down = False
         self.keys_pressed = []
 
-        self.rect = self.image.get_rect(topleft = coords)
+        self.rect = self.image.get_rect(topleft = (0, 0))
 
         #movement stuff
-        self.x, self.y = coords
+        self.x, self.y = 0, 0
         self.maxx_velo = MAXX_VELO
         self.accel = X_ACCEL
         self.collision = True
@@ -103,12 +103,13 @@ class Player(PhysicsObject):
                 else:
                     self.change_image("crouch")
                     self.uncrouch_queued = True
-                    
+
                 break
 
         else:
             self.change_image("default")
             self.update_bounds()
+            self.accel = X_ACCEL
             self.uncrouch_queued = False
 
     def update_timers(self, dt):
