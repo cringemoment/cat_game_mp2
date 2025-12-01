@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "levels/button_test.tmx",
+    "activeFile": "levels/techdemo.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -34,6 +34,7 @@
             "scaleInDock": 1
         },
         "assets/objects/button.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -49,8 +50,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 512,
-                "y": 319.5
+                "x": 515,
+                "y": 320.5
             }
         },
         "levels/button_test.tmx": {
@@ -59,10 +60,10 @@
                 3
             ],
             "scale": 0.75,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 436.66666666666663,
-                "y": 317.99999999999994
+                "x": 434,
+                "y": 319.33333333333326
             }
         },
         "levels/camera.tmx": {
@@ -72,8 +73,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 762.6666666666666,
-                "y": 640.6666666666667
+                "x": 768.6666666666666,
+                "y": 640.6666666666666
             }
         },
         "levels/cat.tsx": {
@@ -99,6 +100,10 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "levels/platform.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
         "levels/precision.tmx": {
             "scale": 0.89359375,
             "selectedLayer": 0,
@@ -118,7 +123,21 @@
                 "y": 319.3333333333333
             }
         },
+        "levels/techdemo.tmx": {
+            "expandedObjectLayers": [
+                5,
+                4,
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 352.33333333333337,
+                "y": 1086.6666666666665
+            }
+        },
         "levels/test.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -137,13 +156,18 @@
         "levels/testplayer.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 2
+        },
+        "levels/wee.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
-    "last.imagePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
+    "last.imagePath": "C:/Users/cring/Documents/GitHub/major_project_2/assets/objects",
     "last.objectTemplatePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
-    "map.height": 20,
+    "map.height": 40,
     "map.lastUsedFormat": "tmx",
-    "map.width": 30,
+    "map.width": 60,
     "openFiles": [
         "levels/test.tsx",
         "levels/orange.tsx",
@@ -151,7 +175,9 @@
         "levels/collision_test.tmx",
         "levels/camera.tmx",
         "assets/objects/button.tsx",
-        "levels/button_test.tmx"
+        "levels/button_test.tmx",
+        "levels/techdemo.tmx",
+        "levels/wee.tsx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
@@ -162,15 +188,16 @@
         "levels/camera.tmx",
         "assets/objects/button.tsx",
         "levels/button_test.tmx",
+        "levels/wee.tsx",
+        "levels/techdemo.tmx",
         "C:/Users/ADMIN/Downloads/cat_game_mp2-main/cat_game_mp2-main/levels/camera.tmx",
         "levels/testlevel.tmx",
-        "levels/box.tsx",
-        "levels/shootingpractice.tmx",
-        "levels/heavybox.tsx"
+        "levels/box.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 32,
         "width": 128
-    }
+    },
+    "tileset.type": 1
 }

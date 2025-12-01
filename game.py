@@ -2,7 +2,7 @@ import pygame
 from src.levels.loadtilemap import load_tilemap
 from src.player.player import Player
 
-from src.levels.level import testlevel, second
+from src.levels.level import testlevel
 from src.playerinput import Controller, Keyboard
 from src.menu.menu import MenuHandler
 
@@ -69,9 +69,9 @@ class Game:
 
     def print_debugs(self):
         debugs = {
-            "p1vx": lambda: self.player1.velx,
-            "p2vx": lambda: self.player2.velx,
-            "paused": lambda: self.paused
+            "x": lambda: self.player1.x,
+            "ong": lambda: self.player2.on_ground,
+            "y": lambda: self.player2.y
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -110,6 +110,6 @@ class Game:
         pygame.display.flip()
 
         if self.keyboard.get_key(pygame.K_k)():
-            self.load_level(second)
+            self.player1.fade_in(1)
 
 game = Game()

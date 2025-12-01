@@ -54,6 +54,7 @@ class Sprite(pygame.sprite.Sprite):
 
         self.sprites = {}
         self.current_sprite = None
+        self.transparency = 255
 
         self.facing = 1 #1 is right
         #by default all sprites should face right
@@ -100,6 +101,8 @@ class Sprite(pygame.sprite.Sprite):
         if self.facing == -1:
             self.image = pygame.transform.flip(self.image, True, False)
 
+        self.image.set_alpha(self.transparency)
+
     def get_image(self):
         if type(self.sprites[self.current_sprite]).__name__ == "Animation":
             return self.sprites[self.current_sprite].frames[self.sprites[self.current_sprite].index]
@@ -110,10 +113,6 @@ class Sprite(pygame.sprite.Sprite):
         if face != self.facing:
             self.image = pygame.transform.flip(self.image, True, False)
             self.facing = -1 if self.facing == 1 else 1
-
-    def update_sprites(self, dt):
-        if type(self.sprites[self.current_sprite]).__name__ == "Animation":
-            self.sprites[self.current_sprite].update_timers(dt)
 
     def play_anim(self, name, play_once = True):
         anim = self.sprites[name]
@@ -132,3 +131,50 @@ class Sprite(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.rect.bottom = bottom
             self.rect.centerx = center
+
+    def fade_in(self, time):
+        self.fade_total = time
+        self.fade_time = time
+        self.fade_mode = "in"
+
+        self.transparency = 0
+
+    def fade_out(self, time):
+        self.fade_total = time
+        self.fade_time = time
+        self.fade_mode = "out"
+
+        self.transparency = 255
+
+    def update_fade(self, dt):
+        if getattr(self, "fade_mode", None) is None:
+            return
+
+        self.fade_time -= dt
+        if self.fade_time < 0:
+            self.fade_time = 0
+
+        t = 1 - (self.fade_time / self.fade_total)
+
+        if self.fade_mode == "in":
+            alpha = int(t * 255)
+        else:
+            alpha = int((1 - t) * 255)
+
+        alpha = max(0, min(255, alpha))
+        self.transparency = alpha
+
+        # self.image.set_alpha(self.transparency)
+
+        if self.fade_time == 0:
+            self.fade_mode = None
+
+    def update_sprites(self, dt):
+        if type(self.sprites[self.current_sprite]).__name__ == "Animation":
+            self.sprites[self.current_sprite].update_timers(dt)
+
+        self.update_fade(dt)
+        self.image.set_alpha(self.transparency)
+
+    def update(self, surface, dt):
+        self.update_sprites(dt)

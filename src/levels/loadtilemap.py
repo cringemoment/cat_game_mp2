@@ -59,6 +59,7 @@ class TileMap:
                         else:
                             self.decorations.add(tile)
 
+
             elif isinstance(layer, pytmx.TiledObjectGroup): #REMEMBER THAT THE CLASS OF AN OBJECT IS "type" AND NOT "class"
                 if getattr(layer, "class", None) == "positions":
                     for obj in layer:

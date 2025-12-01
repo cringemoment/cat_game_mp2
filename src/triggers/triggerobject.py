@@ -27,6 +27,10 @@ class Trigger:
         pass
 
     @call_triggers
+    def on_any_enter(self, player):
+        pass
+
+    @call_triggers
     def on_enter(self, player):
         pass
 
@@ -41,6 +45,9 @@ class Trigger:
                     if not self.players_inside[sprite.index]:
                         self.players_inside[sprite.index] = True
                         self.on_enter(sprite)
+
+                        if not all(self.players_inside):
+                            self.on_any_enter(sprite)
 
                 else:
                     if self.players_inside[sprite.index]:

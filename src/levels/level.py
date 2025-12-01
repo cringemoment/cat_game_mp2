@@ -14,17 +14,38 @@ class Level:
         self.camera.set_level(self.tiles)
 
     def draw(self, surface):
-        self.camera.draw(surface, self.tiles.physics_objects)
-        self.camera.draw(surface, self.tiles.decorations)
-        self.camera.draw(surface, self.tiles.collision_tiles)
-        self.camera.draw(surface, self.tiles.physics_objects)
-        self.camera.draw(surface, self.tiles.area_triggers)
+        objects = []
+
+        groups = [
+            self.tiles.physics_objects,
+            self.tiles.decorations,
+            self.tiles.collision_tiles,
+            self.tiles.physics_objects,
+            self.tiles.area_triggers
+        ]
+
+        for group in groups:
+            for obj in group:
+                if hasattr(obj, "z"):
+                    z = obj.z
+                elif hasattr(obj, "properties") and "z" in obj.properties:
+                    print(obj)
+                    z = obj.properties["z"]
+                else:
+                    z = 0
+
+                objects.append((z, obj))
+
+        objects.sort(key=lambda t: t[0])
+
+        for _, obj in objects:
+            self.camera.draw(surface, [obj])
 
     def update_physics(self, dt):
         self.tiles.physics_objects.update(self, dt)
+        self.camera.update_timers(dt)
 
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-testlevel = Level("levels/button_test.tmx")
-second = Level("levels/camera.tmx")
+testlevel = Level("levels/techdemo.tmx")

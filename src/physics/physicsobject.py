@@ -159,8 +159,8 @@ class PhysicsObject(Sprite):
             for obj in colliders:
                 self.collide_y(obj, i)
 
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.x = round(self.x)
+        self.rect.y = round(self.y)
 
     def update_pos(self, level, dt):
         colliders = []
