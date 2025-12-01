@@ -2,13 +2,22 @@ import pygame
 
 CONTROLLER_DEADZONE = 0.2 #avoid controller drift, just in case
 
+MOUSE_BUTTONS = {
+    "lmb": lambda: pygame.mouse.get_pressed()[0],
+    "mmb": lambda: pygame.mouse.get_pressed()[1],
+    "rmb": lambda: pygame.mouse.get_pressed()[2]
+}
+
 class Keyboard():
     def __init__(self):
-        self.lmb = lambda: pygame.mouse.get_pressed()[0]
-        self.mmb = lambda: pygame.mouse.get_pressed()[1]
-        self.rmb = lambda: pygame.mouse.get_pressed()[2]
+        self.lmb = "lmb"
+        self.mmb = "mmb"
+        self.rmb = "rmb"
 
     def get_key(self, key): #i hate how pygame handles keys
+        if key in MOUSE_BUTTONS:
+            return lambda: MOUSE_BUTTONS[key]()
+
         return lambda: pygame.key.get_pressed()[key]
 
 class Controller():
@@ -44,6 +53,9 @@ class Controller():
         #auxiliary buttons
         self.minus = lambda: self.joystick.get_button(6)
         self.plus = lambda: self.joystick.get_button(7)
+
+    def get_key(self, key):
+        return key
 
 class InputHandler:
     def __init__(self, player, controls, joystick = None):

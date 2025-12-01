@@ -34,7 +34,7 @@ class Game:
             "left": keyboard.get_key(pygame.K_a),
             "right": keyboard.get_key(pygame.K_d),
             "crouch": keyboard.get_key(pygame.K_s),
-            "shoot": keyboard.lmb
+            "shoot": keyboard.get_key(keyboard.lmb)
         }
 
         try:
@@ -42,11 +42,11 @@ class Game:
 
             controller = Controller(testcontroller)
             test_controller_controls = {
-                "jump": controller.B_down,
-                "left": controller.J1_left,
-                "right": controller.J1_right,
-                "crouch": controller.J1_down,
-                "shoot": controller.RB
+                "jump": controller.get_key(controller.B_down),
+                "left": controller.get_key(controller.J1_left),
+                "right": controller.get_key(controller.J1_right),
+                "crouch": controller.get_key(controller.J1_down),
+                "shoot": controller.get_key(controller.RB)
             }
 
             self.player1 = Player(0, testlevel, test_controls, test_spritelist)

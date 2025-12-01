@@ -50,8 +50,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 515,
-                "y": 320.5
+                "x": 512,
+                "y": 319.5
             }
         },
         "levels/button_test.tmx": {
@@ -62,8 +62,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 434,
-                "y": 319.33333333333326
+                "x": 421.33333333333326,
+                "y": 319.3333333333333
             }
         },
         "levels/camera.tmx": {
@@ -73,8 +73,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 768.6666666666666,
-                "y": 640.6666666666666
+                "x": 762.6666666666666,
+                "y": 640.6666666666667
             }
         },
         "levels/cat.tsx": {

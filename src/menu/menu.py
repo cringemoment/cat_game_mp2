@@ -1,15 +1,18 @@
 import pygame
 
 class Button:
-    def __init__(self, x, y, image):
+    def __init__(self, menu, x, y):
+        self.menu = menu
         self.x = x
         self.y = y
-        self.image = image
 
     def on_highlight(self):
         pass
 
-    def on_press(self):
+    def on_select(self):
+        pass
+
+    def on_escape(self):
         pass
 
     def draw(self, surface):

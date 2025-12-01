@@ -74,6 +74,9 @@ class ActivatedObject:
     def on_enter(self, player):
         pass
 
+    def on_any_enter(self, player):
+        pass
+
     def on_leave(self, player):
         pass
 
