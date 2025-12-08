@@ -16,29 +16,22 @@ class Controls:
         self.input_type = type
         self.controls = {}
 
-    def load_controls(self, file):
-        f = json.load(file)
+    def load(self, file):
+        self.controls = json.load(open(file))
 
-    def write_controls(self):
+    def write(self):
         out = {
-            "input_type" = self.input_type,
+            "input_type": self.input_type,
             "controls": self.controls
         }
 
         json.dump(out, open(self.name, "w"))
 
-test_controls = {
-    "jump": "pygame.K_SPACE",
-    "left": "pygame.K_a",
-    "right": "pygame.K_d",
-    "crouch": "pygame.K_s",
-    "shoot": "keyboard.lmb"
-}
+kbcontrols = Controls("p1", "k")
+kbcontrols.load("src/player/controls/profile_1.json")
 
-test_controller_controls = {
-    "jump": "B_down",
-    "left": "J1_left",
-    "right": "J1_right",
-    "crouch": "J1_down",
-    "shoot": "RB"
-}
+try:
+    jycontrols = Controls("p2", "j")
+    jycontrols.load("src/player/controls/profile_2.json")
+except Exception as e:
+    print(e)

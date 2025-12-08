@@ -55,13 +55,13 @@ class Controller():
         self.plus = lambda: self.joystick.get_button(7)
 
     def get_key(self, key):
-        return key
+        return getattr(self, key)
 
 class InputHandler:
-    def __init__(self, player, controls, joystick = None):
+    def __init__(self, player, input_device, controls):
         self.player = player
-        self.controls = controls
-        self.joystick = joystick
+        self.controls = controls.controls
+        self.input_device = input_device
 
         self.keys_pressed = []
 
@@ -74,13 +74,13 @@ class InputHandler:
         keydown_events = {
             "left": lambda: self.player.set_facing(-1),
             "right": lambda: self.player.set_facing(1),
-            "crouch": lambda: self.player.crouch(),
-            "shoot": lambda: self.player.shoot(),
+            "down": lambda: self.player.crouch(),
+            "main_action": lambda: self.player.shoot(),
             "jump": lambda: self.player.jump()
         }
 
         keyup_events = {
-            "crouch": lambda: self.player.uncrouch(),
+            "down": lambda: self.player.uncrouch(),
             "left": lambda: self.player.reset_run(),
             "right": lambda: self.player.reset_run()
         }
@@ -88,12 +88,13 @@ class InputHandler:
         keys = pygame.key.get_pressed()
 
         for control in held_events:
-            if self.controls[control]():
+            # if self.input_device.get_key(self.controls[control])():
+            if any([self.input_device.get_key(i)() for i in self.controls[control]]):
                 held_events[control]()
                 self.player.bullet_physics = False
 
         for control in keydown_events:
-            if self.controls[control]():
+            if any([self.input_device.get_key(i)() for i in self.controls[control]]):
                 if control not in self.keys_pressed:
                     keydown_events[control]()
                     self.keys_pressed.append(control)

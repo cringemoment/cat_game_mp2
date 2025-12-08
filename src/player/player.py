@@ -1,7 +1,7 @@
 import pygame
 import math
 
-from src.playerinput import InputHandler, CONTROLLER_DEADZONE
+from src.player.playerinput import InputHandler, CONTROLLER_DEADZONE
 
 from src.physics.physicsobject import PhysicsObject, AIR_RESISTANCE
 from src.physics.gun import Gun
@@ -21,16 +21,16 @@ BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
-    def __init__(self, index = 0, level = None, controls = None, sprites = None, joystick = None):
+    def __init__(self, index = 0, level = None, controls = None, input_device = None, sprites = None):
         super().__init__(level)
         self.set_sprites(sprites)
 
         self.index = index
 
         #handling controls
-        self.input_handler = InputHandler(self, controls, joystick)
+        self.input_handler = InputHandler(self, controls, input_device)
         self.controls = controls
-        self.joystick = joystick
+        self.input_device = input_device
         self.leftclick_down = False
         self.keys_pressed = []
 
@@ -64,8 +64,8 @@ class Player(PhysicsObject):
         if self.current_sprite == "default":
             self.change_image("running")
 
-        if self.joystick:
-            self.velx += self.accel * self.joystick.get_axis(0)
+        if type(self.input_device).__name__ == "Controller":
+            self.velx += self.accel * self.input_device.get_axis(0)
         else:
             self.velx += self.accel * dir
 
@@ -119,9 +119,9 @@ class Player(PhysicsObject):
             self.coyote_time -= dt
 
     def update_aim(self):
-        if self.joystick:
-            axis_x = self.joystick.get_axis(2)
-            axis_y = self.joystick.get_axis(3)
+        if type(self.input_device).__name__ == "Joystick":
+            axis_x = self.input_device.get_axis(2)
+            axis_y = self.input_device.get_axis(3)
 
             if abs(axis_x) > CONTROLLER_DEADZONE or abs(axis_y) > CONTROLLER_DEADZONE:
                 self.aim_angle = math.degrees(math.atan2(-axis_y, axis_x))
