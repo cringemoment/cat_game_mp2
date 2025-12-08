@@ -2,7 +2,7 @@ import pygame
 
 from game import Game
 
-running = True
+running = True #Hello
 
 game = Game()
 
