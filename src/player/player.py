@@ -9,12 +9,13 @@ from src.physics.gun import Gun
 #each tile is 32 pixels
 #time is measured in seconds
 #acceleration is measured in pixels per frame
-JUMP_POWER = 12
+JUMP_POWER = 15
+CROUCHING_JUMP_POWER = 10
 COYOTE_TIME = 0.15
 
 MAXX_VELO = 5
 X_ACCEL = 2
-CROUCHING_ACCEL = 1.4
+CROUCHING_ACCEL = 1
 CROUCHING_MAXX_VELO = 3
 
 BULLET_HIT_MAXVELO = 10
@@ -43,6 +44,9 @@ class Player(PhysicsObject):
         self.collision = True
         self.bullet_physics = False #lower friction after being hit by a bullet
         self.pushback_factor = 0.01
+
+        self.current_velo = MAXX_VELO
+        self.jump_power = JUMP_POWER
 
         self.uncrouch_queued = False
 
@@ -75,7 +79,7 @@ class Player(PhysicsObject):
 
     def jump(self):
         if self.on_ground or self.coyote_time > 0:
-            self.vely = -JUMP_POWER
+            self.vely = -self.jump_power
             self.on_ground = False
             self.coyote_time = 0
 
@@ -83,7 +87,8 @@ class Player(PhysicsObject):
         # self.play_anim("crouchanim", play_once = True)
         self.change_image("crouch")
         self.accel = CROUCHING_ACCEL
-        self.maxx_velo = CROUCHING_MAXX_VELO
+        self.current_velo = CROUCHING_MAXX_VELO
+        self.jump_power = CROUCHING_JUMP_POWER
 
     def uncrouch(self):
         self.uncrouch_queued = True
@@ -110,7 +115,9 @@ class Player(PhysicsObject):
             self.change_image("default")
             self.update_bounds()
             self.accel = X_ACCEL
+            self.current_velo = MAXX_VELO
             self.uncrouch_queued = False
+            self.jump_power = JUMP_POWER
 
     def update_timers(self, dt):
         if self.on_ground:
@@ -139,7 +146,7 @@ class Player(PhysicsObject):
             self.maxx_velo = BULLET_HIT_MAXVELO
             self.air_resistance = BULLET_HIT_AR
         else:
-            self.maxx_velo = MAXX_VELO
+            self.maxx_velo = self.current_velo
             self.air_resistance = AIR_RESISTANCE
 
         self.update_pos(self.tiles, dt)

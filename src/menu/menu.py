@@ -40,7 +40,7 @@ class TextButton(Widget):
 
     def set_text(self, text = None):
         if text:
-            self.text = text
+            self.text = str(text)
 
         self.text_surf = self.font.render(self.text, True, self.color)
         self.rect = self.text_surf.get_rect(topleft=(self.x, self.y))
@@ -59,9 +59,29 @@ class TextButton(Widget):
     def draw(self, surface):
         surface.blit(self.text_surf, self.rect)
 
-class ArrowSelector(Widget):
-    def __init__(self, *args, **kwargs):
+class NumberChooser(TextButton):
+    def __init__(self, value = 0, min = None, max = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.value = value
+
+        print(min)
+        if min is not None:
+            self.min = min
+        if max:
+            self.max = max
+
+    def left(self):
+        if self.value - 1 < self.min: return
+        self.value -= 1 #TODO: HOLD DOWN
+
+    def right(self):
+        if self.value + 1 > self.max: return
+        self.value += 1 #TODO: HOLD DOWN
+
+    def draw(self, surface):
+        self.text_surf = self.font.render(str(self.value), True, self.color)
+        self.rect = self.text_surf.get_rect(topleft=(self.x, self.y))
+        surface.blit(self.text_surf, self.rect)
 
 class Menu:
     def __init__(self, menuhandler):
@@ -173,8 +193,9 @@ class PauseMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("hello", font, self.go_back, self, 700, 100),
-            TextButton("goobi c:", font, self.open_options, self, 700, 150)
+            TextButton("Unpause", font, self.go_back, self, 600, 100),
+            TextButton("Options", font, self.open_options, self, 600, 150),
+            TextButton("Main Menu", font, self.main_menu, self, 600, 200)
         ]
 
     def go_back(self):
@@ -183,11 +204,15 @@ class PauseMenu(Menu):
     def open_options(self):
         self.menuhandler.change_menu("options")
 
+    def main_menu(self):
+        pass #TODO: Make this become main menu / main page
+
 class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("Woohoo! you made it", font, lambda: None, self, 500, 500),
+            TextButton("Woohoo! you made it! Jane is a fat woman.", font, lambda: None, self, 500, 500),
+            NumberChooser(5, 0, 10, "  ", font, lambda: None, self, 500, 550),
             TextButton("Go Back", font, self.go_back, self, 500, 600)
         ]
 

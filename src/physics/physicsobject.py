@@ -2,7 +2,7 @@ import pygame
 
 from src.renderer.spriteobject import Sprite
 
-GRAVITY = 0.5
+GRAVITY = 0.7
 FRICTION = 1.2
 AIR_RESISTANCE = 0.8
 
