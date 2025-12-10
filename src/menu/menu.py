@@ -1,7 +1,7 @@
 import pygame
 
 pygame.font.init()
-font = pygame.font.SysFont('Comic Sans MS', 20)
+font = pygame.font.SysFont('Comic Sans MS', 25)
 
 class Widget:
     def __init__(self, menu, x, y):
@@ -193,9 +193,9 @@ class PauseMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("Unpause", font, self.go_back, self, 600, 100),
-            TextButton("Options", font, self.open_options, self, 600, 150),
-            TextButton("Main Menu", font, self.main_menu, self, 600, 200)
+            TextButton("Unpause", font, self.go_back, self, 750, 100),
+            TextButton("Options", font, self.open_options, self, 750, 150),
+            TextButton("Main Menu", font, self.main_menu, self, 750, 200)
         ]
 
     def go_back(self):
