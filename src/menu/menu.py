@@ -28,13 +28,14 @@ class Widget:
         pass
 
 class TextButton(Widget):
-    def __init__(self, text, font, command, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, menu, x, y, text, font, command, align = "left"):
+        super().__init__(menu, x, y)
         self.font = font
         self.command = command
         self.color = (255, 255, 255)
         self.default_color = (255, 255, 255)
         self.highlighted_color = (255, 255, 0)
+        self.align = align
 
         self.set_text(text)
 
@@ -43,7 +44,11 @@ class TextButton(Widget):
             self.text = str(text)
 
         self.text_surf = self.font.render(self.text, True, self.color)
-        self.rect = self.text_surf.get_rect(topleft=(self.x, self.y))
+
+        if self.align == "left":
+            self.rect = self.text_surf.get_rect(topleft=(self.x, self.y))
+        elif self.align == "right":
+            self.rect = self.text_surf.get_rect(topright=(self.x, self.y))
 
     def on_highlight(self):
         self.color = self.highlighted_color
@@ -193,9 +198,9 @@ class PauseMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("Unpause", font, self.go_back, self, 600, 100),
-            TextButton("Options", font, self.open_options, self, 600, 150),
-            TextButton("Main Menu", font, self.main_menu, self, 600, 200)
+            TextButton(self, 600, 100, text = "Unpause", font = font, command = self.go_back, align = "right"),
+            TextButton(self, 600, 150, text = "Options", font = font, command = self.open_options, align = "right"),
+            TextButton(self, 600, 200, text = "Main Menu", font = font, command = self.main_menu, align = "right")
         ]
 
     def go_back(self):
@@ -211,9 +216,6 @@ class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("Woohoo! you made it! Jane is a fat woman.", font, lambda: None, self, 500, 500),
-            NumberChooser(5, 0, 10, "  ", font, lambda: None, self, 500, 550),
-            TextButton("Go Back", font, self.go_back, self, 500, 600)
         ]
 
     def go_back(self):
