@@ -8,7 +8,7 @@ from src.menu.menu import MenuHandler
 
 from assets.sprites.players.spritelist import *
 
-from src.player.controls import kbcontrols, jycontrols
+from src.player.controls import kbcontrols, jycontrols, nopause
 
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
@@ -44,20 +44,19 @@ class Game:
         except Exception as e:
             print(e)
             self.player1 = Player(0, testlevel, keyboard, kbcontrols, test_spritelist)
-            self.player2 = Player(1, testlevel, keyboard, kbcontrols, test_controller_spritelist)
+            self.player2 = Player(1, testlevel, keyboard, nopause, test_controller_spritelist)
 
-            self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, kbcontrols)
+            self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
 
         testlevel.load_window(self.window)
         self.load_level(testlevel)
 
-        self.fps = 60
+        self.mi = 20
+        self.mimimi = [0] * self.mi
 
     def print_debugs(self):
         debugs = {
-            "x": lambda: self.player2.x,
-            "y": lambda: self.player2.y,
-            "what": lambda: self.current_level.tiles.physics_objects
+            "fps": lambda: sum(self.mimimi) // self.mi
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -82,7 +81,8 @@ class Game:
         self.window.fill(background_color)
 
         dt = self.clock.tick(MAX_FRAMES) / 1000
-        self.fps = round(1/dt, 0)
+        self.mimimi.append(round(1/dt, 2))
+        self.mimimi.pop(0)
 
         self.current_level.draw(self.window)
 

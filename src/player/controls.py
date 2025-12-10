@@ -30,6 +30,9 @@ class Controls:
 kbcontrols = Controls("p1", "k")
 kbcontrols.load("src/player/controls/profile_1.json")
 
+nopause = Controls("p3", "k")
+nopause.load("src/player/controls/profile_3.json")
+
 try:
     jycontrols = Controls("p2", "j")
     jycontrols.load("src/player/controls/profile_2.json")
