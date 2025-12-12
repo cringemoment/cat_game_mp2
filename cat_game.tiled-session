@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "levels/techdemo.tmx",
+    "activeFile": "levels/level_0.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -56,14 +56,14 @@
         },
         "levels/button_test.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 421.33333333333326,
-                "y": 319.3333333333333
+                "x": 420.66666666666663,
+                "y": 319.33333333333326
             }
         },
         "levels/camera.tmx": {
@@ -96,7 +96,19 @@
             "scaleInDock": 1,
             "scaleInEditor": 2
         },
+        "levels/level_0.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 232.25,
+                "y": 1137.25
+            }
+        },
         "levels/orange.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -132,8 +144,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 352.33333333333337,
-                "y": 1086.6666666666665
+                "x": 573.6666666666667,
+                "y": 1101.6666666666665
             }
         },
         "levels/test.tsx": {
@@ -163,7 +175,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "C:/Users/cring/Documents/GitHub/major_project_2/assets/objects",
+    "last.imagePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
     "last.objectTemplatePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
@@ -171,28 +183,25 @@
     "openFiles": [
         "levels/test.tsx",
         "levels/orange.tsx",
-        "levels/boxworld.tmx",
-        "levels/collision_test.tmx",
-        "levels/camera.tmx",
-        "assets/objects/button.tsx",
-        "levels/button_test.tmx",
+        "levels/level_0.tmx",
         "levels/techdemo.tmx",
-        "levels/wee.tsx"
+        "levels/wee.tsx",
+        "levels/button_test.tmx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
         "levels/test.tsx",
         "levels/orange.tsx",
-        "levels/boxworld.tmx",
-        "levels/collision_test.tmx",
-        "levels/camera.tmx",
-        "assets/objects/button.tsx",
         "levels/button_test.tmx",
         "levels/wee.tsx",
         "levels/techdemo.tmx",
+        "levels/level_0.tmx",
+        "assets/objects/button.tsx",
+        "levels/camera.tmx",
+        "levels/collision_test.tmx",
+        "levels/boxworld.tmx",
         "C:/Users/ADMIN/Downloads/cat_game_mp2-main/cat_game_mp2-main/levels/camera.tmx",
-        "levels/testlevel.tmx",
-        "levels/box.tsx"
+        "levels/testlevel.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
