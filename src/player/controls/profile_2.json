@@ -1,0 +1,26 @@
+{
+  "jump": [
+    "B_down"
+  ],
+  "left": [
+    "J1_left"
+  ],
+  "right": [
+    "J1_right"
+  ],
+  "down": [
+    "J1_down"
+  ],
+  "up": [
+    "J1_up"
+  ],
+  "main_action": [
+    "RB"
+  ],
+  "pause": [
+    "plus"
+  ],
+  "select": [
+    "B_down"
+  ]
+}
