@@ -17,7 +17,7 @@ pygame.display.set_caption(WINDOW_TITLE)
 
 background_color = (30, 30, 30)
 
-testlevel = load_tilemap(s, "levels/testlevel.tmx")
+testlevel = load_tilemap(s, "levels/blablabla.tmx")
 
 test_spritelist = {
 "default": "smaller_test.png",
@@ -58,7 +58,7 @@ except Exception as e:
     testplayer = Player(testlevel.spawn_pos, test_controls, test_spritelist)
     testplayer2 = Player(testlevel.second_spawn_pos, test_controls, test_controller_spritelist)
 
-sprites = pygame.sprite.Group(testplayer, testplayer2)
+sprites = pygame.sprite.Group(testplayer)
 
 s.fill(background_color)
 
@@ -93,10 +93,10 @@ while running:
     #getting the change in time between frames
     dt = clock.tick(MAX_FRAMES) / 1000
 
+    testlevel.draw(s)
+
     sprites.update(testlevel.collision_tiles, dt)
     sprites.draw(s)
-
-    testlevel.draw(s)
 
     print_debugs()
 
