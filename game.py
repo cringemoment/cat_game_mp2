@@ -10,6 +10,8 @@ from assets.sprites.players.spritelist import *
 
 from src.player.controls import kbcontrols, jycontrols, nopause
 
+from src.dialogue.dialogueobject import testtalk
+
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
 WINDOW_TITLE = "catxolotl"
@@ -80,6 +82,7 @@ class Game:
     def update(self):
         self.window.fill(background_color)
 
+        #REMOVE
         dt = self.clock.tick(MAX_FRAMES) / 1000
         self.mimimi.append(round(1/dt, 2))
         self.mimimi.pop(0)
@@ -87,6 +90,8 @@ class Game:
         self.current_level.draw(self.window)
 
         self.menu_handler.update(self.window)
+
+        testtalk.update(self.window, dt)
 
         if not self.paused:
             self.current_level.update_physics(dt)
