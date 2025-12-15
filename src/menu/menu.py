@@ -28,13 +28,14 @@ class Widget:
         pass
 
 class TextButton(Widget):
-    def __init__(self, text, font, command, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, menu, x, y, text, font, command, align = "left"):
+        super().__init__(menu, x, y)
         self.font = font
         self.command = command
         self.color = (255, 255, 255)
         self.default_color = (255, 255, 255)
         self.highlighted_color = (255, 255, 0)
+        self.align = align
 
         self.set_text(text)
 
@@ -43,7 +44,11 @@ class TextButton(Widget):
             self.text = str(text)
 
         self.text_surf = self.font.render(self.text, True, self.color)
-        self.rect = self.text_surf.get_rect(topleft=(self.x, self.y))
+
+        if self.align == "left":
+            self.rect = self.text_surf.get_rect(topleft=(self.x, self.y))
+        elif self.align == "right":
+            self.rect = self.text_surf.get_rect(topright=(self.x, self.y))
 
     def on_highlight(self):
         self.color = self.highlighted_color
@@ -99,24 +104,24 @@ class Menu:
         for widget in self.widgets:
             widget.draw(surface)
 
-    def menudown(self):
+    def menu_down(self):
         if self.current_widget_index + 1 > len(self.widgets) - 1: return
 
         self.current_widget_index += 1
         self.widgets[self.current_widget_index - 1].on_unhighlight()
         self.widgets[self.current_widget_index].on_highlight()
 
-    def menuup(self):
+    def menu_up(self):
         if self.current_widget_index - 1 < 0: return
 
         self.current_widget_index -= 1
         self.widgets[self.current_widget_index + 1].on_unhighlight()
         self.widgets[self.current_widget_index].on_highlight()
 
-    def menuleft(self):
+    def menu_left(self):
         self.widgets[self.current_widget_index].left()
 
-    def menuright(self):
+    def menu_right(self):
         self.widgets[self.current_widget_index].right()
 
     def select(self):
@@ -130,10 +135,10 @@ class MenuInputHandler():
 
         self.menucontrols = {
             "pause": lambda: self.menuhandler.pause(),
-            "left": lambda: self.menuhandler.current_menu.menuleft(),
-            "right": lambda: self.menuhandler.current_menu.menuright(),
-            "down": lambda: self.menuhandler.current_menu.menudown(),
-            "up": lambda: self.menuhandler.current_menu.menuup(),
+            "left": lambda: self.menuhandler.current_menu.menu_left(),
+            "right": lambda: self.menuhandler.current_menu.menu_right(),
+            "down": lambda: self.menuhandler.current_menu.menu_down(),
+            "up": lambda: self.menuhandler.current_menu.menu_up(),
             "select": lambda: self.menuhandler.current_menu.select()
         }
 
@@ -164,7 +169,8 @@ class MenuHandler:
         self.game = game
         self.menus = {
             "default": PauseMenu(self),
-            "options": OptionsMenu(self)
+            "options": OptionsMenu(self),
+            "controls": ControlsMenu(self)
         }
 
         self.current_menu = self.menus["default"]
@@ -193,9 +199,10 @@ class PauseMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("Unpause", font, self.go_back, self, 750, 100),
-            TextButton("Options", font, self.open_options, self, 750, 150),
-            TextButton("Main Menu", font, self.main_menu, self, 750, 200)
+            TextButton(self, 875, 75, text="Unpause", font=font, command=self.go_back, align="right"),
+            TextButton(self, 875, 150, text="Options", font=font, command=self.open_options, align="right"),
+            TextButton(self, 875, 225, text="Controls", font=font, command=self.open_controls, align="right"),
+            TextButton(self, 875, 300, text="Main Menu", font=font, command=self.main_menu, align="right")
         ]
 
     def go_back(self):
@@ -204,6 +211,9 @@ class PauseMenu(Menu):
     def open_options(self):
         self.menuhandler.change_menu("options")
 
+    def open_controls(self):
+        self.menuhandler.change_menu("controls")
+
     def main_menu(self):
         pass #TODO: Make this become main menu / main page
 
@@ -211,9 +221,13 @@ class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            TextButton("Woohoo! you made it! Jane is a fat woman.", font, lambda: None, self, 500, 500),
-            NumberChooser(5, 0, 10, "  ", font, lambda: None, self, 500, 550),
-            TextButton("Go Back", font, self.go_back, self, 500, 600)
+        ]
+
+class ControlsMenu(Menu):
+    def __init(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.widgets = [
+
         ]
 
     def go_back(self):
