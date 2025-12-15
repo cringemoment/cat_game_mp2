@@ -10,6 +10,8 @@ from assets.sprites.players.spritelist import *
 
 from src.player.controls import kbcontrols, jycontrols, nopause
 
+from src.dialogue.dialogueobject import testtalk, DialogueHandler
+
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
 WINDOW_TITLE = "catxolotl"
@@ -25,6 +27,8 @@ class Game:
         pygame.display.set_caption(WINDOW_TITLE)
 
         self.menu_handler = MenuHandler(self)
+        self.dialogue_handler = DialogueHandler(self)
+        self.dialogue_handler.set_dialogue(testtalk)
         self.paused = False
 
         self.clock = pygame.time.Clock()
@@ -40,6 +44,7 @@ class Game:
             self.player1 = Player(0, testlevel, keyboard, kbcontrols, test_spritelist)
             self.player2 = Player(1, testlevel, controller, jycontrols, test_controller_spritelist)
             self.menu_handler.load_inputs(keyboard, controller, kbcontrols, jycontrols)
+            self.dialogue_handler.load_inputs(keyboard, controller, kbcontrols, jycontrols)
 
         except Exception as e:
             print(e)
@@ -47,6 +52,7 @@ class Game:
             self.player2 = Player(1, testlevel, keyboard, nopause, test_controller_spritelist)
 
             self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
+            self.dialogue_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
 
         testlevel.load_window(self.window)
         self.load_level(testlevel)
@@ -80,16 +86,19 @@ class Game:
     def update(self):
         self.window.fill(background_color)
 
+        #REMOVE
         dt = self.clock.tick(MAX_FRAMES) / 1000
         self.mimimi.append(round(1/dt, 2))
         self.mimimi.pop(0)
 
         self.current_level.draw(self.window)
 
-        self.menu_handler.update(self.window)
-
         if not self.paused:
+            self.dialogue_handler.update(self.window, dt)
             self.current_level.update_physics(dt)
+
+        #keep last!!!
+        self.menu_handler.update(self.window)
 
         self.print_debugs()
 

@@ -2,9 +2,9 @@ import pygame
 
 from game import Game
 
-running = True #Hello
+running = True
 
-game = Game()
+game = Game() #Class in game.py
 
 while running:
     for event in pygame.event.get():
@@ -17,3 +17,5 @@ pygame.quit()
 
 ### TODO:
 #make mouse aim properly with rescaled camera
+=======
+pygame.quit()
