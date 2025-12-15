@@ -13,11 +13,9 @@ while running:
 
     game.update()
 
-<<<<<<< Updated upstream
 pygame.quit()
 
 ### TODO:
 #make mouse aim properly with rescaled camera
 =======
 pygame.quit()
->>>>>>> Stashed changes
