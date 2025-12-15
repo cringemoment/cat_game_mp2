@@ -1,6 +1,10 @@
 import pygame
 
 class Animation:
+    '''
+    For displaying images on-screen
+
+    '''
     def __init__(self, frames, delay):
         self.frames = []
         self.sprite = None
@@ -46,8 +50,19 @@ class Animation:
             self.timer = self.delay
             self.next_frame()
 
-#if the image is called default itll automatically be set
+#if the image is called default it'll automatically be set
 class Sprite(pygame.sprite.Sprite):
+    """
+    Objects that have image-changing abilities and functions
+    Inherits from pygame.sprite.sprite
+    set_sprites(sprites): loads in images from file name
+    set_loaded_sprites(sprites): loads in pre-loaded sprites
+    change_image(new_sprites): replaces old sprite with new sprite, y position starts at bottom
+    get_image: finds the file name of the image
+    set_facing(face): self.facing = current orientation, face = correct orientation. Flips image if orientation is wrong
+    play_anim(name, play_once = True): Plays an animation once
+    fade_in(time): Linearly fades
+    """
     def __init__(self, level):
         super().__init__()
         self.level = level
