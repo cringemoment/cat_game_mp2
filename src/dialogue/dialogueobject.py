@@ -82,6 +82,7 @@ class Dialogue:
         self.dialogues = dialogues
         self.current_dialogue_box_index = 0
         self.current_dialogue_box = self.dialogues[0]
+        self.finished = False
 
     def load(self, dialoguehandler):
         self.dialogue_handler = dialoguehandler
@@ -90,8 +91,9 @@ class Dialogue:
         if not self.current_dialogue_box.next_ready: return
 
         self.current_dialogue_box_index += 1
-        if self.current_dialogue_box_index > len(self.dialogues):
-            pass
+        if self.current_dialogue_box_index >= len(self.dialogues):
+            self.finished = True
+            return
 
         self.current_dialogue_box = self.dialogues[self.current_dialogue_box_index]
 
@@ -143,11 +145,15 @@ class DialogueHandler:
 
     def update(self, surface, dt):
         if self.current_dialogue is not None:
+            if self.current_dialogue.finished:
+                self.current_dialogue = None
+                return
+
             self.dialogueinputhandler.check()
             self.current_dialogue.update(surface, dt)
 
 testtalk = Dialogue([
-    DialogueBox("sprites/players/axodialogue1.png", "Hello!!! awawawawawawa >.< >.< aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 20),
-    DialogueBox("sprites/players/axodialogue1.png", "let me knowwwwwwwwwwwwwwwwwwwwww let me know", 100)
+    DialogueBox("sprites/players/axodialogue1.png", "Hello!!! awawawawawawa >.< >.< aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 5),
+    DialogueBox("sprites/players/axodialogue1.png", "let me knowwwwwwwwwwwwwwwwwwwwww let me know", 20)
 
 ])
