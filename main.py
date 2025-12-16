@@ -18,4 +18,3 @@ pygame.quit()
 ### TODO:
 #make mouse aim properly with rescaled camera
 #get z-index working
-pygame.quit()

@@ -1,7 +1,5 @@
 import pygame
 
-from src.triggers.triggerobject import Trigger, ActivatedObject
-
 class Camera:
     def __init__(self):
         self.x = 0
@@ -71,17 +69,3 @@ class Camera:
             scaled_image = pygame.transform.scale(sprite.image, (int(sprite.rect.width * scale_factor), int(sprite.rect.height * scale_factor)))
 
             surface.blit(scaled_image, screen_pos)
-
-class CameraPos(ActivatedObject):
-    def on_trigger(self):
-        speed_ms = float(self.properties.get("speed_ms", 0.1))
-
-        self.level.camera.transition_to(
-            self.x,
-            self.y,
-            int(self.properties["screen_width"]),
-            speed_ms
-        )
-
-class CameraTrigger(Trigger):
-    pass
