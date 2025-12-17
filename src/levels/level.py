@@ -6,7 +6,7 @@ from src.renderer.camera import Camera
 class Level:
     def __init__(self, level_path):
         self.level_path = level_path
-        self.dialogue = 
+        # self.dialogue =
 
     def load_window(self, s):
         self.tiles = load_tilemap(s, self, f"{self.level_path}/tilemap.tmx")
@@ -49,4 +49,4 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-testlevel = Level("levels/techdemo.tmx")
+testlevel = Level("levels/level 0")

@@ -82,6 +82,9 @@ class TileMap:
 
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
+                        print(obj)
+                        print(obj.properties)
+                        print(f" bryhhhh {getattr(obj, 'type', None)}")
                         physics_object = ObjectFactory(getattr(obj, "type", None), self.level)
                         physics_object.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
                         physics_object.name = obj.name

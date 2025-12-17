@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="27">
- <tileset firstgid="1" source="test.tsx"/>
- <tileset firstgid="26" source="wee.tsx"/>
- <tileset firstgid="31" source="testplayer.tsx"/>
- <tileset firstgid="56" source="orange.tsx"/>
- <tileset firstgid="72" source="box.tsx"/>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="36">
+ <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
+ <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
+ <tileset firstgid="32" source="../../assets/tilesets/testplayer.tsx"/>
  <layer id="1" name="base layer" width="60" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -36,7 +34,7 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,0,0,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -61,11 +59,6 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="24" name="door2" type="button" x="736" y="1216" width="32" height="32">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
   <object id="26" name="default" type="CameraPos" x="0" y="960">
    <properties>
     <property name="screen_height" value="20"/>
@@ -78,12 +71,13 @@
  <objectgroup id="4" name="walalalalala" class="physics_objects">
   <object id="9" name="door" type="Door" gid="28" x="448" y="1248" width="32" height="64"/>
   <object id="10" name="door2" type="Door" gid="28" x="896.847" y="1248.74" width="32" height="64"/>
-  <object id="14" gid="30" x="159.876" y="639.441" width="32" height="32"/>
-  <object id="15" gid="28" x="447.315" y="958.631" width="32" height="64"/>
-  <object id="17" gid="72" x="1089.13" y="415.002" width="32" height="32"/>
-  <object id="19" gid="30" x="159.876" y="958.381" width="32" height="32"/>
-  <object id="20" gid="30" x="1087.82" y="639.441" width="32" height="32"/>
-  <object id="22" gid="30" x="480.128" y="651.254" width="320.752" height="32"/>
-  <object id="23" gid="32" x="1087.82" y="447.815" width="32" height="32"/>
+  <object id="27" name="trapdoor1" type="Door" gid="33" x="1120.92" y="447.538" width="32" height="32"/>
+  <object id="28" name="door3" gid="28" x="447.846" y="959.692" width="32" height="64"/>
+  <object id="30" name="trapdoor2" type="Door" gid="30" x="481.385" y="671.385" width="317.231" height="32"/>
+  <object id="31" name="trapdoor1" gid="27" x="1120.92" y="639.846" width="32" height="32"/>
+  <object id="32" name="door3" gid="27" x="160.154" y="640.615" width="32" height="32"/>
+  <object id="33" name="trapdoor2" gid="27" x="224" y="959.077" width="32" height="32"/>
+  <object id="34" name="door2" gid="27" x="704" y="1246.77" width="32" height="32"/>
+  <object id="35" name="box1" gid="26" x="1120.15" y="414.462" width="32" height="32"/>
  </objectgroup>
 </map>
