@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< Updated upstream
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="27">
+=======
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="24">
+>>>>>>> Stashed changes
  <tileset firstgid="1" source="test.tsx"/>
  <tileset firstgid="26" source="wee.tsx"/>
  <tileset firstgid="31" source="testplayer.tsx"/>
@@ -66,6 +70,7 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
+<<<<<<< Updated upstream
   <object id="26" name="default" type="CameraPos" x="0" y="960">
    <properties>
     <property name="screen_height" value="20"/>
@@ -85,5 +90,14 @@
   <object id="20" gid="30" x="1087.82" y="639.441" width="32" height="32"/>
   <object id="22" gid="30" x="480.128" y="651.254" width="320.752" height="32"/>
   <object id="23" gid="32" x="1087.82" y="447.815" width="32" height="32"/>
+=======
+  <object id="14" name="door3" type="Button" gid="30" x="159.876" y="639.441" width="32" height="32"/>
+  <object id="15" name="door3" type="Door" gid="28" x="447.315" y="958.631" width="32" height="64"/>
+  <object id="17" gid="73" x="1089.13" y="415.002" width="32" height="32"/>
+  <object id="19" name="trapdoor2" type="Button" gid="30" x="159.876" y="958.381" width="32" height="32"/>
+  <object id="20" name="trapdoor" type="Button" gid="30" x="1087.82" y="639.441" width="32" height="32"/>
+  <object id="22" name="trapdoor2" type="Door" gid="30" x="480.128" y="651.254" width="320.752" height="32"/>
+  <object id="23" name="trapdoor" type="Door" gid="33" x="1087.82" y="447.815" width="32" height="32"/>
+>>>>>>> Stashed changes
  </objectgroup>
 </map>
