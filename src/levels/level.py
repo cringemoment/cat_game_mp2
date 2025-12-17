@@ -6,9 +6,10 @@ from src.renderer.camera import Camera
 class Level:
     def __init__(self, level_path):
         self.level_path = level_path
+        self.dialogue = 
 
     def load_window(self, s):
-        self.tiles = load_tilemap(s, self, self.level_path)
+        self.tiles = load_tilemap(s, self, f"{self.level_path}/tilemap.tmx")
 
         self.camera = Camera()
         self.camera.set_level(self.tiles)
