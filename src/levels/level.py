@@ -49,4 +49,4 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-testlevel = Level("levels/level 0")
+testlevel = Level("levels/level_0")
