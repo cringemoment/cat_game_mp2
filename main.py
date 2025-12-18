@@ -11,10 +11,12 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+
+
+
+
     game.update()
 
 pygame.quit()
 
-### TODO:
-#make mouse aim properly with rescaled camera
-#get z-index working
+### TODO: make mouse aim properly with rescaled camera, get z-index working

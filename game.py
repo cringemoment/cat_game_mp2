@@ -11,6 +11,7 @@ from assets.sprites.players.spritelist import *
 from src.player.controls import kbcontrols, jycontrols, nopause
 
 from src.dialogue.dialogueobject import testtalk, DialogueHandler
+from levels.level_0.dialogue import *
 
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
@@ -28,7 +29,7 @@ class Game:
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
-        self.dialogue_handler.set_dialogue(testtalk)
+        self.dialogue_handler.set_dialogue(intro)
         self.paused = False
 
         self.clock = pygame.time.Clock()

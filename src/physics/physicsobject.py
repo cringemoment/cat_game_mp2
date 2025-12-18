@@ -9,7 +9,7 @@ AIR_RESISTANCE = 0.8
 MAXX_VELO = 20
 MAXY_VELO = 12
 
-MAX_PHYSICS_CHECKS = 10
+MAX_PHYSICS_CHECKS = 4
 MYSTERY_PHYSICS_CONSTANT = 0.1 #no comment needed
 
 def minimum_push(n, x): #sometimes collision doesn't push out enough

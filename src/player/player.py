@@ -126,6 +126,7 @@ class Player(PhysicsObject):
             self.coyote_time -= dt
 
     def update_aim(self):
+
         if type(self.input_device).__name__ == "Joystick":
             axis_x = self.input_device.get_axis(2)
             axis_y = self.input_device.get_axis(3)
