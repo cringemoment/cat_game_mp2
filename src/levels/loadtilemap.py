@@ -68,12 +68,20 @@ class TileMap:
                         if obj.name == "player_2":
                             self.spawn_pos_2 = (obj.x, obj.y)
 
+                        type = getattr(obj, "type", None)
+                        if not type and "type" in obj.properties:
+                            type = obj.properties["type"]
+
+                        if not type:
+                            print(obj)
+                            print(obj.properties)
+
                         if getattr(obj, "trigger_type", None) == "activated":
-                            self.activated_objects.append(TriggerFactory(obj.type, name = obj.name, x = obj.x, y = obj.y, level = self.level, properties = obj.properties))
+                            self.activated_objects.append(TriggerFactory(type, name = obj.name, x = obj.x, y = obj.y, level = self.level, properties = obj.properties))
 
                         if getattr(obj, "trigger_type", None) == "trigger":
                             rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
-                            trigger = TriggerFactory(obj.type, name = obj.name, rect = rect, level = self.level)
+                            trigger = TriggerFactory(type, name = obj.name, rect = rect, level = self.level)
 
                             if self.tmx_data.get_tile_image_by_gid(obj.gid):
                                 trigger.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
@@ -82,10 +90,12 @@ class TileMap:
 
                 elif getattr(layer, "class", None) == "physics_objects":
                     for obj in layer:
-                        print(obj)
-                        print(obj.properties)
-                        print(f" bryhhhh {getattr(obj, 'type', None)}")
-                        physics_object = ObjectFactory(getattr(obj, "type", None), self.level)
+                        objclass = getattr(obj, "type", None)
+                        if not objclass:
+                            objclass = obj.properties["type"]
+
+                        physics_object = ObjectFactory(objclass, self.level)
+
                         physics_object.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})
                         physics_object.name = obj.name
                         physics_object.x = obj.x

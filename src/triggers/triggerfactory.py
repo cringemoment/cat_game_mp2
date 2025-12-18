@@ -13,8 +13,6 @@ for _, module_name, _ in pkgutil.iter_modules(src.triggers.objects.__path__):
         if obj.__module__ == module.__name__:
             objects[name.lower()] = obj
 
-print(objects)
-
 def TriggerFactory(object, *args, **kwargs):
     if object.lower() not in objects:
         raise Exception(f"{object} not loaded in the trigger object factory")
