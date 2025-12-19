@@ -1,7 +1,7 @@
 import pygame
 
 class DialogueBox:
-    def __init__(self, image, text, speed, font=None):
+    def __init__(self, image, text, speed = 10, font=None):
         self.image_raw = pygame.image.load(f"assets/{image}")
         self.image = None
         self.next_ready = False
