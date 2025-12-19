@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="54">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="59">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
- <tileset firstgid="32" source="../../assets/tilesets/testplayer.tsx"/>
+ <tileset firstgid="34" source="../../assets/tilesets/testplayer.tsx"/>
  <layer id="1" name="base layer" class="level" width="60" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -34,7 +34,7 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -48,10 +48,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="positions" class="positions">
-  <object id="4" name="player" x="64" y="1152">
+  <object id="4" name="player" x="619.432" y="857.554">
    <point/>
   </object>
-  <object id="5" name="player_2" x="160" y="1152">
+  <object id="5" name="player_2" x="541.441" y="857.554">
    <point/>
   </object>
   <object id="8" name="door" type="Trigger" x="384" y="1184" width="82.2417" height="64">
@@ -118,19 +118,32 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="51" name="fifth_room" type="Trigger" x="512" y="704" width="96" height="64">
+  <object id="51" name="fifth_room" type="Trigger" x="532.076" y="886.913" width="96" height="64">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="57" name="door3" type="trigger" x="360.25" y="872.184" width="92.5719" height="84.7647">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="58" name="fifth_room" type="Trigger" x="42.3823" y="1127.59" width="157.261" height="115.994">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="4" name="walalalalala" class="physics_objects">
-  <object id="9" name="door" type="Door" gid="28" x="448" y="1248" width="32" height="64"/>
+  <object id="9" name="door" type="Door" gid="28" x="448" y="1248" width="32" height="64">
+   <properties>
+    <property name="open" value="1"/>
+   </properties>
+  </object>
   <object id="10" name="door2" type="Door" gid="28" x="896" y="1248" width="32" height="64"/>
-  <object id="27" name="trapdoor1" type="Door" gid="33" x="1119.39" y="448.302" width="32" height="32"/>
   <object id="28" name="door3" gid="28" x="448" y="960" width="32" height="64"/>
-  <object id="52" name="door3" gid="28" x="448" y="960" width="32" height="64"/>
-  <object id="35" name="box1" gid="26" x="1120" y="416" width="32" height="32"/>
-  <object id="53" name="trapdoor2" gid="28" x="544" y="672" width="32" height="64" rotation="270"/>
+  <object id="35" name="box1" gid="26" x="1135.61" y="392.578" width="32" height="32"/>
+  <object id="55" name="trapdoor2" type="ReverseTrapDoor" gid="33" x="480" y="672" width="64" height="32"/>
+  <object id="56" name="trapdoor1" type="TrapDoor" gid="32" x="1120" y="448" width="64" height="32"/>
  </objectgroup>
 </map>
