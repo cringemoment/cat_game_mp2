@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "levels/level_0/tilemap.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -37,6 +37,15 @@
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "assets/tilesets/objects.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/testingtileset.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/testplayer.tsx": {
+            "scaleInDock": 1
         },
         "levels/box.tsx": {
             "scaleInDock": 1,
@@ -106,6 +115,14 @@
             "viewCenter": {
                 "x": 802,
                 "y": 848.6666666666666
+            }
+        },
+        "levels/level_0/tilemap.tmx": {
+            "scale": 8,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 413.5,
+                "y": 1205.4375
             }
         },
         "levels/orange.tsx": {
@@ -182,9 +199,11 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 60,
     "openFiles": [
+        "levels/level_0/tilemap.tmx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
+        "levels/level_0/tilemap.tmx",
         "levels/button_test.tmx",
         "levels/techdemo.tmx",
         "levels/level_0.tmx",
@@ -195,8 +214,7 @@
         "levels/camera.tmx",
         "levels/collision_test.tmx",
         "levels/boxworld.tmx",
-        "C:/Users/ADMIN/Downloads/cat_game_mp2-main/cat_game_mp2-main/levels/camera.tmx",
-        "levels/testlevel.tmx"
+        "C:/Users/ADMIN/Downloads/cat_game_mp2-main/cat_game_mp2-main/levels/camera.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
