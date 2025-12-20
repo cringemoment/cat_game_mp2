@@ -29,7 +29,7 @@ class Game:
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
-        self.dialogue_handler.set_dialogue(intro)
+        # self.dialogue_handler.set_dialogue(intro)
         self.paused = False
 
         self.clock = pygame.time.Clock()

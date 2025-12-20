@@ -1,6 +1,6 @@
 from src.dialogue.dialogueobject import *
 
-default = Dialogue([
+intro = Dialogue([
     DialogueBox ("sprites/players/axodialogue1.png", "Alright, I know it's been a while since your last mission, so we're going to have you two complete a basic mission to get back up to speed."),
     DialogueBox("sprites/players/axodialogue1.png", "Your goal is to get the candy currently in the hands of a five-year-old baby."),  #Mission Control
     DialogueBox("sprites/players/axodialogue1.png", "So... we're taking candy from a baby."), #Dude 1

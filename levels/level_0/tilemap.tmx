@@ -48,10 +48,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="positions" class="positions">
-  <object id="4" name="player" x="619.432" y="857.554">
+  <object id="4" name="player" x="212.339" y="1153.12">
    <point/>
   </object>
-  <object id="5" name="player_2" x="541.441" y="857.554">
+  <object id="5" name="player_2" x="81.9273" y="1152">
    <point/>
   </object>
   <object id="8" name="door" type="Trigger" x="432.25" y="1184" width="33.9917" height="64">
@@ -118,17 +118,12 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="51" name="fifth_room" type="Trigger" x="532.076" y="886.913" width="96" height="64">
+  <object id="51" name="fifth_room" type="Trigger" x="512" y="704" width="96" height="64">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
   <object id="57" name="door3" type="trigger" x="360.25" y="872.184" width="92.5719" height="84.7647">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
-  <object id="58" name="fifth_room" type="Trigger" x="42.3823" y="1127.59" width="157.261" height="115.994">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
