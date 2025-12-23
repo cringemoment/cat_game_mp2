@@ -1,4 +1,8 @@
 import pygame
+
+pygame.font.init()
+font = pygame.font.SysFont('Comic Sans MS', 30)
+
 from src.levels.loadtilemap import load_tilemap
 from src.player.player import Player
 
@@ -10,7 +14,7 @@ from assets.sprites.players.spritelist import *
 
 from src.player.controls import kbcontrols, jycontrols, nopause
 
-from src.dialogue.dialogueobject import testtalk, DialogueHandler
+from src.dialogue.dialogueobject import DialogueHandler
 from levels.level_0.dialogue import *
 
 WINDOW_WIDTH = 960
@@ -83,6 +87,9 @@ class Game:
         self.player2.x, self.player2.y = level.tiles.spawn_pos_2
 
         self.current_level.tiles.physics_objects.add(self.player1, self.player2)
+
+        if "default" in self.current_level.dialogues:
+            self.dialogue_handler.set_dialogue(self.current_level.dialogues["default"])
 
     def update(self):
         self.window.fill(background_color)

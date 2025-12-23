@@ -1,7 +1,6 @@
 import pygame
 
-pygame.font.init()
-font = pygame.font.SysFont('Comic Sans MS', 30)
+from src.renderer.fonts import menu_font as font
 
 class Widget:
     def __init__(self, menu, x, y):

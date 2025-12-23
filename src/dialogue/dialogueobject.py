@@ -151,9 +151,3 @@ class DialogueHandler:
 
             self.dialogueinputhandler.check()
             self.current_dialogue.update(surface, dt)
-
-testtalk = Dialogue([
-    DialogueBox("sprites/players/axodialogue1.png", "Hello!!! awawawawawawa >.< >.< aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 5),
-    DialogueBox("sprites/players/axodialogue1.png", "let me knowwwwwwwwwwwwwwwwwwwwww let me know", 20)
-
-])

@@ -1,4 +1,5 @@
 import pygame
+import importlib
 
 from src.levels.loadtilemap import load_tilemap
 from src.renderer.camera import Camera
@@ -6,7 +7,14 @@ from src.renderer.camera import Camera
 class Level:
     def __init__(self, level_path):
         self.level_path = level_path
-        # self.dialogue =
+        self.dialogues = self.load_dialogue_file(level_path)
+
+    def load_dialogue_file(self, file_path):
+        spec = importlib.util.spec_from_file_location("asdkjalkdhdkgjas", f"{file_path}/dialogue.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        return module.dialogues
 
     def load_window(self, s):
         self.tiles = load_tilemap(s, self, f"{self.level_path}/tilemap.tmx")
@@ -49,4 +57,4 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-testlevel = Level("levels/level_0")
+testlevel = Level("levels/dialoguetest")

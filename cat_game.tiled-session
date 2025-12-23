@@ -118,11 +118,11 @@
             }
         },
         "levels/level_0/tilemap.tmx": {
-            "scale": 8,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 413.5,
-                "y": 1205.4375
+                "x": 359.99999999999994,
+                "y": 785.3333333333333
             }
         },
         "levels/orange.tsx": {

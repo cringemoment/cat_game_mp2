@@ -97,11 +97,9 @@ class PhysicsObject(Sprite):
         else:
             return
 
-        self.x -= minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * pushback_factor)
+        if self.pushback_factor != 1:
+            self.x -= minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * pushback_factor)
         obj.x += minimum_push(MYSTERY_PHYSICS_CONSTANT, dx * (1 - pushback_factor))
-
-        # if type(self).__name__ == "Player" and hasattr(obj, "velx"):
-            # obj.velx = dx * (1 - pushback_factor)
 
         self.update_bounds()
         if getattr(obj, "update_bounds", None):

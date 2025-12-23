@@ -36,14 +36,17 @@ class TileMap:
         self.collision_tiles = pygame.sprite.Group()
         self.decorations = pygame.sprite.Group()
         self.physics_objects = pygame.sprite.Group()
+        self.dialogue_triggers = pygame.sprite.Group()
 
         #positions
         self.area_triggers = []
         self.triggers = []
         self.activated_objects = []
 
+        #failsafes
         self.spawn_pos_1 = (0, 0)
         self.spawn_pos_2 = (0, 0)
+
         self.load_tiles()
 
     def load_tiles(self):
@@ -53,7 +56,8 @@ class TileMap:
                     tile_image = self.tmx_data.get_tile_image_by_gid(gid)
                     if tile_image:
                         tile = Tile(tile_image, x, y, self.tile_size)
-                        # Collidable only if layer class is "level"
+
+                        #collidable only if layer class is "level"
                         if getattr(layer, "class", None) == "level":
                             self.collision_tiles.add(tile)
                         else:
@@ -71,10 +75,6 @@ class TileMap:
                         type = getattr(obj, "type", None)
                         if not type and "type" in obj.properties:
                             type = obj.properties["type"]
-
-                        if not type:
-                            print(obj)
-                            print(obj.properties)
 
                         if getattr(obj, "trigger_type", None) == "activated":
                             self.activated_objects.append(TriggerFactory(type, name = obj.name, x = obj.x, y = obj.y, level = self.level, properties = obj.properties))
@@ -104,6 +104,11 @@ class TileMap:
                         physics_object.rect.y = obj.y
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
+
+                elif getattr(layer, "class", None) == "dialogue":
+                    for obj in layer:
+                        rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
+                        self.dialogue_triggers.append(rect)
 
     def get_size(self):
         return self.width, self.height
