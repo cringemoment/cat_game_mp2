@@ -10,7 +10,7 @@ from src.physics.gun import Gun
 #time is measured in seconds
 #acceleration is measured in pixels per frame
 JUMP_POWER = 15
-CROUCHING_JUMP_POWER = 10
+CROUCHING_JUMP_POWER = 11
 COYOTE_TIME = 0.15
 
 MAXX_VELO = 5
@@ -119,6 +119,10 @@ class Player(PhysicsObject):
             self.uncrouch_queued = False
             self.jump_power = JUMP_POWER
 
+    def select(self):
+        for trigger in self.level.tiles.area_triggers:
+            trigger.select(self.index)
+
     def update_timers(self, dt):
         if self.on_ground:
             self.coyote_time = COYOTE_TIME
@@ -126,7 +130,6 @@ class Player(PhysicsObject):
             self.coyote_time -= dt
 
     def update_aim(self):
-
         if type(self.input_device).__name__ == "Joystick":
             axis_x = self.input_device.get_axis(2)
             axis_y = self.input_device.get_axis(3)

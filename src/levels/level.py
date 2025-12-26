@@ -16,8 +16,9 @@ class Level:
 
         return module.dialogues
 
-    def load_window(self, s):
-        self.tiles = load_tilemap(s, self, f"{self.level_path}/tilemap.tmx")
+    def load_game(self, game):
+        self.game = game
+        self.tiles = load_tilemap(self.game.window, self, f"{self.level_path}/tilemap.tmx")
 
         self.camera = Camera()
         self.camera.set_level(self.tiles)

@@ -59,7 +59,6 @@ class Game:
             self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
             self.dialogue_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
 
-        testlevel.load_window(self.window)
         self.load_level(testlevel)
 
         self.mi = 20
@@ -78,7 +77,7 @@ class Game:
 
     def load_level(self, level):
         self.current_level = level
-        self.current_level.load_window(self.window)
+        self.current_level.load_game(self)
 
         self.player1.level = level
         self.player2.level = level
@@ -100,9 +99,9 @@ class Game:
         self.mimimi.pop(0)
 
         self.current_level.draw(self.window)
+        self.dialogue_handler.update(self.window, dt)
 
         if not self.paused:
-            self.dialogue_handler.update(self.window, dt)
             self.current_level.update_physics(dt)
 
         #keep last!!!

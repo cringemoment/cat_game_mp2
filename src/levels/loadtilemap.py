@@ -40,7 +40,6 @@ class TileMap:
 
         #positions
         self.area_triggers = []
-        self.triggers = []
         self.activated_objects = []
 
         #failsafes

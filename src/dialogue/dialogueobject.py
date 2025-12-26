@@ -20,15 +20,16 @@ class DialogueBox:
         self.border_color = (200, 200, 200)
         self.text_color = (255, 255, 255)
 
-    def update(self, surface, dt):
-        if self.visible_chars < len(self.full_text):
-            self.timer += dt
-            while self.timer >= self.char_delay:
-                self.timer -= self.char_delay
-                self.visible_chars += 1
-                if self.visible_chars >= len(self.full_text):
-                    self.next_ready = True
-                    break
+    def update(self, surface, dt, paused):
+        if not paused:
+            if self.visible_chars < len(self.full_text):
+                self.timer += dt
+                while self.timer >= self.char_delay:
+                    self.timer -= self.char_delay
+                    self.visible_chars += 1
+                    if self.visible_chars >= len(self.full_text):
+                        self.next_ready = True
+                        break
 
         self.draw(surface)
 
@@ -49,7 +50,7 @@ class DialogueBox:
         pygame.draw.rect(surface, self.border_color, box_rect, 2, border_radius=12)
 
         img_size = box_height - 2 * self.padding
-        img = pygame.transform.smoothscale(self.image, (img_size, img_size))
+        img = pygame.transform.scale(self.image, (img_size, img_size))
         img_pos = (box_x + self.padding, box_y + self.padding)
         surface.blit(img, img_pos)
 
@@ -97,8 +98,8 @@ class Dialogue:
 
         self.current_dialogue_box = self.dialogues[self.current_dialogue_box_index]
 
-    def update(self, surface, dt):
-        self.current_dialogue_box.update(surface, dt)
+    def update(self, surface, dt, paused):
+        self.current_dialogue_box.update(surface, dt, paused)
 
 class DialogueInputHandler():
     def __init__(self, dialoguehandler, input1, input2, controls1, controls2):
@@ -150,4 +151,4 @@ class DialogueHandler:
                 return
 
             self.dialogueinputhandler.check()
-            self.current_dialogue.update(surface, dt)
+            self.current_dialogue.update(surface, dt, self.game.paused)

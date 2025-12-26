@@ -38,10 +38,20 @@ class Trigger:
     def on_both_leave(self):
         pass
 
+    #helper method for select
+    def select(self, player):
+        if self.players_inside[player]:
+            self.on_select(player)
+
+    @call_triggers
+    def on_select(self, player):
+        pass
+
     def update_players(self):
         for sprite in self.level.tiles.physics_objects:
             if type(sprite).__name__ == "Player":
                 if self.rect.colliderect(sprite.rect):
+
                     if not self.players_inside[sprite.index]:
                         self.players_inside[sprite.index] = True
                         self.on_enter(sprite)
@@ -81,4 +91,7 @@ class ActivatedObject:
         pass
 
     def on_both_leave(self):
+        pass
+
+    def on_select(self, playerj):
         pass

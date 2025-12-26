@@ -77,6 +77,7 @@ class InputHandler:
             "right": lambda: self.player.set_facing(1),
             "down": lambda: self.player.crouch(),
             "main_action": lambda: self.player.shoot(),
+            "select": lambda: self.player.select()
         }
 
         keyup_events = {
@@ -88,7 +89,6 @@ class InputHandler:
         keys = pygame.key.get_pressed()
 
         for control in held_events:
-            # if self.input_device.get_key(self.controls[control])():
             if any([self.input_device.get_key(i)() for i in self.controls[control]]):
                 held_events[control]()
                 self.player.bullet_physics = False
