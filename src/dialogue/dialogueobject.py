@@ -1,5 +1,9 @@
 import pygame
 
+DIALOGUE_BOX_WIDTH = 0.85
+DIALOGUE_BOX_HEIGHT = 0.3
+IMAGE_BOX_RATIO = 1.2
+
 class DialogueBox:
     def __init__(self, image, text, speed = 10, font=None):
         self.image_raw = pygame.image.load(f"assets/{image}")
@@ -9,8 +13,8 @@ class DialogueBox:
         self.full_text = text
         self.visible_chars = 0
 
-        self.speed = speed                  # ms per character
-        self.char_delay = speed / 1000.0    # seconds per character
+        self.speed = speed #ms
+        self.char_delay = speed / 1000.0 #dt is in seconds so we must convert
         self.timer = 0.0
 
         self.font = font or pygame.font.Font(None, 32)
@@ -20,43 +24,33 @@ class DialogueBox:
         self.border_color = (200, 200, 200)
         self.text_color = (255, 255, 255)
 
-    def update(self, surface, dt, paused):
-        if not paused:
-            if self.visible_chars < len(self.full_text):
-                self.timer += dt
-                while self.timer >= self.char_delay:
-                    self.timer -= self.char_delay
-                    self.visible_chars += 1
-                    if self.visible_chars >= len(self.full_text):
-                        self.next_ready = True
-                        break
-
-        self.draw(surface)
-
     def draw(self, surface):
         if self.image is None:
             self.image = self.image_raw.convert_alpha()
 
         sw, sh = surface.get_size()
 
-        box_width = int(sw * 0.9)
-        box_height = int(sh * 0.4)
+        box_width = int(sw * DIALOGUE_BOX_WIDTH)
+        box_height = int(sh * DIALOGUE_BOX_HEIGHT)
         box_x = (sw - box_width) // 2
         box_y = sh - box_height - self.padding
 
         box_rect = pygame.Rect(box_x, box_y, box_width, box_height)
 
-        pygame.draw.rect(surface, self.bg_color, box_rect, border_radius=12)
-        pygame.draw.rect(surface, self.border_color, box_rect, 2, border_radius=12)
-
-        img_size = box_height - 2 * self.padding
+        img_size = box_height // IMAGE_BOX_RATIO
         img = pygame.transform.scale(self.image, (img_size, img_size))
-        img_pos = (box_x + self.padding, box_y + self.padding)
-        surface.blit(img, img_pos)
 
-        text_x = img_pos[0] + img_size + self.padding
+        img_x = box_x
+        img_y = box_y - img_size
+
+        surface.blit(img, (img_x, img_y))
+
+        pygame.draw.rect(surface, self.bg_color, box_rect)
+        pygame.draw.rect(surface, self.border_color, box_rect, 2)
+
+        text_x = box_x + self.padding
         text_y = box_y + self.padding
-        text_width = box_width - (img_size + 3 * self.padding)
+        text_width = box_width - 2 * self.padding
 
         visible_text = self.full_text[:self.visible_chars]
         self._draw_wrapped_text(surface, visible_text, (text_x, text_y), text_width)
@@ -77,6 +71,19 @@ class DialogueBox:
 
         if line:
             surface.blit(self.font.render(line, True, self.text_color), (x, y))
+
+    def update(self, surface, dt, paused):
+        if not paused:
+            if self.visible_chars < len(self.full_text):
+                self.timer += dt
+                while self.timer >= self.char_delay:
+                    self.timer -= self.char_delay
+                    self.visible_chars += 1
+                    if self.visible_chars >= len(self.full_text):
+                        self.next_ready = True
+                        break
+
+        self.draw(surface)
 
 class Dialogue:
     def __init__(self, dialogues):
