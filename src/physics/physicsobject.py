@@ -11,6 +11,7 @@ MAXY_VELO = 12
 
 MAX_PHYSICS_CHECKS = 4
 MYSTERY_PHYSICS_CONSTANT = 0.1 #no comment needed
+SEARCH_RADIUS = 2 * 32 #32 is tile size, 8 is how many tiles is checked on the left/right sid
 
 def minimum_push(n, x): #sometimes collision doesn't push out enough
     #easy fix!
@@ -161,11 +162,26 @@ class PhysicsObject(Sprite):
         self.rect.y = round(self.y)
 
     def update_pos(self, level, dt):
-        colliders = []
-        for i in self.groups():
-            colliders.extend([s for s in i if s is not self and getattr(s, "collision", False)])
+        search_rect = pygame.Rect(
+            self.rect.centerx - SEARCH_RADIUS,
+            self.rect.centery - SEARCH_RADIUS,
+            SEARCH_RADIUS * 2,
+            SEARCH_RADIUS * 2
+        )
 
-        colliders.extend(level.collision_tiles)
+        colliders = []
+
+        for group in self.groups():
+            for s in group:
+                if s is self or not getattr(s, "collision", False):
+                    continue
+                if search_rect.colliderect(s.rect):
+                    colliders.append(s)
+
+        for tile in level.collision_tiles:
+            if search_rect.colliderect(tile.rect):
+                colliders.append(tile)
+
 
         colliders.sort(key = lambda x: abs(x.velx) if hasattr(x, "velx") else 0)
 

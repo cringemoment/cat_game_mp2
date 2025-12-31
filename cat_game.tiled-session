@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "levels/level_0/tilemap.tmx",
+    "activeFile": "assets/tilesets/warehouse_background.tsx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -39,6 +39,7 @@
             "scaleInEditor": 1
         },
         "assets/tilesets/objects.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         },
         "assets/tilesets/testingtileset.tsx": {
@@ -46,6 +47,15 @@
         },
         "assets/tilesets/testplayer.tsx": {
             "scaleInDock": 1
+        },
+        "assets/tilesets/warehouse_background.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.4,
+            "scaleInEditor": 4
+        },
+        "assets/tilesets/warehouse_metal.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "levels/box.tsx": {
             "scaleInDock": 1,
@@ -101,6 +111,14 @@
                 "y": 318
             }
         },
+        "levels/decorated_level_0/tilemap.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 145.75,
+                "y": 1073.25
+            }
+        },
         "levels/heavybox.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 2
@@ -121,8 +139,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 785.9999999999999,
-                "y": 822.6666666666665
+                "x": 786,
+                "y": 821.9999999999999
             }
         },
         "levels/orange.tsx": {
@@ -193,16 +211,21 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
+    "last.imagePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/tilesets",
     "last.objectTemplatePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
     "map.width": 60,
     "openFiles": [
-        "levels/level_0/tilemap.tmx"
+        "levels/decorated_level_0/tilemap.tmx",
+        "assets/tilesets/warehouse_metal.tsx",
+        "assets/tilesets/warehouse_background.tsx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
+        "assets/tilesets/warehouse_background.tsx",
+        "levels/decorated_level_0/tilemap.tmx",
+        "assets/tilesets/warehouse_metal.tsx",
         "levels/level_0/tilemap.tmx",
         "levels/button_test.tmx",
         "levels/techdemo.tmx",
@@ -211,15 +234,12 @@
         "levels/orange.tsx",
         "levels/wee.tsx",
         "assets/objects/button.tsx",
-        "levels/camera.tmx",
-        "levels/collision_test.tmx",
-        "levels/boxworld.tmx",
-        "C:/Users/ADMIN/Downloads/cat_game_mp2-main/cat_game_mp2-main/levels/camera.tmx"
+        "levels/camera.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 32,
-        "width": 128
+        "width": 32
     },
-    "tileset.type": 1
+    "tileset.type": 0
 }
