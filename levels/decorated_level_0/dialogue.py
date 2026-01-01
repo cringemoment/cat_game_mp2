@@ -20,11 +20,25 @@ lookingfor = Dialogue([
     DialogueBox("sprites/players/catdialogue.png", "I don't see it, do you?"), #Dude 1
     DialogueBox("sprites/players/axolotldialogue.png", "No..."), #Dude 2
     DialogueBox("sprites/players/missioncontrol.png", "What are you guys looking for?"), #Mission Control
-    DialogueBox("sprites/players/axolotldialogue.png", "Our stuff."), #Dude 1
+    DialogueBox("sprites/players/catdialogue.png", "Our stuff."), #Dude 1
     DialogueBox("sprites/players/missioncontrol.png", "Stuff? What stuff?"), #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "You know, our equipment."), #Dude 1
     DialogueBox("sprites/players/missioncontrol.png", "You have everything you need."), #Mission Control
-    DialogueBox("sprites/players/axolotldialogue.png", "What about our guns?"), #Dude 1
+    DialogueBox("sprites/players/catdialogue.png", "What about our guns?"), #Dude 1
+    DialogueBox("sprites/players/missioncontrol.png", "your"), #Mission Control
+    DialogueBox("sprites/players/missioncontrol.png", "WHAT?!?!"), #Mission Control
+    DialogueBox("sprites/players/catlookotherway.png", "guns."),  #Dude 1
+    DialogueBox("sprites/players/missioncontrol.png", "YOU ARE TAKING CANDY FROM A CHILD"), #Mission Control
+    DialogueBox("sprites/players/missioncontrol.png", "WHAT DO YOU NEED GUNS FOR!?!"), #Mission Control
+    DialogueBox("sprites/players/axolotldialogue.png", "didn't you say he can be a pain..."), #Dude 2
+    DialogueBox("sprites/players/missioncontrol.png", "NO, NO GUNS"), #Mission Control
+    DialogueBox("sprites/players/axolotldialogue.png", "we're not going to hurt him"), #Dude 2
+    DialogueBox("sprites/players/catdialogue.png", "ya we can use non-lethal bullets"), #Dude 1
+    DialogueBox("sprites/players/missioncontrol.png", "...non-lethal..."), #Mission Control
+    DialogueBox("sprites/players/missioncontrol.png", "..."), #Mission Control
+    DialogueBox("sprites/players/catdialogue.png", "you there?"), #Dude 1
+    DialogueBox("sprites/players/missioncontrol.png", "just..."), #Mission Control
+    DialogueBox("sprites/players/missioncontrol.png", "just do your jod please"), #Mission Control
 ])
 
 helloyellowguy = Dialogue([
