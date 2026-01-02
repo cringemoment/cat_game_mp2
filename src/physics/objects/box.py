@@ -8,6 +8,8 @@ class Box(PhysicsObject):
         self.collision = True
         self.pushback_factor = 0.001
         self.trigger_interactible = True
+        self.original_x = self.x
+        self.original_y = self.y
 
     def sprite_collision(self, sprite):
         if type(sprite).__name__ == "Bullet":
