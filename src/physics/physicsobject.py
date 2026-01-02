@@ -48,6 +48,7 @@ class PhysicsObject(Sprite):
         self.collision = True
         self.pushback_factor = 1
         self.name = None
+        self.trigger_interactible = False
 
     def update_bounds(self):
         self.left = self.x

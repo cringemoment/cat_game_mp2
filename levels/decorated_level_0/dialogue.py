@@ -47,7 +47,7 @@ helloyellowguy = Dialogue([
 ])
 
 dialogues = {
-    "default": default,
-    "secondroomdialogue": lookingfor,
-    "helloyellowguy": helloyellowguy
+    "!default": default,
+    "!secondroomdialogue": lookingfor,
+    "!helloyellowguy": helloyellowguy
 }

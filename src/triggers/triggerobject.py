@@ -14,9 +14,11 @@ class Trigger:
     def __init__(self, name, rect, level, image = None):
         self.name = name
         self.players_inside = [False, False]
+        self.sprites_inside = []
         self.rect = rect
         self.level = level
         self.image = image
+        self.object_interactible = False
 
     @call_triggers
     def on_trigger(self):
@@ -49,9 +51,10 @@ class Trigger:
 
     def update_players(self):
         for sprite in self.level.tiles.physics_objects:
+
+            #player interactions
             if type(sprite).__name__ == "Player":
                 if self.rect.colliderect(sprite.rect):
-
                     if not self.players_inside[sprite.index]:
                         self.players_inside[sprite.index] = True
                         self.on_enter(sprite)
@@ -66,6 +69,20 @@ class Trigger:
 
                         if sum(self.players_inside) == 0:
                             self.on_both_leave()
+
+            #interactions with interactible objects
+            if not self.object_interactible: continue
+            if not sprite.trigger_interactible: continue
+
+            if self.rect.colliderect(sprite.rect):
+                if not sprite in self.sprites_inside:
+                    self.sprites_inside.append(sprite)
+                    self.on_any_enter(sprite)
+
+            else:
+                if sprite in self.sprites_inside:
+                    self.sprites_inside.remove(sprite)
+                    self.on_leave(sprite)
 
         if sum(self.players_inside) == 2:
             self.on_trigger()

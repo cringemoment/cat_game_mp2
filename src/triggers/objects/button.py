@@ -8,6 +8,7 @@ class Button(Sprite, Trigger):
         level = kwargs.pop("level")
         Sprite.__init__(self, level)
         Trigger.__init__(self, *args, **kwargs, level = level)
+        self.object_interactible = True
 
         sprites = {
             "pressed": "objects/button_pressed.png"
@@ -31,6 +32,7 @@ class PermanentButton(Sprite, Trigger):
         Sprite.__init__(self, level)
         Trigger.__init__(self, *args, **kwargs, level = level)
         self.open = False
+        self.object_interactible = True
 
         sprites = {
             "pressed": "objects/button_pressed.png"
