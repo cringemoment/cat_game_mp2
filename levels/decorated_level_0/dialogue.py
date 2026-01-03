@@ -42,12 +42,31 @@ lookingfor = Dialogue([
 ])
 
 helloyellowguy = Dialogue([
-    DialogueBox("sprites/players/axolotldialogue.png", "Hello, little guy!"),
-    DialogueBox("sprites/players/axolotldialogue.png", "I don't think boxes can talk...")
+    DialogueBox("sprites/players/catdialogue.png", "hey look it’s the baby"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "I AM NOT A BABY"),
+    DialogueBox("sprites/players/catdialogue.png", "that’s a nice lolly pop you got there"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "hehe, want one? i have a lot more"),
+    DialogueBox("sprites/players/catdialogue.png", "really? that’s awfully nice of you, yes please, and one for my friend here if you-"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "WELL TOO BAD, CUZ THEY’ER ALLLLLL MINE"),
+    DialogueBox("sprites/players/axolotldialogue.png", "what a brat"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "mine, mine, MINE"),
+    DialogueBox("sprites/players/catdialogue.png", "isn't passed your bed time kid?"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "i don’t have a bed time, i do what i want, and you’re not getting ANY of this candy"),
+    DialogueBox("sprites/players/catdialogue.png", "we’ll see about that"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "you’ll never get it, NEVER"),
+    DialogueBox("sprites/players/catdialogue.png", "it would seem he closed the door"),
+    DialogueBox("sprites/players/axolotldialogue.png", "we’ll just open it again")
+])
+
+end = Dialogue([
+    DialogueBox("sprites/players/catdialogue.png", "that's a nice lolly pop you got there"),
+    DialogueBox("sprites/players/kidwithcandydialogue.png", "i... uh... there's um.. i have a lot more"),
+    DialogueBox("sprites/players/catdialogue.png", "really? don't mind if i do"),
 ])
 
 dialogues = {
-    "!default": default,
-    "!secondroomdialogue": lookingfor,
-    "!helloyellowguy": helloyellowguy
+    "default": default,
+    "secondroomdialogue": lookingfor,
+    "helloyellowguy": helloyellowguy,
+    "end": end
 }

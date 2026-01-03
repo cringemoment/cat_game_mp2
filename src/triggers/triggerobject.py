@@ -77,7 +77,7 @@ class Trigger:
             if self.rect.colliderect(sprite.rect):
                 if not sprite in self.sprites_inside:
                     self.sprites_inside.append(sprite)
-                    self.on_enter(sprite)
+                    self.on_any_enter(sprite)
 
             else:
                 if sprite in self.sprites_inside:

@@ -6,9 +6,7 @@ class ReturnTrigger(Trigger):
         super().__init__(*args, **kwargs)
         self.object_interactible = True
 
-    def on_enter(self, player):
-        print(type(player).__name__)
+    def on_any_enter(self, player):
         if type(player).__name__ == "Box":
-            print('hello')
             player.x = player.original_x
             player.y = player.original_y
