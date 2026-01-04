@@ -4,7 +4,7 @@ default = Dialogue([
     DialogueBox ("sprites/players/missioncontrol.png", "Alright, I know it's been a while since your last mission, so we're going to have you two complete a basic mission to get back up to speed."),
     DialogueBox("sprites/players/missioncontrol.png", "Your goal is to get the candy currently in the hands of a five-year-old child."),  #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "So... we're taking candy from a baby."), #Dude 1
-    DialogueBox("sprites/players/missioncontrol.png", "HEY! He's not a baby any more."), #Mission Control
+    DialogueBox("sprites/players/missioncontrolmad.png", "HEY! He's not a baby any more."), #Mission Control
 
     DialogueBox("sprites/players/missioncontrol.png", "And he can be a real pain sometimes..."),#Mission Control
     DialogueBox("sprites/players/missioncontrol.png", "Just like his father..."), #Mission Control
@@ -13,7 +13,7 @@ default = Dialogue([
     DialogueBox("sprites/players/catdialogue.png", "What?"), #Dude 1
     DialogueBox("sprites/players/missioncontrol.png", "For the record, the kid's my brother's son."), #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "Does your brother know he's here?"), #Dude 1
-    DialogueBox("sprites/players/missioncontrol.png", "Enough questions, just complete this so we can move on to the important mission!"), #Mission Control
+    DialogueBox("sprites/players/missioncontroldrop.png", "Enough questions, just complete this so we can move on to the important mission!"), #Mission Control
 ])
 
 lookingfor = Dialogue([
@@ -26,19 +26,19 @@ lookingfor = Dialogue([
     DialogueBox("sprites/players/missioncontrol.png", "You have everything you need."), #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "What about our guns?"), #Dude 1
     DialogueBox("sprites/players/missioncontrol.png", "your"), #Mission Control
-    DialogueBox("sprites/players/missioncontrol.png", "WHAT?!?!"), #Mission Control
+    DialogueBox("sprites/players/missioncontrol!!.png", "WHAT?!?!"), #Mission Control
     DialogueBox("sprites/players/catlookotherway.png", "guns."),  #Dude 1
-    DialogueBox("sprites/players/missioncontrol.png", "YOU ARE TAKING CANDY FROM A CHILD"), #Mission Control
-    DialogueBox("sprites/players/missioncontrol.png", "WHAT DO YOU NEED GUNS FOR!?!"), #Mission Control
+    DialogueBox("sprites/players/missioncontrolmad.png", "YOU ARE TAKING CANDY FROM A CHILD"), #Mission Control
+    DialogueBox("sprites/players/missioncontrolmad.png", "WHAT DO YOU NEED GUNS FOR!?!"), #Mission Control
     DialogueBox("sprites/players/axolotldialogue.png", "didn't you say he can be a pain..."), #Dude 2
-    DialogueBox("sprites/players/missioncontrol.png", "NO, NO GUNS"), #Mission Control
+    DialogueBox("sprites/players/missioncontrolmad.png", "NO, NO GUNS"), #Mission Control
     DialogueBox("sprites/players/axolotldialogue.png", "we're not going to hurt him"), #Dude 2
     DialogueBox("sprites/players/catdialogue.png", "ya we can use non-lethal bullets"), #Dude 1
-    DialogueBox("sprites/players/missioncontrol.png", "...non-lethal..."), #Mission Control
-    DialogueBox("sprites/players/missioncontrol.png", "..."), #Mission Control
+    DialogueBox("sprites/players/missioncontrollines.png", "...non-lethal..."), #Mission Control
+    DialogueBox("sprites/players/missioncontrollines.png", "..."), #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "you there?"), #Dude 1
-    DialogueBox("sprites/players/missioncontrol.png", "just..."), #Mission Control
-    DialogueBox("sprites/players/missioncontrol.png", "just do your jod please"), #Mission Control
+    DialogueBox("sprites/players/missioncontrollines.png", "just..."), #Mission Control
+    DialogueBox("sprites/players/missioncontrollines.png", "just do your jod please"), #Mission Control
 ])
 
 helloyellowguy = Dialogue([
