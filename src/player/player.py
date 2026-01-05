@@ -44,6 +44,7 @@ class Player(PhysicsObject):
         self.collision = True
         self.bullet_physics = False #lower friction after being hit by a bullet
         self.pushback_factor = 0.01
+        self.trigger_interactible = True
 
         self.current_velo = MAXX_VELO
         self.jump_power = JUMP_POWER

@@ -53,8 +53,10 @@ class Trigger:
         for sprite in self.level.tiles.physics_objects:
 
             #player interactions
-            if type(sprite).__name__ == "Player":
+            if type(sprite).__name__ == "Player" and not self.object_interactible:
                 if self.rect.colliderect(sprite.rect):
+                    if type(self).__name__ == "Button":
+                        print("aa")
                     if not self.players_inside[sprite.index]:
                         self.players_inside[sprite.index] = True
                         self.on_enter(sprite)
@@ -76,13 +78,18 @@ class Trigger:
 
             if self.rect.colliderect(sprite.rect):
                 if not sprite in self.sprites_inside:
+                    self.on_enter(sprite)
+                    if self.sprites_inside == []:
+                        self.on_any_enter(sprite)
+
                     self.sprites_inside.append(sprite)
-                    self.on_any_enter(sprite)
 
             else:
                 if sprite in self.sprites_inside:
                     self.sprites_inside.remove(sprite)
                     self.on_leave(sprite)
+                    if self.sprites_inside == []:
+                        self.on_both_leave()
 
         if sum(self.players_inside) == 2:
             self.on_trigger()

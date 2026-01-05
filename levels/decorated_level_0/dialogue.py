@@ -38,7 +38,7 @@ lookingfor = Dialogue([
     DialogueBox("sprites/players/missioncontrollines.png", "..."), #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "you there?"), #Dude 1
     DialogueBox("sprites/players/missioncontrollines.png", "just..."), #Mission Control
-    DialogueBox("sprites/players/missioncontrollines.png", "just do your jod please"), #Mission Control
+    DialogueBox("sprites/players/missioncontrollines.png", "just do your job please"), #Mission Control
 ])
 
 helloyellowguy = Dialogue([
@@ -50,7 +50,7 @@ helloyellowguy = Dialogue([
     DialogueBox("sprites/players/kidwithcandydialogue.png", "WELL TOO BAD, CUZ THEY’ER ALLLLLL MINE"),
     DialogueBox("sprites/players/axolotldialogue.png", "what a brat"),
     DialogueBox("sprites/players/kidwithcandydialogue.png", "mine, mine, MINE"),
-    DialogueBox("sprites/players/catdialogue.png", "isn't passed your bed time kid?"),
+    DialogueBox("sprites/players/catdialogue.png", "isn't it past your bed time?"),
     DialogueBox("sprites/players/kidwithcandydialogue.png", "i don’t have a bed time, i do what i want, and you’re not getting ANY of this candy"),
     DialogueBox("sprites/players/catdialogue.png", "we’ll see about that"),
     DialogueBox("sprites/players/kidwithcandydialogue.png", "you’ll never get it, NEVER"),

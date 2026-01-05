@@ -9,6 +9,7 @@ class Button(Sprite, Trigger):
         Sprite.__init__(self, level)
         Trigger.__init__(self, *args, **kwargs, level = level)
         self.object_interactible = True
+        self.on = False
 
         sprites = {
             "pressed": "objects/button_pressed.png"
@@ -17,14 +18,15 @@ class Button(Sprite, Trigger):
         self.set_sprites(sprites)
 
     def on_enter(self, player):
-        Trigger.on_enter(self, player)
-        self.change_image("pressed")
-
-        testpart.spawn_effect(self.level, 100, 100)
+        if not self.on:
+            Trigger.on_enter(self, player)
+            self.change_image("pressed")
+            self.on = True
 
     def on_both_leave(self):
         Trigger.on_both_leave(self)
         self.change_image("default")
+        self.on = False
 
 class PermanentButton(Sprite, Trigger):
     def __init__(self, *args, **kwargs):
