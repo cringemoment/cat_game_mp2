@@ -10,3 +10,14 @@ class ReturnTrigger(Trigger):
         if type(player).__name__ == "Box":
             player.x = player.original_x
             player.y = player.original_y
+
+class ReturnTriggerWall(Trigger):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.object_interactible = True
+
+    def on_any_enter(self, player):
+        if type(player).__name__ == "Box":
+            #<
+            if player.left > self.rect.x:
+                player.x += 40

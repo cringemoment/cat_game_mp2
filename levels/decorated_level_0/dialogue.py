@@ -65,8 +65,8 @@ end = Dialogue([
 ])
 
 dialogues = {
-    "default": default,
-    "secondroomdialogue": lookingfor,
-    "helloyellowguy": helloyellowguy,
-    "end": end
+    ".default": default,
+    ".secondroomdialogue": lookingfor,
+    ".helloyellowguy": helloyellowguy,
+    ".end": end
 }
