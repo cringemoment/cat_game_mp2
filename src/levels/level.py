@@ -5,9 +5,11 @@ from src.levels.loadtilemap import load_tilemap
 from src.renderer.camera import Camera
 
 class Level:
-    def __init__(self, level_path):
+    def __init__(self, level_path, name = "no title", subtitle = "uh oh"):
         self.level_path = level_path
         self.dialogues = self.load_dialogue_file(level_path)
+        self.name = name
+        self.subtitle = subtitle
 
     def load_dialogue_file(self, file_path):
         spec = importlib.util.spec_from_file_location("asdkjalkdhdkgjas", f"{file_path}/dialogue.py")
@@ -16,9 +18,8 @@ class Level:
 
         return module.dialogues
 
-    def load_game(self, game):
-        self.game = game
-        self.tiles = load_tilemap(self.game.window, self, f"{self.level_path}/tilemap.tmx")
+    def load_window(self, s):
+        self.tiles = load_tilemap(s, self, self.level_path)
 
         self.camera = Camera()
         self.camera.set_level(self.tiles)
@@ -39,7 +40,6 @@ class Level:
                 if hasattr(obj, "z"):
                     z = obj.z
                 elif hasattr(obj, "properties") and "z" in obj.properties:
-                    print(obj)
                     z = obj.properties["z"]
                 else:
                     z = 0
@@ -58,4 +58,9 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-testlevel = Level("levels/decorated_level_0")
+main_menu = Level("levels/main_menu")
+level_0 = Level("levels/decorated_level_0", "Level 0", "Where our friends get their footing back")
+
+levels = {
+"level_0": level_0
+}
