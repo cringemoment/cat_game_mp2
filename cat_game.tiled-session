@@ -112,11 +112,14 @@
             }
         },
         "levels/decorated_level_0/tilemap.tmx": {
-            "scale": 2,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 145.75,
-                "y": 1073.5
+                "x": 798,
+                "y": 863
             }
         },
         "levels/heavybox.tsx": {
@@ -141,6 +144,17 @@
             "viewCenter": {
                 "x": 786,
                 "y": 821.9999999999999
+            }
+        },
+        "levels/level_1/tilemap.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.46807291666666667,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 790.4751307444086,
+                "y": 785.1340825637031
             }
         },
         "levels/main_menu/tilemap.tmx": {

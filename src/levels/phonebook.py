@@ -14,17 +14,19 @@ left_count = 5
 mysterious_padding = 6
 
 level_name_positions = {
-"level_0": 130
+"level_0": 130,
+"level_1": 160
 }
 
 new_level_dialogues = {
-"level_0": level_0
+"level_0": level_0,
+"level_1": level_0
 }
 
 class PhoneBook:
     def __init__(self, game):
         self.game = game
-        self.open = True
+        self.open = False
         self.current_popup = new_level_dialogues["level_0"]
 
         #preloading render stuff

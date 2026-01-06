@@ -53,3 +53,7 @@ class PermanentButton(Sprite, Trigger):
 
     def on_both_leave(self):
         pass
+
+class LaunchPad(Button):
+    def on_enter(self, player):
+        player.vely -= 50

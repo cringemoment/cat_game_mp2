@@ -62,7 +62,10 @@ class Level:
 
 main_menu = Level("levels/main_menu")
 level_0 = Level("levels/decorated_level_0", "Level 0", "1-800-HOW-PLAY")
+level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
+
 
 levels = {
-"level_0": level_0
+"level_0": level_0,
+"level_1": level_1
 }
