@@ -38,6 +38,18 @@ class Trigger:
     def on_both_leave(self):
         pass
 
+<<<<<<< Updated upstream
+=======
+    #helper method for select
+    def select(self, player):
+        if self.players_inside[player.index]:
+            self.on_select(player.index)
+
+    @call_triggers
+    def on_select(self, player):
+        pass
+
+>>>>>>> Stashed changes
     def update_players(self):
         for sprite in self.level.tiles.physics_objects:
             if type(sprite).__name__ == "Player":
@@ -57,6 +69,23 @@ class Trigger:
                         if sum(self.players_inside) == 0:
                             self.on_both_leave()
 
+<<<<<<< Updated upstream
+=======
+            #interactions with interactible objects
+            if not self.object_interactible: continue
+            if not sprite.trigger_interactible: continue
+
+            if self.rect.colliderect(sprite.rect):
+                if not sprite in self.sprites_inside:
+                    self.sprites_inside.append(sprite)
+                    self.on_any_enter(sprite)
+
+            else:
+                if sprite in self.sprites_inside:
+                    self.sprites_inside.remove(sprite)
+                    self.on_leave(sprite)
+
+>>>>>>> Stashed changes
         if sum(self.players_inside) == 2:
             self.on_trigger()
 
