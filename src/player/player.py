@@ -119,13 +119,10 @@ class Player(PhysicsObject):
             self.uncrouch_queued = False
             self.jump_power = JUMP_POWER
 
-<<<<<<< Updated upstream
-=======
     def select(self):
         for trigger in self.level.tiles.area_triggers:
             trigger.select(self)
 
->>>>>>> Stashed changes
     def update_timers(self, dt):
         if self.on_ground:
             self.coyote_time = COYOTE_TIME

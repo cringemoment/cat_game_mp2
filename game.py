@@ -9,14 +9,10 @@ from src.menu.menu import MenuHandler
 from assets.sprites.players.spritelist import *
 
 from src.player.controls import kbcontrols, jycontrols, nopause
-
-<<<<<<< Updated upstream
-=======
 from src.dialogue.dialogueobject import DialogueHandler
 
 from src.levels.phonebook import PhoneBook
 
->>>>>>> Stashed changes
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
 WINDOW_TITLE = "catxolotl"
@@ -33,11 +29,8 @@ class Game:
         self.current_level = main_menu
 
         self.menu_handler = MenuHandler(self)
-<<<<<<< Updated upstream
-=======
         self.dialogue_handler = DialogueHandler(self)
         self.phone_book = PhoneBook(self)
->>>>>>> Stashed changes
         self.paused = False
 
         self.clock = pygame.time.Clock()
@@ -61,12 +54,8 @@ class Game:
 
             self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
 
-<<<<<<< Updated upstream
         testlevel.load_window(self.window)
-        self.load_level(testlevel)
-=======
         self.load_level(self.current_level)
->>>>>>> Stashed changes
 
         self.mi = 20
         self.mimimi = [0] * self.mi
@@ -102,14 +91,10 @@ class Game:
         self.mimimi.pop(0)
 
         self.current_level.draw(self.window)
-<<<<<<< Updated upstream
-
         self.menu_handler.update(self.window)
-=======
         self.dialogue_handler.update(self.window, dt)
         self.phone_book.update(self.window)
->>>>>>> Stashed changes
-
+        
         if not self.paused:
             self.current_level.update_physics(dt)
 

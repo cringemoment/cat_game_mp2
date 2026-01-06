@@ -14,9 +14,11 @@ class Trigger:
     def __init__(self, name, rect, level, image = None):
         self.name = name
         self.players_inside = [False, False]
+        self.sprites_inside = []
         self.rect = rect
         self.level = level
         self.image = image
+        self.object_interactible = False
 
     @call_triggers
     def on_trigger(self):
@@ -38,22 +40,23 @@ class Trigger:
     def on_both_leave(self):
         pass
 
-<<<<<<< Updated upstream
-=======
     #helper method for select
     def select(self, player):
-        if self.players_inside[player.index]:
-            self.on_select(player.index)
+        if self.players_inside[player]:
+            self.on_select(player)
 
     @call_triggers
     def on_select(self, player):
         pass
 
->>>>>>> Stashed changes
     def update_players(self):
         for sprite in self.level.tiles.physics_objects:
-            if type(sprite).__name__ == "Player":
+
+            #player interactions
+            if type(sprite).__name__ == "Player" and not self.object_interactible:
                 if self.rect.colliderect(sprite.rect):
+                    if type(self).__name__ == "Button":
+                        print("aa")
                     if not self.players_inside[sprite.index]:
                         self.players_inside[sprite.index] = True
                         self.on_enter(sprite)
@@ -69,23 +72,25 @@ class Trigger:
                         if sum(self.players_inside) == 0:
                             self.on_both_leave()
 
-<<<<<<< Updated upstream
-=======
             #interactions with interactible objects
             if not self.object_interactible: continue
             if not sprite.trigger_interactible: continue
 
             if self.rect.colliderect(sprite.rect):
                 if not sprite in self.sprites_inside:
+                    self.on_enter(sprite)
+                    if self.sprites_inside == []:
+                        self.on_any_enter(sprite)
+
                     self.sprites_inside.append(sprite)
-                    self.on_any_enter(sprite)
 
             else:
                 if sprite in self.sprites_inside:
                     self.sprites_inside.remove(sprite)
                     self.on_leave(sprite)
+                    if self.sprites_inside == []:
+                        self.on_both_leave()
 
->>>>>>> Stashed changes
         if sum(self.players_inside) == 2:
             self.on_trigger()
 
@@ -110,4 +115,7 @@ class ActivatedObject:
         pass
 
     def on_both_leave(self):
+        pass
+
+    def on_select(self, playerj):
         pass

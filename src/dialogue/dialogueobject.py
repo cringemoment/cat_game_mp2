@@ -1,10 +1,6 @@
 import pygame
 
 class DialogueBox:
-<<<<<<< Updated upstream
-    def __init__(self, image, text, speed):
-        pass
-=======
     def __init__(self, image, text, speed = 25, font=None):
         self.image_raw = pygame.image.load(f"assets/{image}")
         self.image = None
@@ -23,7 +19,6 @@ class DialogueBox:
         self.bg_color = (20, 20, 20)
         self.border_color = (200, 200, 200)
         self.text_color = (255, 255, 255)
->>>>>>> Stashed changes
 
     def draw(self, surface):
         pass
@@ -31,8 +26,6 @@ class DialogueBox:
     def update(self, surface, dt):
         self.draw(surface)
 
-<<<<<<< Updated upstream
-=======
 class Dialogue:
     def __init__(self, dialogues):
         self.dialogues = dialogues
@@ -60,7 +53,6 @@ class Dialogue:
     def update(self, surface, dt, paused):
         self.current_dialogue_box.update(surface, dt, paused)
 
->>>>>>> Stashed changes
 class DialogueInputHandler():
     def __init__(self, dialoguehandler, input1, input2, controls1, controls2):
         self.dialoguehandler = dialoguehandler

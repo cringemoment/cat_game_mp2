@@ -1,4 +1,5 @@
 import pygame
+import importlib
 
 from src.levels.loadtilemap import load_tilemap
 from src.renderer.camera import Camera
@@ -6,12 +7,16 @@ from src.renderer.camera import Camera
 class Level:
     def __init__(self, level_path, name = "no title", subtitle = "uh oh"):
         self.level_path = level_path
-<<<<<<< Updated upstream
-=======
         self.dialogues = self.load_dialogue_file(level_path)
         self.name = name
         self.subtitle = subtitle
->>>>>>> Stashed changes
+
+    def load_dialogue_file(self, file_path):
+        spec = importlib.util.spec_from_file_location("asdkjalkdhdkgjas", f"{file_path}/dialogue.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        return module.dialogues
 
     def load_window(self, s):
         self.tiles = load_tilemap(s, self, self.level_path)
@@ -53,13 +58,9 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-<<<<<<< Updated upstream
-testlevel = Level("levels/level_0.tmx")
-=======
 main_menu = Level("levels/main_menu")
 level_0 = Level("levels/decorated_level_0", "Level 0", "Where our friends get their footing back")
 
 levels = {
 "level_0": level_0
 }
->>>>>>> Stashed changes
