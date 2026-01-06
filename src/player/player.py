@@ -122,7 +122,7 @@ class Player(PhysicsObject):
 
     def select(self):
         for trigger in self.level.tiles.area_triggers:
-            trigger.select(self.index)
+            trigger.select(self)
 
     def update_timers(self, dt):
         if self.on_ground:

@@ -42,7 +42,7 @@ class Trigger:
 
     #helper method for select
     def select(self, player):
-        if self.players_inside[player]:
+        if self.players_inside[player.index]:
             self.on_select(player)
 
     @call_triggers
@@ -55,8 +55,6 @@ class Trigger:
             #player interactions
             if type(sprite).__name__ == "Player" and not self.object_interactible:
                 if self.rect.colliderect(sprite.rect):
-                    if type(self).__name__ == "Button":
-                        print("aa")
                     if not self.players_inside[sprite.index]:
                         self.players_inside[sprite.index] = True
                         self.on_enter(sprite)

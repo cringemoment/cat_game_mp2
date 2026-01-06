@@ -4,8 +4,8 @@ from src.renderer.fonts import title_font, subtitle_font
 
 level_0 = Dialogue([
     DialogueBox("sprites/players/catdialogue.png", "Who is this?"),
-    DialogueBox("sprites/players/missioncontrol.png", "Hello, Agent Calico.", 50),
-    DialogueBox("sprites/players/missioncontrol.png", "I know you've been out of the game for a while."),
+    # DialogueBox("sprites/players/missioncontrol.png", "Hello, Agent Calico.", 50),
+    # DialogueBox("sprites/players/missioncontrol.png", "I know you've been out of the game for a while."),
 ])
 
 level_name_positions = {
@@ -19,7 +19,7 @@ new_level_dialogues = {
 class PhoneBook:
     def __init__(self, game):
         self.game = game
-        self.open = True
+        self.open = False
         self.current_popup = new_level_dialogues["level_0"]
 
         #preloading render stuff

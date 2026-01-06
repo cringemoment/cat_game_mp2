@@ -116,7 +116,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 145.75,
-                "y": 1073.25
+                "y": 1073.5
             }
         },
         "levels/heavybox.tsx": {
@@ -141,6 +141,14 @@
             "viewCenter": {
                 "x": 786,
                 "y": 821.9999999999999
+            }
+        },
+        "levels/main_menu/tilemap.tmx": {
+            "scale": 2.4640625,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.05072923272039,
+                "y": 159.89854153455929
             }
         },
         "levels/orange.tsx": {

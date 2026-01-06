@@ -46,6 +46,7 @@ class Game:
             self.player1 = Player(0, self.current_level, keyboard, kbcontrols, test_spritelist)
             self.player2 = Player(1, self.current_level, controller, jycontrols, test_controller_spritelist)
             self.menu_handler.load_inputs(keyboard, controller, kbcontrols, jycontrols)
+            self.dialogue_handler.load_inputs(keyboard, controller, kbcontrols, jycontrols)
 
         except Exception as e:
             print(e)
@@ -53,8 +54,8 @@ class Game:
             self.player2 = Player(1, self.current_level, keyboard, nopause, test_controller_spritelist)
 
             self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
+            self.dialogue_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
 
-        testlevel.load_window(self.window)
         self.load_level(self.current_level)
 
         self.mi = 20
@@ -62,7 +63,8 @@ class Game:
 
     def print_debugs(self):
         debugs = {
-            "fps": lambda: sum(self.mimimi) // self.mi
+            "fps": lambda: sum(self.mimimi) // self.mi,
+            "x": lambda: self.player1.y
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -73,7 +75,7 @@ class Game:
 
     def load_level(self, level):
         self.current_level = level
-        self.current_level.load_window(self.window)
+        self.current_level.load_game(self)
 
         self.player1.level = level
         self.player2.level = level
@@ -83,6 +85,9 @@ class Game:
 
         self.current_level.tiles.physics_objects.add(self.player1, self.player2)
 
+        if "default" in self.current_level.dialogues:
+            self.dialogue_handler.set_dialogue(self.current_level.dialogues["default"])
+
     def update(self):
         self.window.fill(background_color)
 
@@ -91,12 +96,13 @@ class Game:
         self.mimimi.pop(0)
 
         self.current_level.draw(self.window)
-        self.menu_handler.update(self.window)
         self.dialogue_handler.update(self.window, dt)
         self.phone_book.update(self.window)
-        
+
         if not self.paused:
             self.current_level.update_physics(dt)
+
+        self.menu_handler.update(self.window)
 
         self.print_debugs()
 

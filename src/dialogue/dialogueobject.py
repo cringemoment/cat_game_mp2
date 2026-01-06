@@ -1,11 +1,12 @@
 import pygame
+from src.renderer.fonts import dialoguefont
 
 DIALOGUE_BOX_WIDTH = 0.85
 DIALOGUE_BOX_HEIGHT = 0.3
 IMAGE_BOX_RATIO = 1.2
 
 class DialogueBox:
-    def __init__(self, image, text, speed = 10, font=None):
+    def __init__(self, image, text, speed = 10, font = None):
         self.image_raw = pygame.image.load(f"assets/{image}")
         self.image = None
         self.next_ready = False
@@ -17,7 +18,7 @@ class DialogueBox:
         self.char_delay = speed / 1000.0 #dt is in seconds so we must convert
         self.timer = 0.0
 
-        self.font = font or pygame.font.Font(None, 32)
+        self.font = font or dialoguefont
 
         self.padding = 20
         self.bg_color = (20, 20, 20)
@@ -95,12 +96,16 @@ class Dialogue:
     def load(self, dialoguehandler):
         self.dialogue_handler = dialoguehandler
 
+    def on_finish(self):
+        pass
+
     def next(self):
         if not self.current_dialogue_box.next_ready: return
 
         self.current_dialogue_box_index += 1
         if self.current_dialogue_box_index >= len(self.dialogues):
             self.finished = True
+            self.on_finish()
             return
 
         self.current_dialogue_box = self.dialogues[self.current_dialogue_box_index]
