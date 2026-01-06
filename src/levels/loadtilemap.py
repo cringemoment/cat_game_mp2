@@ -1,5 +1,5 @@
 #rn each layer is treated by its class
-#class physics_object are for physics objects
+#class physics_objects are for physics objects
 #class level is for immovable tangible stuff
 #class decoration is for intangible stuff
 #class positions is for positions and stuff

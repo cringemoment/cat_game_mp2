@@ -8,8 +8,13 @@ level_0 = Dialogue([
     # DialogueBox("sprites/players/missioncontrol.png", "I know you've been out of the game for a while."),
 ])
 
+left_align_x = 80
+left_spine_x = 470
+left_count = 5
+mysterious_padding = 6
+
 level_name_positions = {
-"level_0": (80, 100)
+"level_0": 130
 }
 
 new_level_dialogues = {
@@ -19,7 +24,7 @@ new_level_dialogues = {
 class PhoneBook:
     def __init__(self, game):
         self.game = game
-        self.open = False
+        self.open = True
         self.current_popup = new_level_dialogues["level_0"]
 
         #preloading render stuff
@@ -37,9 +42,12 @@ class PhoneBook:
     def update(self, surface):
         if self.open:
             surface.blit(self.book, (0, 0))
-            for level_name in levels:
+            for i, level_name in enumerate(levels):
                 level = levels[level_name]
                 title = title_font.render(level.name, False, (0, 0, 0))
                 subtitle = subtitle_font.render(level.subtitle, False, (88, 88, 88))
-                surface.blit(title, level_name_positions[level_name])
-                surface.blit(subtitle, (level_name_positions[level_name][0], level_name_positions[level_name][1] + 30)) #bruh
+                if i < left_count:
+                    title_rect = title.get_rect(bottomleft = (left_align_x, level_name_positions[level_name]))
+                    subtitle_rect = subtitle.get_rect(bottomright = (left_spine_x, level_name_positions[level_name] - mysterious_padding))
+                    surface.blit(title, title_rect)
+                    surface.blit(subtitle, subtitle_rect)

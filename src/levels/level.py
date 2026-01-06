@@ -61,7 +61,7 @@ class Level:
             trigger.update_players()
 
 main_menu = Level("levels/main_menu")
-level_0 = Level("levels/decorated_level_0", "Level 0", "Where our friends get their footing back")
+level_0 = Level("levels/decorated_level_0", "Level 0", "1-800-HOW-PLAY")
 
 levels = {
 "level_0": level_0
