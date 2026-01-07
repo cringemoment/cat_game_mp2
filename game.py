@@ -2,7 +2,7 @@ import pygame
 from src.levels.loadtilemap import load_tilemap
 from src.player.player import Player
 
-from src.levels.level import level_1 as main_menu
+from src.levels.level import level_0 as main_menu
 from src.player.playerinput import Controller, Keyboard
 from src.menu.menu import MenuHandler
 

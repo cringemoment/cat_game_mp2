@@ -18,6 +18,7 @@ class ReturnTriggerWall(Trigger):
 
     def on_any_enter(self, player):
         if type(player).__name__ == "Box":
-            #<
             if player.left > self.rect.x:
                 player.x += 40
+            else:
+                player.x -= 40
