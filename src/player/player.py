@@ -22,16 +22,13 @@ BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
-    def __init__(self, index = 0, level = None, controls = None, input_device = None, sprites = None):
+    def __init__(self, index = 0, level = None, sprites = None):
         super().__init__(level)
         self.set_sprites(sprites)
 
         self.index = index
 
         #handling controls
-        self.input_handler = InputHandler(self, controls, input_device)
-        self.controls = controls
-        self.input_device = input_device
         self.leftclick_down = False
         self.keys_pressed = []
 
@@ -61,6 +58,10 @@ class Player(PhysicsObject):
 
         self.gun = Gun(level, self)
         self.aim_angle = 0
+
+    def load_inputs(self, input_device, controls):
+        self.input_device = input_device
+        self.input_handler = InputHandler(self, input_device, controls)
 
     def shoot(self):
         self.gun.shoot()
@@ -131,7 +132,17 @@ class Player(PhysicsObject):
             self.coyote_time -= dt
 
     def update_aim(self):
-        if type(self.input_device).__name__ == "Joystick":
+        camera = self.level.camera
+        screen = pygame.display.get_surface()
+        screen_width, screen_height = screen.get_size()
+
+        tile_size = screen_width / camera.width
+        scale_factor = tile_size / 32
+
+        player_world = pygame.Vector2(self.rect.center)
+        player_screen = pygame.Vector2((player_world.x - camera.x) * scale_factor, (player_world.y - camera.y) * scale_factor)
+
+        if type(self.input_device).__name__ == "Controller":
             axis_x = self.input_device.get_axis(2)
             axis_y = self.input_device.get_axis(3)
 
@@ -139,8 +150,8 @@ class Player(PhysicsObject):
                 self.aim_angle = math.degrees(math.atan2(-axis_y, axis_x))
         else:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            dx = mouse_x - self.rect.centerx
-            dy = mouse_y - self.rect.centery
+            dx = mouse_x - player_screen.x
+            dy = mouse_y - player_screen.y
             self.aim_angle = math.degrees(math.atan2(-dy, dx))
 
     def update(self, level, dt):

@@ -34,7 +34,7 @@ nopause = Controls("p3", "k")
 nopause.load("src/player/controls/profile_3.json")
 
 try:
-    jycontrols = Controls("p2", "j")
-    jycontrols.load("src/player/controls/profile_2.json")
+    joycontrols = Controls("p2", "j")
+    joycontrols.load("src/player/controls/profile_2.json")
 except Exception as e:
     print(e)

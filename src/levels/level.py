@@ -66,6 +66,7 @@ level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
 
 
 levels = {
+"main_menu": main_menu,
 "level_0": level_0,
 "level_1": level_1
 }

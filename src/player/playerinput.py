@@ -57,6 +57,9 @@ class Controller():
     def get_key(self, key):
         return getattr(self, key)
 
+    def get_axis(self, i):
+        return self.joystick.get_axis(i)
+
 class InputHandler:
     def __init__(self, player, input_device, controls):
         self.player = player

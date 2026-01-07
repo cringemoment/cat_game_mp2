@@ -2,13 +2,17 @@ import pygame
 from src.levels.loadtilemap import load_tilemap
 from src.player.player import Player
 
+<<<<<<< Updated upstream
 from src.levels.level import level_0 as main_menu
+=======
+from src.levels.level import levels
+>>>>>>> Stashed changes
 from src.player.playerinput import Controller, Keyboard
 from src.menu.menu import MenuHandler
 
 from assets.sprites.players.spritelist import *
 
-from src.player.controls import kbcontrols, jycontrols, nopause
+from src.player.controls import kbcontrols, joycontrols, nopause
 from src.dialogue.dialogueobject import DialogueHandler
 
 from src.levels.phonebook import PhoneBook
@@ -26,7 +30,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        self.current_level = main_menu
+        self.current_level = "level_0"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
@@ -38,28 +42,38 @@ class Game:
         self.keyboard = Keyboard()
         keyboard = Keyboard()
 
+        self.player1 = Player(0, self.current_level, test_spritelist)
+        self.player2 = Player(1, self.current_level, test_controller_spritelist)
+
+        i1 = keyboard
+        c1 = kbcontrols
+
         try:
             testcontroller = pygame.joystick.Joystick(0)
-
             controller = Controller(testcontroller)
 
-            self.player1 = Player(0, self.current_level, keyboard, kbcontrols, test_spritelist)
-            self.player2 = Player(1, self.current_level, controller, jycontrols, test_controller_spritelist)
-            self.menu_handler.load_inputs(keyboard, controller, kbcontrols, jycontrols)
-            self.dialogue_handler.load_inputs(keyboard, controller, kbcontrols, jycontrols)
+            i2 = controller
+            c2 = joycontrols
 
         except Exception as e:
             print(e)
-            self.player1 = Player(0, self.current_level, keyboard, kbcontrols, test_spritelist)
-            self.player2 = Player(1, self.current_level, keyboard, nopause, test_controller_spritelist)
 
-            self.menu_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
-            self.dialogue_handler.load_inputs(keyboard, keyboard, kbcontrols, nopause)
+            i2 = keyboard
+            c2 = nopause
+
+        self.load_inputs(i1, i2, c1, c2)
 
         self.load_level(self.current_level)
 
         self.mi = 20
         self.mimimi = [0] * self.mi
+
+    def load_inputs(self, i1, i2, c1, c2):
+        self.player1.load_inputs(i1, c1)
+        self.player2.load_inputs(i2, c2)
+
+        self.menu_handler.load_inputs(i1, i2, c1, c2)
+        self.dialogue_handler.load_inputs(i1, i2, c1, c2)
 
     def print_debugs(self):
         debugs = {
@@ -73,7 +87,8 @@ class Game:
             text = font.render(f"{var}: {debugs[var]()}", False, color, (0, 0, 0))
             self.window.blit(text, (10, i * 30 + 10))
 
-    def load_level(self, level):
+    def load_level(self, level_name):
+        level = levels[level_name]
         self.current_level = level
         self.current_level.load_game(self)
 
@@ -84,6 +99,8 @@ class Game:
         self.player2.x, self.player2.y = level.tiles.spawn_pos_2
 
         self.current_level.tiles.physics_objects.add(self.player1, self.player2)
+
+        self.dialogue_handler.current_dialogue = None
 
         if "default" in self.current_level.dialogues:
             self.dialogue_handler.set_dialogue(self.current_level.dialogues["default"])
@@ -109,4 +126,4 @@ class Game:
         pygame.display.flip()
 
         if self.keyboard.get_key(pygame.K_k)():
-            self.player1.fade_in(1)
+            self.player1.fade_out(1)

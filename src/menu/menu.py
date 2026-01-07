@@ -258,7 +258,8 @@ class PauseMenu(Menu):
         self.menuhandler.change_menu("controls")
 
     def main_menu(self):
-        pass #TODO: Make this become main menu / main page
+        self.menuhandler.game.paused = False
+        self.menuhandler.game.load_level("main_menu")
 
 class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
