@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="14">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
- <tileset firstgid="37" source="../../assets/objects/tablewithphone.tsx"/>
+ <tileset firstgid="38" source="../../assets/objects/tablewithphone.tsx"/>
  <layer id="1" name="level" class="level" width="15" height="10">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -12,8 +12,8 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,37,38,39,0,0,0,0,0,1,
-1,0,0,0,0,0,40,41,42,0,0,0,0,0,1,
+1,0,0,0,0,0,38,39,40,0,0,0,0,0,1,
+1,0,0,0,0,0,41,42,43,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
@@ -26,10 +26,10 @@
    </properties>
    <point/>
   </object>
-  <object id="2" name="player" x="384" y="192">
+  <object id="2" name="player" x="352" y="224">
    <point/>
   </object>
-  <object id="3" name="player_2" x="64" y="192">
+  <object id="3" name="player_2" x="64" y="224">
    <point/>
   </object>
   <object id="13" name="phonebook" type="PhoneBook" x="160.667" y="224" width="159.333" height="63.8333">

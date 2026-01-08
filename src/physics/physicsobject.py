@@ -9,7 +9,7 @@ AIR_RESISTANCE = 0.8
 MAXX_VELO = 20
 MAXY_VELO = 12
 
-MAX_PHYSICS_CHECKS = 10
+MAX_PHYSICS_CHECKS = 4
 MYSTERY_PHYSICS_CONSTANT = 0.1 #no comment needed
 SEARCH_RADIUS = 2 * 32 #32 is tile size, 8 is how many tiles is checked on the left/right sid
 

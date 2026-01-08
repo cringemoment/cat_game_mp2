@@ -38,6 +38,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "assets/tilesets/kidwithcandy.tsx": {
+            "scaleInDock": 1
+        },
         "assets/tilesets/objects.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1
@@ -118,7 +121,7 @@
             "scale": 0.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 798,
+                "x": 797,
                 "y": 863
             }
         },
@@ -158,11 +161,11 @@
             }
         },
         "levels/main_menu/tilemap.tmx": {
-            "scale": 2.4640625,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240.05072923272039,
-                "y": 159.89854153455929
+                "x": 270.25,
+                "y": 160
             }
         },
         "levels/orange.tsx": {

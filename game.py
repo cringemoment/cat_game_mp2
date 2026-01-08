@@ -2,11 +2,7 @@ import pygame
 from src.levels.loadtilemap import load_tilemap
 from src.player.player import Player
 
-<<<<<<< Updated upstream
-from src.levels.level import level_0 as main_menu
-=======
 from src.levels.level import levels
->>>>>>> Stashed changes
 from src.player.playerinput import Controller, Keyboard
 from src.menu.menu import MenuHandler
 

@@ -53,7 +53,8 @@ class PhoneBook:
     def update(self, surface):
         if self.open:
             surface.blit(self.book, (0, 0))
-            for i, level_name in enumerate(levels[1:]):
+            for i, level_name in enumerate(levels):
+                if level_name == "main_menu": continue
                 level = levels[level_name]
 
                 if self.level_file[level_name]:
