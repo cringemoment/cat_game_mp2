@@ -67,8 +67,9 @@ class TextButton(Widget):
         surface.blit(self.text_surf, self.rect)
 
 class NumberChooser(Widget):
-    def __init__(self, menu, x, y, text, value = 0, min = None, max = None, font = None, align = "left"):
+    def __init__(self, menu, x, y, text, value = 0, min = None, max = None, font = None, align = "right"):
         super().__init__(menu, x, y)
+
         self.value = value
         self.text = text
         self.font = font
@@ -84,6 +85,11 @@ class NumberChooser(Widget):
         if max:
             self.max = max
 
+        self.text_surf = self.font.render(self.text, True, self.color)
+        self.text_rect = self.text_surf.get_rect(topleft=(self.x, self.y))
+        if align == "right":
+            self.x -= self.text_rect.width
+
         self.set_value_rect()
 
     def set_value_rect(self):
@@ -93,7 +99,7 @@ class NumberChooser(Widget):
         self.number_padding = 10
 
         self.value_surf = self.font.render(str(self.value), True, self.color)
-        self.rect = self.value_surf.get_rect(topright=(self.x - self.number_padding, self.y + self.text_rect.height))
+        self.rect = self.value_surf.get_rect(topright = (self.x - self.number_padding, self.y + self.text_rect.height))
 
         self.slider_width = 100
         self.slider_height = 6
@@ -124,7 +130,6 @@ class NumberChooser(Widget):
         surface.blit(self.text_surf, self.text_rect)
         surface.blit(self.value_surf, self.rect)
 
-        # --- Draw slider ---
         # Outline
         pygame.draw.rect(surface, (180, 180, 180), (self.slider_x, self.slider_y, self.slider_width, self.slider_height), width = 2, border_radius = self.border_radius)
 
@@ -265,7 +270,7 @@ class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            NumberChooser(self, 300, 300, text = "number", value = 5, min = 0, max = 10, font = font, align = "right")
+            NumberChooser(self, 875, 75, text = "Number", value = 5, min = 0, max = 10, font = font, align = "right")
         ]
 
 class ControlsMenu(Menu):
