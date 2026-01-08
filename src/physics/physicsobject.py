@@ -76,6 +76,9 @@ class PhysicsObject(Sprite):
         if not self.colliding(obj):
             return
 
+        if type(self).__name__ == "Player":
+            print(obj)
+
         if not obj.alive() or not self.alive():
             return
 

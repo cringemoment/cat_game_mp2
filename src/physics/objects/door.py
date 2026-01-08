@@ -22,6 +22,7 @@ class Door(PhysicsObject, ActivatedObject):
     def on_both_leave(self):
         self.change_image("default")
         self.collision = True
+        print("alalala")
 
 class ReverseDoor(PhysicsObject, ActivatedObject):
     def __init__(self, *args, **kwargs):
@@ -87,4 +88,3 @@ class TrapDoor(PhysicsObject, ActivatedObject):
     def on_both_leave(self):
         self.change_image("default")
         self.collision = True
-

@@ -70,11 +70,20 @@ class Game:
 
         self.menu_handler.load_inputs(i1, i2, c1, c2)
         self.dialogue_handler.load_inputs(i1, i2, c1, c2)
+        self.phone_book.load_inputs(i1, i2, c1, c2)
+
+    def bruh(self):
+        for sprite in self.current_level.tiles.physics_objects:
+            if sprite.name == "door":
+                return sprite.collision
+
+        return "uh oh"
 
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "x": lambda: self.player1.y
+            "": lambda: len(self.current_level.tiles.area_triggers),
+            "": lambda: self.bruh()
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)

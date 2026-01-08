@@ -158,9 +158,11 @@ class DialogueHandler:
 
     def update(self, surface, dt):
         if self.current_dialogue is not None:
+            self.game.paused = True
             if self.current_dialogue.finished:
                 self.current_dialogue = None
+                self.game.paused = False
                 return
 
             self.dialogueinputhandler.check()
-            self.current_dialogue.update(surface, dt, self.game.paused)
+            self.current_dialogue.update(surface, dt, self.game.menu_handler.open)

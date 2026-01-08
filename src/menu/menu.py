@@ -214,7 +214,7 @@ class MenuInputHandler():
         for key in self.keys:
             if key():
                 if key in self.pressed: continue
-                if self.keys[key] != "pause" and not self.menuhandler.game.paused: continue
+                if self.keys[key] != "pause" and not self.menuhandler.open: continue
 
                 self.pressed.append(key)
                 self.menucontrols[self.keys[key]]()
@@ -226,6 +226,7 @@ class MenuInputHandler():
 class MenuHandler:
     def __init__(self, game):
         self.game = game
+        self.open = False
         self.menus = {
             "default": PauseMenu(self),
             "options": OptionsMenu(self),
@@ -246,12 +247,13 @@ class MenuHandler:
 
     def pause(self):
         self.game.paused = not self.game.paused
+        self.open = not self.open
         self.change_menu("default")
 
     def update(self, surface):
         self.input_handler.check()
 
-        if self.game.paused:
+        if self.open:
             self.current_menu.draw_menu(surface)
 
 class PauseMenu(Menu):
@@ -275,6 +277,7 @@ class PauseMenu(Menu):
 
     def main_menu(self):
         self.menuhandler.game.paused = False
+        self.menuhandler.open = False
         self.menuhandler.game.load_level("main_menu")
 
 class OptionsMenu(Menu):

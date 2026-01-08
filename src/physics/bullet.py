@@ -29,7 +29,7 @@ class Bullet(PhysicsObject):
         image = tiles.image
         part = ParticleEffect(break_tile(image, 4), 6)
 
-        part.spawn_effect(self.level, self.x, self.y, -self.velx, -self.vely)
+        # part.spawn_effect(self.level, self.x, self.y, -self.velx, -self.vely)
 
     def update_timers(self, dt):
         self.lifetime -= dt
