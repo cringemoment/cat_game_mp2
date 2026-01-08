@@ -1,4 +1,7 @@
+from webbrowser import open_new
+
 import pygame
+import json
 
 from src.renderer.fonts import menu_font as font
 
@@ -136,6 +139,14 @@ class NumberChooser(Widget):
         # Fill
         pygame.draw.rect(surface, (255, 255, 255), (self.slider_x, self.slider_y, self.slider_fill_width, self.slider_height), border_radius = self.border_radius)
 
+class ControlWidget(Widget):
+    def __init__(self, menu, x, y, action, keybind1, keybind2, font=None):
+        super().__init__(menu, x, y)
+        self.action = action
+        self.kb1 = keybind1
+        self.kb2 = keybind2
+        self.font = font
+
 class Menu:
     def __init__(self, menuhandler):
         self.overlay = pygame.Surface((2000, 2000))
@@ -270,14 +281,24 @@ class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.widgets = [
-            NumberChooser(self, 875, 75, text = "Number", value = 5, min = 0, max = 10, font = font, align = "right")
+            NumberChooser(self, 875, 75, text = "Volume", value = 5, min = 0, max = 10, font = font, align = "right")
         ]
 
 class ControlsMenu(Menu):
-    def __init(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.widgets = [
 
+        with open("src/player/controls/profile_1.json") as f:
+            controls = json.load(f)
+            for action in controls:
+                for keybind in controls[action]:
+                    if type(keybind).__name__ == "int":
+                        print(f"{action}: {pygame.key.name(keybind)}")
+                    else:
+                        print(f"{action}: {keybind}")
+
+        self.widgets = [
+            TextButton(self, 875, 75, text="Unpause", font=font, command=self.go_back, align="right")
         ]
 
     def go_back(self):
