@@ -112,6 +112,8 @@ class Game:
         if "default" in self.current_level.dialogues:
             self.dialogue_handler.set_dialogue(self.current_level.dialogues["default"])
 
+        self.sound_handler.play_bg_music(level.bg_music)
+
     def update(self):
         self.window.fill(background_color)
 
