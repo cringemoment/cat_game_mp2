@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="97">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
  <tileset firstgid="38" source="../../assets/tilesets/testplayer.tsx"/>
@@ -231,8 +231,8 @@
   </object>
   <object id="48" name="fourth_room" type="CameraPos" x="0" y="320">
    <properties>
-    <property name="screen_height" value="40"/>
-    <property name="screen_width" value="45"/>
+    <property name="screen_height" value="30"/>
+    <property name="screen_width" value="43"/>
     <property name="trigger_type" value="activated"/>
    </properties>
    <point/>

@@ -22,3 +22,13 @@ class ReturnTriggerWall(Trigger):
                 player.x += 40
             else:
                 player.x -= 40
+
+class ReturnPlayerTrigger(Trigger):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.object_interactible = True
+
+    def on_any_enter(self, player):
+        if type(player).__name__ == "Player":
+            player.x = float(self.properties["return_x"])
+            player.y = float(self.properties["return_y"])
