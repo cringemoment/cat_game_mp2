@@ -76,6 +76,7 @@ class Game:
 
         self.menu_handler.load_inputs(i1, i2, c1, c2)
         self.dialogue_handler.load_inputs(i1, i2, c1, c2)
+        self.phone_book.load_inputs(i1, i2, c1, c2)
 
     def print_debugs(self):
         debugs = {
@@ -106,6 +107,8 @@ class Game:
 
         if "default" in self.current_level.dialogues:
             self.dialogue_handler.set_dialogue(self.current_level.dialogues["default"])
+
+        self.sound_handler.play_bg_music(level.bg_music)
 
     def update(self):
         self.window.fill(background_color)

@@ -5,11 +5,12 @@ from src.levels.loadtilemap import load_tilemap
 from src.renderer.camera import Camera
 
 class Level:
-    def __init__(self, level_path, name = "no title", subtitle = "uh oh"):
+    def __init__(self, level_path, name = "no title", subtitle = "uh oh", music = None):
         self.level_path = level_path
         self.dialogues = self.load_dialogue_file(level_path)
         self.name = name
         self.subtitle = subtitle
+        self.bg_music = music
 
     def load_dialogue_file(self, file_path):
         spec = importlib.util.spec_from_file_location("asdkjalkdhdkgjas", f"{file_path}/dialogue.py")
@@ -60,8 +61,8 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-main_menu = Level("levels/__main_menu")
-level_0 = Level("levels/level_0", "Level 0", "1-800-HOW-PLAY")
+main_menu = Level("levels/__main_menu", "", "")
+level_0 = Level("levels/level_0", "Level 0", "1-800-HOW-PLAY", "level0_bg")
 level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
 
 levels = {

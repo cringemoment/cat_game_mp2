@@ -250,6 +250,11 @@ class MenuHandler:
         self.open = not self.open
         self.change_menu("default")
 
+        if self.open:
+            self.game.sound_handler.bg_music_channel.pause()
+        else:
+            self.game.sound_handler.bg_music_channel.unpause()
+
     def update(self, surface):
         self.input_handler.check()
 
