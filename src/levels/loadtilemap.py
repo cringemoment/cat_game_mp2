@@ -80,7 +80,7 @@ class TileMap:
 
                         if getattr(obj, "trigger_type", None) == "trigger":
                             rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
-                            trigger = TriggerFactory(type, name = obj.name, rect = rect, level = self.level)
+                            trigger = TriggerFactory(type, name = obj.name, rect = rect, level = self.level, properties = obj.properties)
 
                             if self.tmx_data.get_tile_image_by_gid(obj.gid):
                                 trigger.set_loaded_sprites({"default": self.tmx_data.get_tile_image_by_gid(obj.gid)})

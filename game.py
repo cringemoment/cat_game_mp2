@@ -28,7 +28,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        self.current_level = "level_0"
+        default_level = "level_0"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
@@ -63,7 +63,7 @@ class Game:
 
         self.load_inputs(i1, i2, c1, c2)
 
-        self.load_level(self.current_level)
+        self.load_level(default_level)
 
         self.mi = 20
         self.mimimi = [0] * self.mi
@@ -81,7 +81,7 @@ class Game:
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "x": lambda: self.player1.y
+            "": lambda: self.player1.current_trigger_inside
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -100,6 +100,10 @@ class Game:
 
         self.player1.x, self.player1.y = level.tiles.spawn_pos_1
         self.player2.x, self.player2.y = level.tiles.spawn_pos_2
+        self.player1.velx = 0
+        self.player1.vely = 0
+        self.player2.velx = 0
+        self.player2.vely = 0
 
         self.current_level.tiles.physics_objects.add(self.player1, self.player2)
 
@@ -132,4 +136,3 @@ class Game:
 
         if self.keyboard.get_key(pygame.K_k)():
             pass
-

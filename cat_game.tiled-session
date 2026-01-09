@@ -160,6 +160,14 @@
                 "y": 785.1340825637031
             }
         },
+        "levels/level_2/tilemap.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1267,
+                "y": 607
+            }
+        },
         "levels/main_menu/tilemap.tmx": {
             "scale": 2,
             "selectedLayer": 1,
@@ -240,7 +248,7 @@
     "last.objectTemplatePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
-    "map.width": 60,
+    "map.width": 120,
     "openFiles": [
         "levels/decorated_level_0/tilemap.tmx",
         "assets/tilesets/warehouse_metal.tsx",
