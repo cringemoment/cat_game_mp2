@@ -90,6 +90,7 @@ class Player(PhysicsObject):
 
     def crouch(self):
         # self.play_anim("crouchanim", play_once = True)
+        self.level.game.sound_handler.play_sound("cannon_fire")
         self.change_image("crouch")
         self.accel = CROUCHING_ACCEL
         self.current_velo = CROUCHING_MAXX_VELO

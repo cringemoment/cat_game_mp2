@@ -12,6 +12,7 @@ from src.player.controls import kbcontrols, joycontrols, nopause
 from src.dialogue.dialogueobject import DialogueHandler
 
 from src.levels.phonebook import PhoneBook
+from src.sound.sound import Sound
 
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
@@ -20,17 +21,20 @@ MAX_FRAMES = 60
 
 background_color = (30, 30, 30)
 
+
 class Game:
     def __init__(self):
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        testlevel = "level_0"
+        self.current_level = "level_0"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
         self.phone_book = PhoneBook(self)
+        self.sound_handler = Sound(self)
+
         self.paused = False
 
         self.clock = pygame.time.Clock()
@@ -59,10 +63,12 @@ class Game:
 
         self.load_inputs(i1, i2, c1, c2)
 
-        self.load_level(testlevel)
+        self.load_level(self.current_level)
 
         self.mi = 20
         self.mimimi = [0] * self.mi
+
+        self.bruh = False
 
     def load_inputs(self, i1, i2, c1, c2):
         self.player1.load_inputs(i1, c1)
@@ -70,20 +76,11 @@ class Game:
 
         self.menu_handler.load_inputs(i1, i2, c1, c2)
         self.dialogue_handler.load_inputs(i1, i2, c1, c2)
-        self.phone_book.load_inputs(i1, i2, c1, c2)
-
-    def bruh(self):
-        for sprite in self.current_level.tiles.physics_objects:
-            if sprite.name == "door":
-                return sprite.collision
-
-        return "uh oh"
 
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "": lambda: len(self.current_level.tiles.area_triggers),
-            "": lambda: self.player1.current_trigger_inside
+            "x": lambda: self.player1.y
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -93,9 +90,6 @@ class Game:
             self.window.blit(text, (10, i * 30 + 10))
 
     def load_level(self, level_name):
-        self.player1.kill()
-        self.player2.kill()
-
         level = levels[level_name]
         self.current_level = level
         self.current_level.load_game(self)
@@ -117,7 +111,7 @@ class Game:
         self.window.fill(background_color)
 
         dt = self.clock.tick(MAX_FRAMES) / 1000
-        self.mimimi.append(round(1/dt, 2))
+        self.mimimi.append(round(1 / dt, 2))
         self.mimimi.pop(0)
 
         self.current_level.draw(self.window)
@@ -134,4 +128,5 @@ class Game:
         pygame.display.flip()
 
         if self.keyboard.get_key(pygame.K_k)():
-            self.player1.fade_out(1)
+            pass
+
