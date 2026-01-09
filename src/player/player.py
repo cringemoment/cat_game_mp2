@@ -22,9 +22,10 @@ BULLET_HIT_MAXVELO = 10
 BULLET_HIT_AR = 0.1
 
 class Player(PhysicsObject):
-    def __init__(self, index = 0, level = None, sprites = None):
-        super().__init__(level)
+    def __init__(self, index = 0, sprites = None):
+        super().__init__("beh")
         self.set_sprites(sprites)
+        level = None
 
         self.index = index
 
@@ -58,6 +59,8 @@ class Player(PhysicsObject):
 
         self.gun = Gun(level, self)
         self.aim_angle = 0
+
+        self.current_trigger_inside = None
 
     def load_inputs(self, input_device, controls):
         self.input_device = input_device
@@ -122,8 +125,14 @@ class Player(PhysicsObject):
             self.jump_power = JUMP_POWER
 
     def select(self):
+        good = False
         for trigger in self.level.tiles.area_triggers:
+            if self.rect.colliderect(trigger.rect):
+                self.current_trigger_inside = trigger.name
+                good = True
             trigger.select(self)
+        if not good:
+            self.current_trigger_inside = None
 
     def update_timers(self, dt):
         if self.on_ground:

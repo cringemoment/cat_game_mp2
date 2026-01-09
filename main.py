@@ -14,3 +14,5 @@ while running:
     game.update()
 
 pygame.quit()
+
+#TODO: fix the level 0 gap bro

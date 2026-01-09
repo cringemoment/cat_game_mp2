@@ -116,6 +116,8 @@ class PhoneBook:
             self.current_popup.on_finish = self.open_book
             self.game.dialogue_handler.set_dialogue(self.current_popup)
             self.current_popup = None
+        else:
+            self.open_book()
 
     def load_levels(self):
         self.level_file = load(open("src/levels/unlocked_levels.json"))

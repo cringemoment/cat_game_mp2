@@ -60,8 +60,8 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-main_menu = Level("levels/main_menu")
-level_0 = Level("levels/decorated_level_0", "Level 0", "1-800-HOW-PLAY")
+main_menu = Level("levels/__main_menu")
+level_0 = Level("levels/level_0", "Level 0", "1-800-HOW-PLAY")
 level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
 
 levels = {

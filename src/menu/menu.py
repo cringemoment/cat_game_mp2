@@ -295,10 +295,11 @@ class ControlsMenu(Menu):
             controls = json.load(f)
             for action in controls:
                 for keybind in controls[action]:
-                    if type(keybind).__name__ == "int":
-                        print(f"{action}: {pygame.key.name(keybind)}")
-                    else:
-                        print(f"{action}: {keybind}")
+                    pass
+                    # if type(keybind).__name__ == "int":
+                    #     # print(f"{action}: {pygame.key.name(keybind)}")
+                    # else:
+                    #     # print(f"{action}: {keybind}")
 
         self.widgets = [
             TextButton(self, 875, 75, text="Unpause", font=font, command=self.go_back, align="right")

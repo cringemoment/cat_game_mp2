@@ -73,13 +73,13 @@ class PhysicsObject(Sprite):
         pass
 
     def collide_x(self, obj, iteration):
-        if not self.colliding(obj):
+        if self.collision == False or getattr(obj, "collision", True) == False:
             return
 
-        if type(self).__name__ == "Player":
-            print(obj)
-
         if not obj.alive() or not self.alive():
+            return
+
+        if not self.colliding(obj):
             return
 
         if getattr(obj, "sprite_collision", None):
@@ -87,9 +87,6 @@ class PhysicsObject(Sprite):
             obj.sprite_collision(self)
         else:
             self.tile_collision(obj)
-
-        if self.collision == False or getattr(obj, "collision", True) == False:
-            return
 
         pushback_factor = getattr(obj, "pushback_factor", 1)
 
@@ -111,6 +108,9 @@ class PhysicsObject(Sprite):
             obj.update_bounds()
 
     def collide_y(self, obj, iteration):
+        if self.collision == False or getattr(obj, "collision", True) == False:
+            return
+
         if not self.touching_ground(obj) or not self.colliding(obj):
             return
 
@@ -122,9 +122,6 @@ class PhysicsObject(Sprite):
             obj.sprite_collision(self)
         else:
             self.tile_collision(obj)
-
-        if self.collision == False or getattr(obj, "collision", True) == False:
-            return
 
         pushback_factor = getattr(obj, "pushback_factor", 1)
 

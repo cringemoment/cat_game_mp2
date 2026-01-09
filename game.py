@@ -26,7 +26,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        self.current_level = "level_0"
+        testlevel = "level_0"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
@@ -38,8 +38,8 @@ class Game:
         self.keyboard = Keyboard()
         keyboard = Keyboard()
 
-        self.player1 = Player(0, self.current_level, test_spritelist)
-        self.player2 = Player(1, self.current_level, test_controller_spritelist)
+        self.player1 = Player(0, test_spritelist)
+        self.player2 = Player(1, test_controller_spritelist)
 
         i1 = keyboard
         c1 = kbcontrols
@@ -59,7 +59,7 @@ class Game:
 
         self.load_inputs(i1, i2, c1, c2)
 
-        self.load_level(self.current_level)
+        self.load_level(testlevel)
 
         self.mi = 20
         self.mimimi = [0] * self.mi
@@ -83,7 +83,7 @@ class Game:
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
             "": lambda: len(self.current_level.tiles.area_triggers),
-            "": lambda: self.bruh()
+            "": lambda: self.player1.current_trigger_inside
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -93,6 +93,9 @@ class Game:
             self.window.blit(text, (10, i * 30 + 10))
 
     def load_level(self, level_name):
+        self.player1.kill()
+        self.player2.kill()
+
         level = levels[level_name]
         self.current_level = level
         self.current_level.load_game(self)
