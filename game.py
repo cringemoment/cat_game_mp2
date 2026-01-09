@@ -28,7 +28,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        default_level = "level_0"
+        default_level = "main_menu"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
