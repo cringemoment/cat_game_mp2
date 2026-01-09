@@ -12,8 +12,8 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,38,39,40,0,0,0,0,0,0,
-1,0,0,0,0,0,41,42,43,0,0,0,0,0,0,
+1,0,0,0,0,0,38,39,40,0,0,0,0,0,1,
+1,0,0,0,0,0,41,42,43,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
@@ -34,6 +34,8 @@
   </object>
   <object id="13" name="phonebook" type="PhoneBook" x="160.667" y="224" width="159.333" height="63.8333">
    <properties>
+    <property name="return_x" value="three"/>
+    <property name="return_y" value="224923432"/>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>

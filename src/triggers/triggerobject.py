@@ -11,7 +11,7 @@ def call_triggers(f):
     return w
 
 class Trigger:
-    def __init__(self, name, rect, level, image = None):
+    def __init__(self, name, rect, level, image = None, properties = {}):
         self.name = name
         self.players_inside = [False, False]
         self.sprites_inside = []
@@ -19,6 +19,8 @@ class Trigger:
         self.level = level
         self.image = image
         self.object_interactible = False
+        self.properties = properties
+        print(self.properties)
 
     @call_triggers
     def on_trigger(self):
