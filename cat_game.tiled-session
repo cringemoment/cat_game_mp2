@@ -38,6 +38,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "assets/objects/tablewithphone.tsx": {
+            "scaleInDock": 1
+        },
         "assets/tilesets/kidwithcandy.tsx": {
             "scaleInDock": 1
         },
@@ -59,6 +62,17 @@
         "assets/tilesets/warehouse_metal.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "levels/__main_menu/tilemap.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2.248333333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 181.24536693847296,
+                "y": 159.6738324684952
+            }
         },
         "levels/box.tsx": {
             "scaleInDock": 1,
@@ -161,11 +175,14 @@
             }
         },
         "levels/level_2/tilemap.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1267,
-                "y": 607
+                "x": 336.5,
+                "y": 1109
             }
         },
         "levels/main_menu/tilemap.tmx": {

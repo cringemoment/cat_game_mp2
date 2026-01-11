@@ -28,7 +28,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        default_level = "main_menu"
+        default_level = "level_2"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
@@ -134,5 +134,5 @@ class Game:
 
         pygame.display.flip()
 
-        if self.keyboard.get_key(pygame.K_k)():
-            pass
+        if self.keyboard.get_key(pygame.K_k)() and self.dialogue_handler.current_dialogue:
+            self.dialogue_handler.current_dialogue.finished = True

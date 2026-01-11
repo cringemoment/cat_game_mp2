@@ -20,7 +20,6 @@ class Trigger:
         self.image = image
         self.object_interactible = False
         self.properties = properties
-        print(self.properties)
 
     @call_triggers
     def on_trigger(self):

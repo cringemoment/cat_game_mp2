@@ -70,6 +70,6 @@ levels = {
 "main_menu": main_menu,
 "level_0": level_0,
 "level_1": level_1,
-"level_2": level_1,
+"level_2": level_2,
 "level_3": level_1,
 }

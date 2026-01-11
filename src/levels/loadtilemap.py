@@ -7,7 +7,7 @@
 import pygame
 import pytmx
 
-# from src.physicsobject import PhysicsObject
+
 from src.physics.objectfactory import ObjectFactory
 from src.triggers.triggerfactory import TriggerFactory
 
@@ -23,6 +23,15 @@ class Tile(pygame.sprite.Sprite):
         self.top = self.y
         self.bottom = self.y + tile_size
 
+class BackgroundImage(pygame.sprite.Sprite):
+    def __init__(self, image, pl_x, pl_y):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.x = 0
+        self.y = 0
+        self.pl_x = pl_x
+        self.pl_y = pl_y
+
 #lot of copy pasted boilerplate
 class TileMap:
     def __init__(self, level, tmx_data):
@@ -33,6 +42,7 @@ class TileMap:
         self.level = level
 
         #separate sprite groups
+        self.backgrounds = pygame.sprite.Group()
         self.collision_tiles = pygame.sprite.Group()
         self.decorations = pygame.sprite.Group()
         self.physics_objects = pygame.sprite.Group()
@@ -50,6 +60,9 @@ class TileMap:
 
     def load_tiles(self):
         for layer in self.tmx_data.visible_layers:
+            if isinstance(layer, pytmx.TiledImageLayer):
+                self.backgrounds.add(BackgroundImage(layer.image, layer.parallaxx, layer.parallaxy))
+
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid in layer:
                     tile_image = self.tmx_data.get_tile_image_by_gid(gid)
@@ -108,6 +121,10 @@ class TileMap:
                     for obj in layer:
                         rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
                         self.dialogue_triggers.append(rect)
+
+
+        print(self.backgrounds)
+        print(dir(self.backgounds[0]))
 
     def get_size(self):
         return self.width, self.height
