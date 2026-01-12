@@ -26,10 +26,10 @@
    </properties>
    <point/>
   </object>
-  <object id="2" name="player" x="352" y="224">
+  <object id="2" name="player" x="351.555" y="213.325">
    <point/>
   </object>
-  <object id="3" name="player_2" x="64" y="224">
+  <object id="3" name="player_2" x="63.1105" y="211.991">
    <point/>
   </object>
   <object id="13" name="phonebook" type="PhoneBook" x="160.667" y="224" width="159.333" height="63.8333">

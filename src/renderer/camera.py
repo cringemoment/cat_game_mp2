@@ -28,7 +28,7 @@ class Camera:
         self.width = int(self.positions["default"].properties["screen_width"])
         self.height = int(self.positions["default"].properties.get("screen_height", self.width * 2/3))
 
-    def transition_to(self, newx, newy, newwidth, speed_ms_ms):
+    def transition_to(self, newx, newy, newwidth, speed):
         self.start_x = self.x
         self.start_y = self.y
         self.start_width = self.width
@@ -37,8 +37,8 @@ class Camera:
         self.target_y = newy
         self.target_width = newwidth
 
-        self.transition_total = speed_ms_ms
-        self.transition_time = speed_ms_ms
+        self.transition_total = speed
+        self.transition_time = speed
 
     def update_timers(self, dt):
         if self.transition_time > 0:

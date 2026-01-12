@@ -1,5 +1,5 @@
 from src.dialogue.dialogueobject import *
-from src.levels.level import levels
+from src.levels.level import levels, phonebook_levels
 from src.renderer.fonts import title_font, subtitle_font
 
 from json import load
@@ -126,10 +126,8 @@ class PhoneBook:
     def update(self, surface):
         if self.open:
             surface.blit(self.book, (0, 0))
-            good = dict(levels)
-            good.pop("main_menu")
 
-            for i, level_name in enumerate(good):
+            for i, level_name in enumerate(phonebook_levels):
                 self.color = (0, 0, 0)
 
                 if not self.level_file[level_name]:

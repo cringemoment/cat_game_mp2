@@ -1,6 +1,6 @@
 import pygame
 pygame.mixer.init()
-pygame.mixer.set_num_channels(32)
+pygame.mixer.set_num_channels(64)
 
 class Sound():
     def __init__(self, game):

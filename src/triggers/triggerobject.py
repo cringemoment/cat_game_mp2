@@ -54,22 +54,26 @@ class Trigger:
         for sprite in self.level.tiles.physics_objects:
 
             #player interactions
-            if type(sprite).__name__ == "Player" and not self.object_interactible:
-                if self.rect.colliderect(sprite.rect):
-                    if not self.players_inside[sprite.index]:
-                        self.players_inside[sprite.index] = True
-                        self.on_enter(sprite)
+            if not self.object_interactible:
+                if type(sprite).__name__ == "Player":
+                    if self.rect.colliderect(sprite.rect):
+                        if not self.players_inside[sprite.index]:
+                            self.players_inside[sprite.index] = sprite
+                            self.on_enter(sprite)
 
-                        if not all(self.players_inside):
-                            self.on_any_enter(sprite)
+                            if not all(self.players_inside):
+                                self.on_any_enter(sprite)
 
-                else:
-                    if self.players_inside[sprite.index]:
-                        self.players_inside[sprite.index] = False
-                        self.on_leave(sprite)
+                            if all(self.players_inside):
+                                self.on_trigger()
 
-                        if sum(self.players_inside) == 0:
-                            self.on_both_leave()
+                    else:
+                        if self.players_inside[sprite.index]:
+                            self.players_inside[sprite.index] = False
+                            self.on_leave(sprite)
+
+                            if not any(self.players_inside):
+                                self.on_both_leave()
 
             #interactions with interactible objects
             if not self.object_interactible: continue
@@ -89,9 +93,6 @@ class Trigger:
                     self.on_leave(sprite)
                     if self.sprites_inside == []:
                         self.on_both_leave()
-
-        if sum(self.players_inside) == 2:
-            self.on_trigger()
 
 class ActivatedObject:
     def __init__(self, name, x, y, level, properties):

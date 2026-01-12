@@ -1,5 +1,3 @@
-import pygame
-
 from src.physics.physicsobject import PhysicsObject
 
 class Box(PhysicsObject):

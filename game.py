@@ -28,7 +28,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        default_level = "level_2"
+        default_level = "train_level"
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
@@ -81,7 +81,9 @@ class Game:
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "": lambda: self.player1.current_trigger_inside
+            "": lambda: self.player1.current_trigger_inside,
+            "x": lambda: self.player1.x,
+            "y": lambda: self.player1.y
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -94,6 +96,9 @@ class Game:
         level = levels[level_name]
         self.current_level = level
         self.current_level.load_game(self)
+
+        self.player1.kill()
+        self.player2.kill()
 
         self.player1.level = level
         self.player2.level = level
