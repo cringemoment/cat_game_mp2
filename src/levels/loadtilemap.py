@@ -81,8 +81,9 @@ class TileMap:
                             self.collision_tiles.add(tile)
                         elif getattr(layer, "class", None) == "background":
                             pl_x = layer.properties["pl_x"]
-                            bg = Tile(tile_image, x, y, (tile_w, tile_h))
-                            self.backgrounds.add(tile)
+                            pl_y = layer.properties["pl_y"]
+                            bg = BackgroundImage(tile_image, pl_x, pl_y)
+                            self.backgrounds.add(bg)
                         else:
                             self.decorations.add(tile)
 
@@ -134,7 +135,7 @@ class TileMap:
                         self.dialogue_triggers.append(rect)
 
 
-        # print(self.backgrounds)
+        print(self.backgrounds)
 
     def get_size(self):
         return self.width, self.height
