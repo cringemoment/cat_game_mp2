@@ -18,7 +18,6 @@ class Door(PhysicsObject, ActivatedObject):
     def on_any_enter(self, player):
         self.change_image("open")
         self.collision = False
-        print("triggered")
 
     def on_both_leave(self):
         self.change_image("default")
