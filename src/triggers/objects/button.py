@@ -21,11 +21,13 @@ class Button(Sprite, Trigger):
         if not self.on:
             Trigger.on_enter(self, player)
             self.change_image("pressed")
+            self.level.game.sound_handler.play_sound("button")
             self.on = True
 
     def on_both_leave(self):
         Trigger.on_both_leave(self)
         self.change_image("default")
+        self.level.game.sound_handler.play_sound("button")
         self.on = False
 
 class PermanentButton(Sprite, Trigger):
