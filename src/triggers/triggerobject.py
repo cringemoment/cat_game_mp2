@@ -2,9 +2,10 @@ import pygame
 
 def call_triggers(f):
     def w(self, *args, **kwargs):
-        allobjs = self.level.tiles.activated_objects
-        allobjs.extend(self.level.tiles.physics_objects)
-        for obj in self.level.tiles.activated_objects:
+        # allobjs = self.level.tiles.activated_objects
+        allobjs = [*self.level.tiles.activated_objects, *self.level.tiles.physics_objects]
+
+        for obj in allobjs:
             if obj.name == self.name:
                 method = getattr(obj, f.__name__)
                 method(*args, **kwargs)
@@ -52,7 +53,6 @@ class Trigger:
 
     def update_players(self):
         for sprite in self.level.tiles.physics_objects:
-
             #player interactions
             if not self.object_interactible:
                 if type(sprite).__name__ == "Player":
