@@ -49,6 +49,7 @@ class PhysicsObject(Sprite):
         self.pushback_factor = 1
         self.name = None
         self.trigger_interactible = False
+        self.player_only = False
 
     def update_bounds(self):
         self.left = self.x
@@ -77,6 +78,9 @@ class PhysicsObject(Sprite):
             return
 
         if not obj.alive() or not self.alive():
+            return
+
+        if self.player_only and type(obj).__name__ != "Player":
             return
 
         if not self.colliding(obj):
@@ -117,6 +121,9 @@ class PhysicsObject(Sprite):
         if not obj.alive() or not self.alive():
             return
 
+        if self.player_only and type(obj).__name__ != "Player":
+            return
+
         if getattr(obj, "sprite_collision", None):
             self.sprite_collision(obj)
             obj.sprite_collision(self)
@@ -125,7 +132,7 @@ class PhysicsObject(Sprite):
 
         pushback_factor = getattr(obj, "pushback_factor", 1)
 
-        if self.bottom >= obj.top and self.top < obj.top: #going down
+        if self.bottom > obj.top and self.top < obj.top: #going down
             dy = self.bottom - obj.top
             self.y -= dy
             self.on_ground = True
@@ -133,10 +140,8 @@ class PhysicsObject(Sprite):
 
         elif self.top < obj.bottom and self.bottom > obj.bottom: #going up
             dy = obj.bottom - self.top
-            # if type(self).__name__ == "Player" and type(obj).__name__ == "Player":
-            #     print(f"Pushing player up {dy * (1 - pushback_factor)}, to {obj.y - dy * (1 - pushback_factor)}")
-            self.y += dy * pushback_factor
-            obj.y -= dy * (1 - pushback_factor)
+            self.y += dy
+            # obj.y -= dy * (1 - pushback_factor)
             self.vely = 0
 
         self.update_bounds()

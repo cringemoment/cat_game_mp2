@@ -31,6 +31,7 @@ class Level:
         objects = []
 
         groups = [
+            self.tiles.backgrounds,
             self.tiles.physics_objects,
             self.tiles.decorations,
             self.tiles.collision_tiles,

@@ -2,7 +2,6 @@ import pygame
 
 from game import Game
 
-
 running = True
 
 game = Game() #Class in game.py

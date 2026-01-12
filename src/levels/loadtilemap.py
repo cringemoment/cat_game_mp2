@@ -11,31 +11,22 @@ from src.physics.objectfactory import ObjectFactory
 from src.triggers.triggerfactory import TriggerFactory
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, image, x, y, tile_size):
+    def __init__(self, image, x, y, tile_size, pl_x = 1.0, pl_y = 1.0):
         super().__init__()
-        ts_x, ts_y = tile_size
+        maptilesize = 32
+        self.width, self.height = tile_size
         self.image = image
-        ts_x, ts_y = tile_size
-        self.rect = self.image.get_rect(topleft = (x * ts_x, y * ts_y))
-        self.x = x * ts_x
-        self.y = y * ts_y
+        self.rect = self.image.get_rect(topleft = (x * maptilesize, (y + 1) * maptilesize - self.height))
+
+        self.x = x * maptilesize
+        self.y = y * maptilesize
+        self.pl_x = float(pl_x)
+        self.pl_y = float(pl_y)
+
         self.left = self.x
-        self.right = self.x + ts_x
+        self.right = self.x + self.width
         self.top = self.y
-        self.bottom = self.y + ts_y
-
-        if ts_x != 32: #idk man
-            self.top = self.y - ts_y
-            self.bottom = self.y
-
-class BackgroundImage(pygame.sprite.Sprite):
-    def __init__(self, image, pl_x, pl_y):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.x = 0
-        self.y = 0
-        self.pl_x = pl_x
-        self.pl_y = pl_y
+        self.bottom = self.y + maptilesize
 
 #lot of copy pasted boilerplate
 class TileMap:
@@ -73,16 +64,15 @@ class TileMap:
                         tile_w = ts.tilewidth
                         tile_h = ts.tileheight
 
-
                         tile = Tile(tile_image, x, y, (tile_w, tile_h))
 
                         #collidable only if layer class is "level"
                         if getattr(layer, "class", None) == "level":
                             self.collision_tiles.add(tile)
                         elif getattr(layer, "class", None) == "background":
-                            pl_x = layer.properties["pl_x"]
-                            pl_y = layer.properties["pl_y"]
-                            bg = BackgroundImage(tile_image, pl_x, pl_y)
+                            pl_x = layer.properties["pl_x"] if "pl_x" in layer.properties else 1
+                            pl_y = layer.properties["pl_y"] if "pl_y" in layer.properties else 1
+                            bg = Tile(tile_image, x, y, (tile_w, tile_h), pl_x, pl_y)
                             self.backgrounds.add(bg)
                         else:
                             self.decorations.add(tile)
@@ -135,7 +125,8 @@ class TileMap:
                         self.dialogue_triggers.append(rect)
 
 
-        print(self.backgrounds)
+        for i in self.backgrounds:
+            print(i.x , i.y)
 
     def get_size(self):
         return self.width, self.height

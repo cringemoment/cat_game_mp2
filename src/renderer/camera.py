@@ -55,7 +55,6 @@ class Camera:
         screen_width, screen_height = surface.get_size()
 
         tile_size = screen_width / self.width  # fills horizontally
-        scale_factor = tile_size / 32
 
         offset = pygame.Vector2(self.x, self.y)
 
@@ -63,11 +62,22 @@ class Camera:
             if not getattr(sprite, "image", None):
                 continue
 
-            world_pos = pygame.Vector2(sprite.rect.topleft) - offset
-            screen_pos = pygame.Vector2(world_pos.x * scale_factor, world_pos.y * scale_factor)
+            ts_x, ts_y = getattr(sprite, "ts_x", 32), getattr(sprite, "ts_y", 32)
+
+            scale_factor_x = tile_size / ts_x
+            scale_factor_y = tile_size / ts_y
+
+            parallax = pygame.Vector2(
+                getattr(sprite, "pl_x", 1.0),
+                getattr(sprite, "pl_y", 1.0),
+            )
+
+            world_pos = pygame.Vector2(sprite.rect.topleft) - offset.elementwise() * parallax
+
+            screen_pos = pygame.Vector2(world_pos.x * scale_factor_x, world_pos.y * scale_factor_y)
 
             #slight optimization - check the rectangle bounds before we scale image to save time
-            scaled_rect = pygame.Rect(screen_pos, (sprite.rect.width * scale_factor,  sprite.rect.height * scale_factor))
+            scaled_rect = pygame.Rect(screen_pos, (sprite.rect.width * scale_factor_x,  sprite.rect.height * scale_factor_y))
 
             if not screen_rect.colliderect(scaled_rect):
                 continue
