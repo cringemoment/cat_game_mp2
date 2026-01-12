@@ -9,8 +9,6 @@ default = Dialogue([
     DialogueBox("sprites/players/missioncontrol.png", "And he can be a real pain sometimes..."),#Mission Control
     DialogueBox("sprites/players/missioncontrol.png", "Just like his father..."), #Mission Control
     DialogueBox("sprites/players/catsmug.png", "Didn't know you had a kid."), # Dude 1
-    DialogueBox("sprites/players/missioncontrol.png", "What?"), #Mission Control
-    DialogueBox("sprites/players/catdialogue.png", "What?"), #Dude 1
     DialogueBox("sprites/players/missioncontrol.png", "For the record, the kid's my brother's son."), #Mission Control
     DialogueBox("sprites/players/catdialogue.png", "Does your brother know he's here?"), #Dude 1
     DialogueBox("sprites/players/missioncontroldrop.png", "Enough questions, just complete this so we can move on to the important mission!"), #Mission Control

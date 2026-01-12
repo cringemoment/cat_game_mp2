@@ -1,4 +1,5 @@
-from src.triggers.triggerobject import Trigger
+from src.triggers.triggerobject import Trigger, ActivatedObject
+
 
 class ReturnTrigger(Trigger):
     def __init__(self, *args, **kwargs):
@@ -22,12 +23,16 @@ class ReturnTriggerWall(Trigger):
             else:
                 player.x -= 40
 
-class ReturnPlayerTrigger(Trigger):
+class ReturnPlayerTrigger(ActivatedObject):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.object_interactible = True
+        self.test = False
+
+    def on_trigger(self):
+        print("hello")
+        self.test = True
 
     def on_any_enter(self, player):
-        if type(player).__name__ == "Player":
+        if type(player).__name__ == "Player" and self.test:
             player.x = float(self.properties["return_x"])
             player.y = float(self.properties["return_y"])
