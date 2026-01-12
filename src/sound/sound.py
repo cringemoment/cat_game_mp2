@@ -1,6 +1,9 @@
 import pygame
+
 pygame.mixer.init()
 pygame.mixer.set_num_channels(64)
+
+#ffmpeg -i door_open.m4a -c:a libvorbis -q:a 4 door_open.ogg
 
 class Sound():
     def __init__(self, game):
@@ -11,6 +14,10 @@ class Sound():
         self.bg_music_channel = pygame.mixer.Channel(0)
 
         self.load_sound("cannon_fire", "assets/sounds/cannon_fire.ogg")
+        self.load_sound("jump", "assets/sounds/jump.ogg")
+        self.load_sound("door_open", "assets/sounds/door_open.ogg")
+        self.load_sound("ringtone", "assets/sounds/ringtone.ogg")
+        self.load_sound("door_close", "assets/sounds/door_close.ogg")
         self.load_bg_music("level0_bg", "assets/sounds/level0_bg.ogg")
 
     def load_sound(self, file, file_path):

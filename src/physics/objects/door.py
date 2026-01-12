@@ -18,10 +18,12 @@ class Door(PhysicsObject, ActivatedObject):
     def on_any_enter(self, player):
         self.change_image("open")
         self.collision = False
+        self.level.game.sound_handler.play_sound("door_open")
 
     def on_both_leave(self):
         self.change_image("default")
         self.collision = True
+        self.level.game.sound_handler.play_sound("door_close")
 
 class ReverseDoor(PhysicsObject, ActivatedObject):
     def __init__(self, *args, **kwargs):

@@ -87,6 +87,7 @@ class Player(PhysicsObject):
             self.vely = -self.jump_power
             self.on_ground = False
             self.coyote_time = 0
+            self.level.game.sound_handler.play_sound("jump")
 
     def crouch(self):
         # self.play_anim("crouchanim", play_once = True)
