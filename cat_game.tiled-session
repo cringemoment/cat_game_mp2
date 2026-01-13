@@ -42,6 +42,7 @@
             "scaleInDock": 1
         },
         "assets/tilesets/kidwithcandy.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "assets/tilesets/objects.tsx": {
@@ -156,11 +157,14 @@
             }
         },
         "levels/level_0/tilemap.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 0.75,
-            "selectedLayer": 1,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 786,
-                "y": 821.9999999999999
+                "x": -98.66666666666663,
+                "y": 858
             }
         },
         "levels/level_1/tilemap.tmx": {
@@ -176,13 +180,14 @@
         },
         "levels/level_2/tilemap.tmx": {
             "expandedObjectLayers": [
-                3
+                3,
+                2
             ],
             "scale": 1,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 336.5,
-                "y": 1109
+                "x": 430,
+                "y": 979.5
             }
         },
         "levels/main_menu/tilemap.tmx": {
@@ -265,7 +270,7 @@
     "last.objectTemplatePath": "C:/Users/ADMIN/Documents/GitHub/cat_game_mp2/assets/objects",
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
-    "map.width": 120,
+    "map.width": 60,
     "openFiles": [
         "levels/decorated_level_0/tilemap.tmx",
         "assets/tilesets/warehouse_metal.tsx",
