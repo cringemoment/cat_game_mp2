@@ -16,7 +16,7 @@ class LaunchPad(Sprite, Trigger):
         self.set_sprites(sprites)
 
     def on_enter(self, player):
-        player.vely = -25
+        player.vely = -23
 
     def on_both_leave(self):
         Trigger.on_both_leave(self)

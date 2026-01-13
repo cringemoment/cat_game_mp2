@@ -9,7 +9,7 @@ from src.physics.gun import Gun
 #each tile is 32 pixels
 #time is measured in seconds
 #acceleration is measured in pixels per frame
-JUMP_POWER = 15
+JUMP_POWER = 13
 CROUCHING_JUMP_POWER = 11
 COYOTE_TIME = 0.15
 
