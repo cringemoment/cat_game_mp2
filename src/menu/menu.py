@@ -1,5 +1,3 @@
-from webbrowser import open_new
-
 import pygame
 import json
 
@@ -240,8 +238,10 @@ class MenuHandler:
 
     def change_menu(self, menu):
         self.current_menu = self.menus[menu]
+
         for i in self.current_menu.widgets:
             i.on_unhighlight()
+
         self.current_menu.widgets[0].on_highlight()
         self.current_menu.current_widget_index = 0
 
@@ -266,13 +266,18 @@ class PauseMenu(Menu):
         super().__init__(*args, **kwargs)
         self.widgets = [
             TextButton(self, 875, 75, text="Unpause", font=font, command=self.go_back, align="right"),
-            TextButton(self, 875, 150, text="Options", font=font, command=self.open_options, align="right"),
-            TextButton(self, 875, 225, text="Controls", font=font, command=self.open_controls, align="right"),
-            TextButton(self, 875, 300, text="Main Menu", font=font, command=self.main_menu, align="right")
+            TextButton(self, 875, 150, text="Restart Level", font=font, command=self.restart, align="right"),
+            TextButton(self, 875, 225, text="Options", font=font, command=self.open_options, align="right"),
+            TextButton(self, 875, 300, text="Controls", font=font, command=self.open_controls, align="right"),
+            TextButton(self, 875, 375, text="Main Menu", font=font, command=self.main_menu, align="right")
         ]
 
     def go_back(self):
         self.menuhandler.pause()
+
+    def restart(self):
+        self.menuhandler.pause()
+        self.menuhandler.game.transition_load_level(self.menuhandler.game.current_level_name)
 
     def open_options(self):
         self.menuhandler.change_menu("options")
@@ -283,7 +288,7 @@ class PauseMenu(Menu):
     def main_menu(self):
         self.menuhandler.game.paused = False
         self.menuhandler.open = False
-        self.menuhandler.game.load_level("main_menu")
+        self.menuhandler.game.transition_load_level("main_menu")
 
 class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):

@@ -73,6 +73,7 @@ class PhoneBook:
         self.current_popup = new_level_dialogues["level_0"]
         self.load_levels()
         self.oops = False
+        self.loading = False
 
         #preloading render stuff
         self.book = pygame.image.load("assets/menus/book_open.png")
@@ -101,12 +102,14 @@ class PhoneBook:
             self.oops = True
             return
 
-        self.game.load_level(list(levels.keys())[self.current_level_y + 1])
         self.open = False
         self.game.paused = False
+        self.loading = True
+        self.game.transition_load_level(list(levels.keys())[self.current_level_y + 1])
 
     def open_book(self):
-        self.open = True
+        if not self.loading:
+            self.open = True
 
     def close_book(self):
         self.open = False

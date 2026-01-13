@@ -85,7 +85,7 @@ class Game:
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "": lambda: self.player1.current_trigger_inside
+            "open": lambda: self.phone_book.open
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -94,8 +94,16 @@ class Game:
             text = font.render(f"{var}: {debugs[var]()}", False, color, (0, 0, 0))
             self.window.blit(text, (10, i * 30 + 10))
 
+    def transition_load_level(self, level_name):
+        self.dialogue_handler.current_dialogue = None
+        self.transition_handler.transition_in_out(
+            lambda: self.load_level(level_name),
+            self.player1,
+            self.player2
+        )
+
     def load_level(self, level_name):
-        self.transition_handler.close(self.player1, self.player2)
+        self.current_level_name = level_name
         level = levels[level_name]
         self.current_level = level
         self.current_level.load_game(self)
@@ -114,11 +122,9 @@ class Game:
         self.player2.vely = 0
 
         self.current_level.tiles.physics_objects.add(self.player1, self.player2)
+        self.current_level.draw(self.window)
 
         self.dialogue_handler.current_dialogue = None
-
-        if "default" in self.current_level.dialogues:
-            self.dialogue_handler.set_dialogue(self.current_level.dialogues["default"])
 
         self.sound_handler.play_bg_music(level.bg_music)
 
@@ -152,3 +158,6 @@ class Game:
 
         if self.keyboard.get_key(pygame.K_n)():
             self.transition_handler.open(self.player1, self.player2)
+
+        if self.keyboard.get_key(pygame.K_p)():
+            self.transition_load_level("main_menu")

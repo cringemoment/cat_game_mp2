@@ -6,6 +6,8 @@ class Camera:
         self.y = 0
         self.width = 30
         self.height = 20
+        self.tile_size = 32
+        self.offset = pygame.Vector2(0, 0)
 
         # transition
         self.transition_time = 0
@@ -50,6 +52,13 @@ class Camera:
             self.y = self.start_y + (self.target_y - self.start_y) * t
             self.width = self.start_width + (self.target_width - self.start_width) * t
 
+    def update_bounds(self, surface):
+        self.screen_rect = surface.get_rect()
+        self.screen_width, screen_height = surface.get_size()
+        self.offset = pygame.Vector2(self.x, self.y)
+
+        self.tile_size = self.screen_width / self.width
+
     def get_screen_pos(self, sprite, offset_x = 0, offset_y = 0):
         ts_x, ts_y = getattr(sprite, "ts_x", 32), getattr(sprite, "ts_y", 32)
 
@@ -67,11 +76,7 @@ class Camera:
         return screen_pos
 
     def draw(self, surface, group):
-        self.screen_rect = surface.get_rect()
-        self.screen_width, screen_height = surface.get_size()
-        self.offset = pygame.Vector2(self.x, self.y)
-
-        self.tile_size = self.screen_width / self.width  # fills horizontally
+        self.update_bounds(surface)
 
         for sprite in group:
             if not getattr(sprite, "image", None):
