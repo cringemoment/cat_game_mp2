@@ -14,6 +14,8 @@ from src.dialogue.dialogueobject import DialogueHandler
 from src.levels.phonebook import PhoneBook
 from src.sound.sound import Sound
 
+from src.renderer.transitionobject import TransitionHandler
+
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 640
 WINDOW_TITLE = "catxolotl"
@@ -29,11 +31,13 @@ class Game:
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
         default_level = "main_menu"
+        self.current_level = None
 
         self.menu_handler = MenuHandler(self)
         self.dialogue_handler = DialogueHandler(self)
         self.phone_book = PhoneBook(self)
         self.sound_handler = Sound(self)
+        self.transition_handler = TransitionHandler(self)
 
         self.paused = False
 
@@ -81,9 +85,7 @@ class Game:
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "": lambda: self.player1.current_trigger_inside,
-            "x": lambda: self.player1.x,
-            "y": lambda: self.player1.y
+            "": lambda: self.player1.current_trigger_inside
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)
@@ -93,6 +95,7 @@ class Game:
             self.window.blit(text, (10, i * 30 + 10))
 
     def load_level(self, level_name):
+        self.transition_handler.close(self.player1, self.player2)
         level = levels[level_name]
         self.current_level = level
         self.current_level.load_game(self)
@@ -133,6 +136,8 @@ class Game:
         if not self.paused:
             self.current_level.update_physics(dt)
 
+        self.transition_handler.update(self.window, dt)
+
         self.menu_handler.update(self.window)
 
         self.print_debugs()
@@ -141,3 +146,9 @@ class Game:
 
         if self.keyboard.get_key(pygame.K_k)() and self.dialogue_handler.current_dialogue:
             self.dialogue_handler.current_dialogue.finished = True
+
+        if self.keyboard.get_key(pygame.K_j)():
+            self.transition_handler.close(self.player1, self.player2)
+
+        if self.keyboard.get_key(pygame.K_n)():
+            self.transition_handler.open(self.player1, self.player2)

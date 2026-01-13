@@ -66,7 +66,7 @@ main_menu = Level("levels/__main_menu", "", "")
 level_0 = Level("levels/level_0", "Level 0", "1-800-HOW-PLAY", "level0_bg")
 level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
 train_station = Level("levels/train_station", "Level 2", "OFF-THE-RAIL")
-train_level = Level("levels/level_2")
+train_level = Level("levels/level_3")
 
 levels = {
 "main_menu": main_menu,

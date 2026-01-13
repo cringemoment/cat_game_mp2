@@ -50,36 +50,39 @@ class Camera:
             self.y = self.start_y + (self.target_y - self.start_y) * t
             self.width = self.start_width + (self.target_width - self.start_width) * t
 
+    def get_screen_pos(self, sprite, offset_x = 0, offset_y = 0):
+        ts_x, ts_y = getattr(sprite, "ts_x", 32), getattr(sprite, "ts_y", 32)
+
+        self.scale_factor_x = self.tile_size / ts_x
+        self.scale_factor_y = self.tile_size / ts_y
+
+        parallax = pygame.Vector2(
+            getattr(sprite, "pl_x", 1.0),
+            getattr(sprite, "pl_y", 1.0),
+        )
+
+        world_pos = pygame.Vector2(sprite.rect.topleft) - self.offset.elementwise() * parallax + (offset_x, offset_y)
+        screen_pos = pygame.Vector2(world_pos.x * self.scale_factor_x, world_pos.y * self.scale_factor_y)
+
+        return screen_pos
+
     def draw(self, surface, group):
-        screen_rect = surface.get_rect()
-        screen_width, screen_height = surface.get_size()
+        self.screen_rect = surface.get_rect()
+        self.screen_width, screen_height = surface.get_size()
+        self.offset = pygame.Vector2(self.x, self.y)
 
-        tile_size = screen_width / self.width  # fills horizontally
-
-        offset = pygame.Vector2(self.x, self.y)
+        self.tile_size = self.screen_width / self.width  # fills horizontally
 
         for sprite in group:
             if not getattr(sprite, "image", None):
                 continue
 
-            ts_x, ts_y = getattr(sprite, "ts_x", 32), getattr(sprite, "ts_y", 32)
-
-            scale_factor_x = tile_size / ts_x
-            scale_factor_y = tile_size / ts_y
-
-            parallax = pygame.Vector2(
-                getattr(sprite, "pl_x", 1.0),
-                getattr(sprite, "pl_y", 1.0),
-            )
-
-            world_pos = pygame.Vector2(sprite.rect.topleft) - offset.elementwise() * parallax
-
-            screen_pos = pygame.Vector2(world_pos.x * scale_factor_x, world_pos.y * scale_factor_y)
+            screen_pos = self.get_screen_pos(sprite)
 
             #slight optimization - check the rectangle bounds before we scale image to save time
-            scaled_rect = pygame.Rect(screen_pos, (sprite.rect.width * scale_factor_x,  sprite.rect.height * scale_factor_y))
+            scaled_rect = pygame.Rect(screen_pos, (sprite.rect.width * self.scale_factor_x,  sprite.rect.height * self.scale_factor_y))
 
-            if not screen_rect.colliderect(scaled_rect):
+            if not self.screen_rect.colliderect(scaled_rect):
                 continue
 
             scaled_image = pygame.transform.scale(sprite.image, scaled_rect.size)
