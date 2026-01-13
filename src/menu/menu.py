@@ -78,6 +78,8 @@ class NumberChooser(Widget):
         self.value = value
 
         self.color = (255, 255, 255)
+        self.default_color = (255, 255, 255)
+        self.highlighted_color = (255, 255, 0)
 
         self.border_radius = 5
 
@@ -99,7 +101,7 @@ class NumberChooser(Widget):
 
         self.number_padding = 10
 
-        self.value_surf = self.font.render(str(self.value), True, self.color)
+        self.value_surf = self.font.render(str(self.value), True, self.default_color)
         self.rect = self.value_surf.get_rect(topright = (self.x - self.number_padding, self.y + self.text_rect.height))
 
         self.slider_width = 100
@@ -126,15 +128,20 @@ class NumberChooser(Widget):
         self.value += 1 #TODO: HOLD DOWN
         self.set_value_rect()
 
+    def on_highlight(self):
+        self.color = self.highlighted_color
+        self.set_value_rect()
+
+    def on_unhighlight(self):
+        self.color = self.default_color
+        self.set_value_rect()
+
     def draw(self, surface):
-        # Draw text & number
         surface.blit(self.text_surf, self.text_rect)
         surface.blit(self.value_surf, self.rect)
 
-        # Outline
         pygame.draw.rect(surface, (180, 180, 180), (self.slider_x, self.slider_y, self.slider_width, self.slider_height), width = 2, border_radius = self.border_radius)
 
-        # Fill
         pygame.draw.rect(surface, (255, 255, 255), (self.slider_x, self.slider_y, self.slider_fill_width, self.slider_height), border_radius = self.border_radius)
 
 class ControlWidget(Widget):
@@ -293,9 +300,24 @@ class PauseMenu(Menu):
 class OptionsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.file = "settings.json"
+        self.data = self.load_options()
+
         self.widgets = [
-            NumberChooser(self, 875, 75, text = "Volume", value = 5, min = 0, max = 10, font = font, align = "right")
+            NumberChooser(self, 875, 75, text = "Volume", value = self.data["Volume"], min = 0, max = 10, font = font, align = "right"),
+            TextButton(self, 875, 300, text="Apply Changes", font=font, command=self.save, align="right")
         ]
+
+    def load_options(self):
+        return json.load(open(self.file))
+
+    def save(self):
+        for widget in self.widgets:
+            if getattr(widget, "value", None) is not None:
+                self.data[widget.text] = widget.value
+
+        with open(self.file, "w") as f:
+            json.dump(self.data, f)
 
 class ControlsMenu(Menu):
     def __init__(self, *args, **kwargs):

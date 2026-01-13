@@ -2,7 +2,7 @@ import pygame
 import math
 
 class TransitionHandler:
-    def __init__(self, game, duration = 1):
+    def __init__(self, game, duration = 0.9):
         self.game = game
 
         self.closed = False
@@ -13,7 +13,7 @@ class TransitionHandler:
         self.end_radius = 0
         self.time = 0
 
-        self.pause_duration = 0.8
+        self.pause_duration = 0.95
         self.pause_timer = 0
 
         self.p1_pos = (0, 0) #failsafes
@@ -29,6 +29,7 @@ class TransitionHandler:
 
         self._queued_func = func
         self._transition_state = "closing"
+        self.game.sound_handler.play_sound("loading_in")
 
         self.close(p1, p2)
 
