@@ -20,6 +20,7 @@ class Sound():
         self.load_sound("cannon_fire", "assets/sounds/cannon_fire.ogg")
         self.load_sound("jump", "assets/sounds/jump.ogg")
         self.load_sound("button", "assets/sounds/button.ogg")
+        self.load_sound("boing", "assets/sounds/boing.ogg")
         self.load_sound("door_open", "assets/sounds/door_open.ogg")
         self.load_sound("door_close", "assets/sounds/door_close.ogg")
         self.load_sound("ringtone", "assets/sounds/ringtone.ogg")
