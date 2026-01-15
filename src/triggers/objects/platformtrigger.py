@@ -8,3 +8,6 @@ class PlatformTrigger(Trigger):
     def on_enter(self, player):
         if type(player).__name__ == "HorizontalPlatform":
             player.velx = player.velx * -1
+        elif type(player).__name__ == "VerticalPlatform":
+            player.vely = player.vely * -1
+            player.velysave = player.vely

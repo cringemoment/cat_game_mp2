@@ -83,7 +83,9 @@ class Player(PhysicsObject):
             self.change_image("default")
 
     def jump(self):
+        self.jump_timer += 1
         if self.on_ground or self.coyote_time > 0:
+            print("jump")
             self.vely = -self.jump_power
             self.on_ground = False
             self.coyote_time = 0

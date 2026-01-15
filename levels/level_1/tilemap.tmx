@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="51" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="36">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="47">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
  <tileset firstgid="38" source="../../assets/tilesets/testplayer.tsx"/>
- <layer id="1" name="outline" class="level" width="30" height="51">
+ <tileset firstgid="63" source="../../assets/tilesets/kidwithcandy.tsx"/>
+ <layer id="1" name="outline" class="level" width="30" height="60">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -14,9 +15,9 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,30,0,0,0,0,0,0,0,30,0,0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,
@@ -26,64 +27,74 @@
 1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1,
 1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,
 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,
-1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,
-1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,
+1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,1,
+1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+63,64,63,64,63,64,63,64,63,64,63,64,38,38,38,38,38,38,63,64,63,64,63,64,63,64,63,64,63,64,
+65,66,65,66,65,66,65,66,65,66,65,38,65,66,65,66,65,66,38,66,65,66,65,66,65,66,65,66,65,66,
+63,64,63,64,63,64,63,64,63,38,38,38,63,64,63,64,38,38,38,38,38,64,63,64,63,64,63,64,63,64,
+65,66,65,66,65,66,65,66,65,38,65,38,65,66,65,38,65,66,65,66,65,38,65,66,65,66,65,66,65,66,
+63,64,63,64,63,64,63,64,63,38,63,38,63,64,63,38,63,64,63,64,63,38,63,64,63,64,63,64,63,64,
+65,66,65,66,65,66,65,66,65,38,65,38,65,66,65,66,38,38,38,38,38,66,65,66,65,66,65,66,65,66,
+63,64,63,64,63,64,63,64,63,38,63,38,63,64,63,64,63,64,38,64,63,64,63,64,63,64,63,64,63,64,
+65,66,65,66,65,66,65,66,65,38,38,38,65,66,65,66,65,66,38,66,65,66,65,66,65,66,65,66,65,66,
+63,64,63,64,63,64,63,64,63,64,63,38,63,64,38,38,63,64,38,64,63,64,63,64,63,64,63,64,63,64
 </data>
  </layer>
  <objectgroup id="2" name="objects and doors" class="physics_objects">
-  <object id="1" gid="28" x="448" y="1600" width="32" height="64"/>
-  <object id="2" gid="28" x="768" y="1280" width="32" height="64"/>
-  <object id="3" gid="28" x="96" y="1280" width="32" height="64"/>
-  <object id="4" gid="28" x="128" y="768" width="32" height="64"/>
-  <object id="5" gid="28" x="192" y="1056" width="32" height="64"/>
-  <object id="6" gid="32" x="32" y="992" width="64" height="32"/>
-  <object id="7" gid="33" x="608" y="1312" width="64" height="32"/>
-  <object id="8" gid="33" x="672" y="1312" width="64" height="32"/>
-  <object id="9" gid="33" x="160" y="864" width="64" height="32"/>
-  <object id="10" gid="33" x="704" y="832" width="64" height="32"/>
-  <object id="11" gid="33" x="736" y="544" width="64" height="32"/>
-  <object id="21" gid="26" x="64" y="1056" width="32" height="32"/>
-  <object id="22" gid="26" x="864" y="1280" width="32" height="32"/>
-  <object id="23" gid="32" x="704" y="992" width="64" height="32"/>
-  <object id="24" gid="27" x="896" y="448" width="32" height="32"/>
+  <object id="1" name="door1" gid="28" x="448" y="1600" width="32" height="64"/>
+  <object id="2" name="door5" gid="28" x="768" y="1280" width="32" height="64"/>
+  <object id="3" name="door4" gid="28" x="128" y="1280" width="32" height="64"/>
+  <object id="4" name="door3" gid="28" x="128" y="768" width="32" height="64"/>
+  <object id="5" name="door2" gid="28" x="192" y="1056" width="32" height="64"/>
+  <object id="6" name="trapdoor3" gid="32" x="32" y="992" width="64" height="32"/>
+  <object id="9" name="trapdoor5" gid="33" x="160" y="864" width="64" height="32"/>
+  <object id="36" name="trapdoor5" gid="33" x="608" y="1312" width="64" height="32"/>
+  <object id="37" name="trapdoor5" gid="33" x="672" y="1312" width="64" height="32"/>
+  <object id="10" name="trapdoor6" gid="33" x="704" y="832" width="64" height="32"/>
+  <object id="11" name="trapdoor7" gid="33" x="736" y="544" width="64" height="32"/>
+  <object id="21" name="box2" gid="26" x="128" y="1056" width="32" height="32"/>
+  <object id="22" name="box1" gid="26" x="715.749" y="1134.77" width="32" height="32"/>
+  <object id="23" name="trapdoor4" gid="32" x="704" y="992" width="64" height="32"/>
+  <object id="40" name="trapdoor1" gid="32" x="704" y="1184" width="64" height="32"/>
  </objectgroup>
  <objectgroup id="3" name="positions and triggers" class="positions">
-  <object id="13" gid="27" x="64" y="640" width="32" height="32"/>
-  <object id="14" gid="27" x="64" y="768" width="32" height="32"/>
-  <object id="15" gid="27" x="608" y="1440" width="32" height="32"/>
-  <object id="16" gid="27" x="224" y="1280" width="32" height="32"/>
-  <object id="17" gid="27" x="128" y="1280" width="32" height="32"/>
-  <object id="18" gid="27" x="64" y="1280" width="32" height="32"/>
-  <object id="19" gid="27" x="64" y="1152" width="32" height="32"/>
-  <object id="20" gid="27" x="896" y="1600" width="32" height="32"/>
+  <object id="13" name="trapdoor6" gid="27" x="64" y="640" width="32" height="32"/>
+  <object id="14" name="door2" type="PermanentButton" gid="27" x="32" y="1056" width="32" height="32"/>
+  <object id="42" name="trapdoor3" type="PermanentButton" gid="27" x="64" y="768" width="32" height="32"/>
+  <object id="15" name="n/a" gid="27" x="608" y="1440" width="32" height="32"/>
+  <object id="16" name="door3" gid="27" x="416" y="1280" width="32" height="32"/>
+  <object id="17" name="trapdoor5" gid="27" x="288" y="1280" width="32" height="32"/>
+  <object id="18" name="door5" type="PermanentButton" gid="27" x="64" y="1280" width="32" height="32"/>
+  <object id="19" name="trapdoor4" gid="27" x="64" y="1152" width="32" height="32"/>
+  <object id="20" name="door1" gid="27" x="896" y="1600" width="32" height="32"/>
   <object id="25" name="player" x="64" y="1504">
    <point/>
   </object>
@@ -100,7 +111,7 @@
   </object>
   <object id="28" name="room_2" type="CameraPos" x="0" y="640">
    <properties>
-    <property name="screen_height" value="20"/>
+    <property name="screen_height" value="21"/>
     <property name="screen_width" value="30"/>
     <property name="trigger_type" value="activated"/>
    </properties>
@@ -108,7 +119,7 @@
   </object>
   <object id="29" name="room_3" type="CameraPos" x="0" y="288">
    <properties>
-    <property name="screen_height" value="20"/>
+    <property name="screen_height" value="21"/>
     <property name="screen_width" value="30"/>
     <property name="trigger_type" value="activated"/>
    </properties>
@@ -116,18 +127,18 @@
   </object>
   <object id="30" name="room_4" type="CameraPos" x="0" y="0">
    <properties>
-    <property name="screen_height" value="20"/>
+    <property name="screen_height" value="21"/>
     <property name="screen_width" value="30"/>
     <property name="trigger_type" value="activated"/>
    </properties>
    <point/>
   </object>
-  <object id="31" name="room_2" type="Trigger" x="321.85" y="1186.16" width="468.419" height="89.1508">
+  <object id="31" name="room_2" type="Trigger" x="164.523" y="1260.29" width="625.746" height="15.0254">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="32" name="room_3" type="Trigger" x="527.35" y="894.53" width="397.401" height="64.9743">
+  <object id="32" name="room_3" type="Trigger" x="512" y="896" width="406.478" height="64.9743">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
@@ -137,11 +148,27 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="34" name="room_2" type="ReturnPlayerTrigger" x="608" y="1312" width="131.46" height="78.5736">
+  <object id="38" name="door4" gid="27" x="416" y="960" width="32" height="32"/>
+  <object id="24" name="trapdoor7" gid="27" x="896" y="448" width="32" height="32"/>
+  <object id="41" name="trapdoor1" gid="27" x="864" y="1280" width="32" height="32"/>
+  <object id="43" name="no_box" type="ReturnTrigger" x="803.278" y="1190.55" width="36.3063" height="86.2275">
    <properties>
-    <property name="return_x" value="64"/>
-    <property name="return_y" value="1500"/>
-    <property name="trigger_type" value="trigger"/>
+    <property name="trigger_type" value="tigger"/>
+   </properties>
+  </object>
+  <object id="44" name="no_box" type="ReturnTrigger" x="608.131" y="1311.57" width="130.098" height="39.3319">
+   <properties>
+    <property name="trigger_type" value="tigger"/>
+   </properties>
+  </object>
+  <object id="46" name="no_box" type="ReturnTrigger" x="347.936" y="1186.01" width="80.1765" height="25.717">
+   <properties>
+    <property name="trigger_type" value="tigger"/>
+   </properties>
+  </object>
+  <object id="45" name="no_box" type="ReturnTriggerWall" x="167.917" y="1193.57" width="36.3063" height="81.6893">
+   <properties>
+    <property name="trigger_type" value="tigger"/>
    </properties>
   </object>
  </objectgroup>

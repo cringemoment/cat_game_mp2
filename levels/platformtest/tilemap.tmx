@@ -41,12 +41,12 @@
   <object id="3" name="player" x="160" y="480">
    <point/>
   </object>
-  <object id="6" name="platform1" type="PlatformTrigger" x="658.691" y="572.931" width="178.605" height="31.9608">
+  <object id="6" name="platform1" type="PlatformTrigger" x="439.665" y="573.871" width="76.1423" height="31.9608">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="8" name="platform1" type="PlatformTrigger" x="155.346" y="569.912" width="178.605" height="31.9608">
+  <object id="8" name="platform1" type="PlatformTrigger" x="434.533" y="418.568" width="73.3223" height="31.9608">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
@@ -77,7 +77,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="physics_objects" class="physics_objects">
-  <object id="4" name="platform1" type="HorizontalPlatform" gid="30" x="414.465" y="596.176" width="128" height="32">
+  <object id="4" name="platform1" type="VerticalPlatform" gid="30" x="413.525" y="545.415" width="128" height="32">
    <properties>
     <property name="trigger_type" value="activated"/>
    </properties>

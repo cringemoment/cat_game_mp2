@@ -25,16 +25,16 @@
  <tile id="5">
   <image source="../objects/table.png" width="64" height="32"/>
  </tile>
- <tile id="6">
+ <tile id="6" type="TrapDoor">
   <image source="../objects/trapdoor_closed.png" width="64" height="32"/>
  </tile>
- <tile id="7" type="StartOpenTrapDoor">
+ <tile id="7" type="ReverseTrapDoor">
   <image source="../objects/trapdoor_open.png" width="64" height="32"/>
  </tile>
  <tile id="10">
   <image source="../objects/tablewithphone.png" width="96" height="64"/>
  </tile>
- <tile id="11">
+ <tile id="11" type="ReverseDoor">
   <image source="../objects/door_open.png" width="32" height="64"/>
  </tile>
 </tileset>
