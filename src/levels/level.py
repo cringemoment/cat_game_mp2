@@ -68,6 +68,7 @@ level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
 level_2 = Level("levels/level_2", "s", "y813202171293")
 train_station = Level("levels/train_station", "Level 2", "OFF-THE-RAIL")
 train_level = Level("levels/level_3")
+# platformtest = Level("levels/platformtest")
 
 levels = {
 "main_menu": main_menu,
@@ -76,6 +77,7 @@ levels = {
 "level_2": level_2,
 "level_3": train_station,
 "train_level": train_level,
+# "platformtest": platformtest
 }
 
 phonebook_levels = {
