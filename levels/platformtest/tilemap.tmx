@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="12">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
  <layer id="1" name="Tile Layer 1" class="level" width="30" height="20">
@@ -38,15 +38,15 @@
   <object id="2" name="player_2" x="64" y="480">
    <point/>
   </object>
-  <object id="3" name="player" x="160" y="480">
+  <object id="3" name="player" x="788.876" y="219.613">
    <point/>
   </object>
-  <object id="6" name="platform1" type="PlatformTrigger" x="439.665" y="573.871" width="76.1423" height="31.9608">
+  <object id="6" name="platform1" type="PlatformTrigger" x="47.6751" y="592.672" width="865.763" height="13.1603">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="8" name="platform1" type="PlatformTrigger" x="434.533" y="418.568" width="73.3223" height="31.9608">
+  <object id="8" name="platform1" type="PlatformTrigger" x="41.603" y="285.085" width="865.763" height="31.9608">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
@@ -77,10 +77,11 @@
 </data>
  </layer>
  <objectgroup id="3" name="physics_objects" class="physics_objects">
-  <object id="4" name="platform1" type="VerticalPlatform" gid="30" x="413.525" y="545.415" width="128" height="32">
+  <object id="4" name="platform1" type="VerticalPlatform" gid="30" x="412.585" y="547.295" width="128" height="32">
    <properties>
     <property name="trigger_type" value="activated"/>
    </properties>
   </object>
+  <object id="9" name="box1" gid="26" x="449.312" y="224.685" width="32" height="32"/>
  </objectgroup>
 </map>
