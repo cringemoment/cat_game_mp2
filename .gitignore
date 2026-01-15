@@ -2,3 +2,4 @@ __pycache__/
 .idea/
 cat_game.tiled-session
 cat_gme.tiled-project
+settings.json
