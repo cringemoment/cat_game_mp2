@@ -11,11 +11,17 @@ class Button(Sprite, Trigger):
         self.object_interactible = True
         self.on = False
 
+        self.load_color()
+
+    def load_color(self):
+        color = getattr(self.properties, "color", "red")
         sprites = {
-            "pressed": "objects/button_pressed.png"
+            "unpressed": f"objects/{color}_button.png",
+            "pressed": f"objects/{color}_button_pressed.png"
         }
 
         self.set_sprites(sprites)
+        self.change_image("unpressed")
 
     def on_enter(self, player):
         if not self.on:
@@ -26,7 +32,7 @@ class Button(Sprite, Trigger):
 
     def on_both_leave(self):
         Trigger.on_both_leave(self)
-        self.change_image("default")
+        self.change_image("unpressed")
         self.level.game.sound_handler.play_sound("button")
         self.on = False
 
