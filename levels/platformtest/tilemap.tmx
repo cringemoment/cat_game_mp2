@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="19">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
  <layer id="1" name="Tile Layer 1" class="level" width="30" height="20">
@@ -17,12 +17,12 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
@@ -62,37 +62,40 @@
   <object id="2" name="player_2" x="64" y="480">
    <point/>
   </object>
-  <object id="3" name="player" x="788.876" y="219.613">
+  <object id="3" name="player" x="128" y="480">
    <point/>
   </object>
-  <object id="6" name="platform1" type="PlatformTrigger" x="47.6751" y="592.672" width="518.946" height="13.1603">
+  <object id="14" name="room1" type="Trigger" x="252.867" y="545.214" width="63.9217" height="62.0416">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="8" name="platform1" type="PlatformTrigger" x="41.603" y="285.085" width="865.763" height="31.9608">
+  <object id="15" name="return" type="ReturnPlayerTrigger" x="479.412" y="413.611">
    <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
-  <object id="12" name="akjsdgakjgds" gid="27" x="704" y="608" width="32" height="32">
-   <properties>
-    <property name="color" value="red"/>
-   </properties>
-  </object>
-  <object id="13" name="lll" type="Button" gid="38" x="736" y="608" width="32" height="32">
-   <properties>
-    <property name="color" value="red"/>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup id="3" name="physics_objects" class="physics_objects">
-  <object id="4" name="platform1" type="VerticalPlatform" gid="30" x="412.585" y="547.295" width="128" height="32">
-   <properties>
+    <property name="room" value="two"/>
     <property name="trigger_type" value="activated"/>
    </properties>
+   <point/>
   </object>
-  <object id="9" name="box1" gid="26" x="449.312" y="224.685" width="32" height="32"/>
+  <object id="16" name="return" type="Trigger" x="611.956" y="423.011" width="29.1408" height="177.665">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="17" name="room1" type="RoomChange" x="243.78" y="550.58" width="72.3819" height="55.4614">
+   <properties>
+    <property name="room" value="two"/>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="18" name="room1" type="CameraPos" x="32" y="0">
+   <properties>
+    <property name="screen_hight" value="20"/>
+    <property name="screen_width" value="30"/>
+    <property name="trigger_type" value="activated"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
+ <objectgroup id="3" name="physics_objects" class="physics_objects"/>
 </map>

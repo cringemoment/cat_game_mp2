@@ -26,13 +26,18 @@ class ReturnTriggerWall(Trigger):
 class ReturnPlayerTrigger(ActivatedObject):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.test = False
+
+    def on_enter(self, player):
+
+        if type(player).__name__ == "Player":
+            if player.room == self.properties["room"]:
+                player.x = self.x
+                player.y = self.y
+
+class RoomChange(Trigger):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def on_trigger(self):
-        print("hello")
-        self.test = True
-
-    def on_any_enter(self, player):
-        if type(player).__name__ == "Player" and self.test:
-            player.x = float(self.properties["return_x"])
-            player.y = float(self.properties["return_y"])
+        self.players_inside[0].room = self.properties["room"]
+        self.players_inside[1].room = self.properties["room"]

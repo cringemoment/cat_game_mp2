@@ -62,6 +62,8 @@ class Player(PhysicsObject):
 
         self.current_trigger_inside = None
 
+        self.room = 'none'
+
     def load_inputs(self, input_device, controls):
         self.input_device = input_device
         self.input_handler = InputHandler(self, input_device, controls)
