@@ -144,13 +144,68 @@ class NumberChooser(Widget):
 
         pygame.draw.rect(surface, (255, 255, 255), (self.slider_x, self.slider_y, self.slider_fill_width, self.slider_height), border_radius = self.border_radius)
 
-class ControlWidget(Widget):
-    def __init__(self, menu, x, y, action, keybind1, keybind2, font=None):
+class ControlsWidget(Widget):
+    def __init__(self, menu, x, y, action, keys, font, key_gap=16):
         super().__init__(menu, x, y)
-        self.action = action
-        self.kb1 = keybind1
-        self.kb2 = keybind2
+
         self.font = font
+        self.action = action
+        self.key1, self.key2 = keys
+        self.controls_x = 500
+
+        self.key_gap = key_gap
+
+        self.default_color = (220, 220, 220)
+        self.highlighted_color = (255, 255, 0)
+        self.box_color = (60, 60, 60)
+
+        self.color = self.default_color
+
+        self.render_keys()
+
+    def render_keys(self):
+        self.action_surf = self.font.render(self.action, True, self.color)
+        self.key1_surf = self.font.render(self.key1, True, self.color)
+        self.key2_surf = self.font.render(self.key2, True, self.color)
+
+        self.action_rect = self.action_surf.get_rect(topleft=(self.x, self.y))
+
+        k1_x = self.controls_x
+        self.key1_rect = self.key1_surf.get_rect(midleft=(k1_x, self.action_rect.centery))
+
+        k2_x = self.controls_x + self.key_gap
+        self.key2_rect = self.key2_surf.get_rect(midleft=(k2_x, self.action_rect.centery))
+
+        right = self.key2_rect.right
+        self.rect = pygame.Rect(self.x, self.y, right - self.x, self.action_rect.height)
+
+    def set_keys(self, key1=None, key2=None):
+        if key1:
+            self.key1 = key1
+        if key2:
+            self.key2 = key2
+        self.render_keys()
+
+    def on_highlight(self):
+        self.color = self.highlighted_color
+        self.render_keys()
+
+    def on_unhighlight(self):
+        self.color = self.default_color
+        self.render_keys()
+
+    def on_select(self):
+        self.menu.start_rebind(self)
+
+    def draw(self, surface):
+        for rect in (self.key1_rect, self.key2_rect):
+            box = rect.inflate(12, 8)
+            pygame.draw.rect(surface, self.box_color, box, border_radius=4)
+            pygame.draw.rect(surface, self.color, box, 2, border_radius=4)
+
+        surface.blit(self.action_surf, self.action_rect)
+        surface.blit(self.key1_surf, self.key1_rect)
+        surface.blit(self.key2_surf, self.key2_rect)
 
 class Menu:
     def __init__(self, menuhandler):
@@ -323,19 +378,27 @@ class ControlsMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        with open("src/player/controls/profile_1.json") as f:
-            controls = json.load(f)
-            for action in controls:
-                for keybind in controls[action]:
-                    pass
-                    # if type(keybind).__name__ == "int":
-                    #     # print(f"{action}: {pygame.key.name(keybind)}")
-                    # else:
-                    #     # print(f"{action}: {keybind}")
+        self.widgets = []
 
-        self.widgets = [
-            TextButton(self, 875, 75, text="Unpause", font=font, command=self.go_back, align="right")
-        ]
+        with open("src/player/controls/profile_2.json") as f:
+            controls = json.load(f)
+            for actionindex, action in enumerate(controls):
+                keys = []
+                for keybind in controls[action]:
+                    if type(keybind).__name__ == "int":
+                        keys.append(pygame.key.name(keybind))
+                    else:
+                        keys.append(keybind)
+
+                if len(keys) == 1:
+                    keys.append("")
+
+                self.widgets.append(ControlsWidget(self, 600, 60 * (actionindex + 1), action = action, keys = keys, font = font))
+
+        self.widgets.append(TextButton(self, 875, 150, text="Go Back", font=font, command=self.go_back, align="right"))
+
+    def start_rebind(self):
+        pass
 
     def go_back(self):
         self.menuhandler.change_menu("default")

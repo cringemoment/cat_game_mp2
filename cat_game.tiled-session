@@ -41,14 +41,16 @@
         "assets/objects/tablewithphone.tsx": {
             "scaleInDock": 1
         },
-        "assets/tilesets/WarehouseTileset_Metal_filled.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
         "assets/tilesets/WarehouseTileset_Wall_Gray.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/WarehouseTileset_Wall_Lightgray.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/autoscroller.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/cat_bg_test.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/kidwithcandy.tsx": {
@@ -57,6 +59,9 @@
         },
         "assets/tilesets/objects.tsx": {
             "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "assets/tilesets/sunset.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/testingtileset.tsx": {
@@ -73,14 +78,6 @@
             "scaleInEditor": 0.75
         },
         "assets/tilesets/warehouse_metal.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
-        "assets/tilesets/warehouse_wood_1.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
-        "assets/tilesets/warehouse_wood_2.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -183,16 +180,17 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 710.6666666666665,
+                "x": 710,
                 "y": 783.3333333333333
             }
         },
         "levels/level_1/tilemap.tmx": {
             "expandedObjectLayers": [
-                2
+                2,
+                3
             ],
             "scale": 0.46807291666666667,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 789.4069211082676,
                 "y": 785.1340825637031
@@ -200,13 +198,23 @@
         },
         "levels/level_2/tilemap.tmx": {
             "expandedObjectLayers": [
-                6
+                4,
+                2,
+                3
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 750.6666666666665,
-                "y": 888.6666666666667
+                "x": 805,
+                "y": 1191
+            }
+        },
+        "levels/level_3/tilemap.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 815,
+                "y": 761
             }
         },
         "levels/main_menu/tilemap.tmx": {
@@ -294,25 +302,22 @@
         "assets/tilesets/warehouse_metal.tsx",
         "assets/tilesets/warehouse_background.tsx",
         "levels/level_2/tilemap.tmx",
-        "levels/level_0/tilemap.tmx",
-        "assets/tilesets/WarehouseTileset_Metal_filled.tsx",
-        "assets/tilesets/warehouse_wood_1.tsx",
-        "assets/tilesets/warehouse_wood_2.tsx"
+        "levels/level_0/tilemap.tmx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
         "assets/tilesets/warehouse_metal.tsx",
         "assets/tilesets/warehouse_background.tsx",
-        "assets/tilesets/warehouse_wood_2.tsx",
-        "assets/tilesets/warehouse_wood_1.tsx",
-        "assets/tilesets/WarehouseTileset_Metal_filled.tsx",
         "levels/level_0/tilemap.tmx",
         "levels/level_2/tilemap.tmx",
         "levels/decorated_level_0/tilemap.tmx",
         "levels/button_test.tmx",
         "levels/techdemo.tmx",
         "levels/level_0.tmx",
-        "levels/test.tsx"
+        "levels/test.tsx",
+        "levels/orange.tsx",
+        "levels/wee.tsx",
+        "assets/objects/button.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
