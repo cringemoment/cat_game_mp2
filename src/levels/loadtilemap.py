@@ -116,6 +116,7 @@ class TileMap:
                         physics_object.y = obj.y
                         physics_object.rect.x = obj.x
                         physics_object.rect.y = obj.y
+                        physics_object.properties = obj.properties
                         physics_object.change_image("default")
                         self.physics_objects.add(physics_object)
 

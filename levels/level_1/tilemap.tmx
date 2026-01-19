@@ -89,17 +89,17 @@
     <property name="speed" value="1"/>
    </properties>
   </object>
-  <object id="67" name="platform" type="VerticalPlatform" gid="30" x="800" y="576" width="128" height="32">
+  <object id="67" name="platform" type="VerticalPlatform" gid="30" x="800" y="608" width="128" height="32">
+   <properties>
+    <property name="speed" value="1"/>
+   </properties>
+  </object>
+  <object id="68" name="platform" type="HorizontalPlatform" gid="30" x="640" y="384" width="128" height="32">
    <properties>
     <property name="speed" value="-1"/>
    </properties>
   </object>
-  <object id="68" name="platform" type="HorizontalPlatform" gid="30" x="576" y="352" width="128" height="32">
-   <properties>
-    <property name="speed" value="-1"/>
-   </properties>
-  </object>
-  <object id="69" name="platfom" type="HorizontalPlatform" gid="30" x="256" y="352" width="128" height="32">
+  <object id="69" name="platform" type="HorizontalPlatform" gid="30" x="192" y="384" width="128" height="32">
    <properties>
     <property name="speed" value="1"/>
    </properties>
@@ -118,10 +118,10 @@
   <object id="25" name="player" x="64" y="1504">
    <point/>
   </object>
-  <object id="26" name="player_2" x="192" y="1504">
+  <object id="26" name="player_2" x="160" y="1504">
    <point/>
   </object>
-  <object id="27" name="default" type="CameraPos" x="0" y="32">
+  <object id="27" name="default" type="CameraPos" x="0" y="1312">
    <properties>
     <property name="screen_height" value="10"/>
     <property name="screen_width" value="30"/>
@@ -170,22 +170,22 @@
   </object>
   <object id="38" name="door4" gid="27" x="416" y="960" width="32" height="32"/>
   <object id="41" name="trapdoor1" gid="27" x="864" y="1280" width="32" height="32"/>
-  <object id="71" name="platform" type="PlatformTrigger" x="32" y="320" width="65" height="32">
+  <object id="71" name="platform" type="PlatformTrigger" x="32" y="352" width="63" height="32">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="74" name="platform" type="PlatformTrigger" x="448" y="320" width="64" height="32">
+  <object id="74" name="platform" type="PlatformTrigger" x="418" y="352" width="123" height="32">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="75" name="platform" type="PlatformTrigger" x="864" y="320" width="64" height="32">
+  <object id="75" name="platform" type="PlatformTrigger" x="864" y="352" width="65" height="32">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="76" name="platform" type="PlatformTrigger" x="832" y="576" width="64" height="32">
+  <object id="76" name="platform" type="PlatformTrigger" x="832" y="608" width="64" height="32">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>

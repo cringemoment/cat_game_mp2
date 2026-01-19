@@ -6,23 +6,31 @@ class HorizontalPlatform(PhysicsObject, ActivatedObject):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.gravity = 0
-        self.velx = int(self.properties["speed"])
+        self.velx = 0
         self.trigger_interactible = True
         self.air_resistance = 0
         self.friction = 0
+
+    def update(self, *args, **kwargs):
+        super().update(*args, **kwargs)
+        if self.velx == 0:
+            self.velx = int(self.properties["speed"])
 
 class VerticalPlatform(PhysicsObject, ActivatedObject):
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         self.gravity = 0
-        self.vely = 1
+        self.vely = 0
         self.trigger_interactible = True
         self.air_resistance = 0
         self.friction = 0
-        self.velysave = self.vely
+        self.velysave = 0
 
     def update(self, *args, **kwargs):
         super().update(*args, **kwargs)
+        if self.vely == 0 and self.velysave == 0:
+            self.vely = int(self.properties["speed"])
+            self.velysave = self.vely
         self.vely = self.velysave
     def collide_y(self, obj, iteration):
         super().collide_y(obj, iteration)
