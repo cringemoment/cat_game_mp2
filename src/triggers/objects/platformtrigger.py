@@ -11,3 +11,5 @@ class PlatformTrigger(Trigger):
         elif type(player).__name__ == "VerticalPlatform":
             player.vely = player.vely * -1
             player.velysave = player.vely
+        elif type(player).__name__ == "UpPlatform":
+            player.vely = 0
