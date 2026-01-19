@@ -19,12 +19,9 @@ class Box(PhysicsObject):
             self.original_x = self.x
             self.original_y = self.y
 
-class HeavyBox(PhysicsObject):
-    def __init__(self):
-        super().__init__()
+class CargoBox(PhysicsObject):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.collision = True
-        self.pushback_factor = 0.8
-
-    def sprite_collision(self, sprite):
-        if type(sprite).__name__ == "Bullet":
-            self.vely -= 2
+        self.pushback_factor = 0.5
+        self.trigger_interactible = True
