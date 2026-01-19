@@ -42,13 +42,18 @@
             "scaleInDock": 1
         },
         "assets/tilesets/WarehouseTileset_Metal_filled.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 1
         },
         "assets/tilesets/WarehouseTileset_Wall_Gray.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/WarehouseTileset_Wall_Lightgray.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/autoscroller.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/cat_bg_test.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/kidwithcandy.tsx": {
@@ -57,6 +62,9 @@
         },
         "assets/tilesets/objects.tsx": {
             "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "assets/tilesets/sunset.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/testingtileset.tsx": {
@@ -77,12 +85,10 @@
             "scaleInEditor": 1
         },
         "assets/tilesets/warehouse_wood_1.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 1
         },
         "assets/tilesets/warehouse_wood_2.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 1
         },
         "levels/__main_menu/tilemap.tmx": {
             "expandedObjectLayers": [
@@ -183,30 +189,41 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 342.6666666666667,
+                "x": 710,
                 "y": 783.3333333333333
             }
         },
         "levels/level_1/tilemap.tmx": {
             "expandedObjectLayers": [
-                2
+                2,
+                3
             ],
-            "scale": 0.46807291666666667,
-            "selectedLayer": 0,
+            "scale": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 789.4069211082676,
-                "y": 785.1340825637031
+                "x": 257.5,
+                "y": 1090.5
             }
         },
         "levels/level_2/tilemap.tmx": {
             "expandedObjectLayers": [
-                6
+                4,
+                2,
+                3
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 473.33333333333337,
-                "y": 876.6666666666667
+                "x": 805,
+                "y": 1191
+            }
+        },
+        "levels/level_3/tilemap.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 815,
+                "y": 761
             }
         },
         "levels/main_menu/tilemap.tmx": {

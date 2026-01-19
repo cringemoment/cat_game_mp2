@@ -24,26 +24,14 @@ runninganim2 = Animation([
     "sprites/players/axorun4.png",
 ], 0.1)
 
-crouch = Animation([
-    "sprites/players/catcrouch1.png",
-    "sprites/players/catcrouch2.png",
-    "sprites/players/catcrouch3.png",
-    "sprites/players/catcrouch4.png",
-    "sprites/players/catcrouch5.png",
-    "sprites/players/catcrouch6.png",
-    "sprites/players/catcrouch7.png",
-], 0.01)
-
 test_spritelist = {
 "default": idleanimation,
-"crouchanim": crouch,
 "crouch": "sprites/players/catcrouch.png",
 "running": runninganim
 }
 
 test_controller_spritelist = {
 "default": idle2,
-"crouchanim": "sprites/players/axocrouch.png",
 "crouch": "sprites/players/axocrouch.png",
 "running": runninganim2
 }
