@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="objects" tilewidth="128" tileheight="80" tilecount="12" columns="0">
+<tileset version="1.10" tiledversion="1.11.2" name="objects" tilewidth="128" tileheight="80" tilecount="16" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" type="Box">
   <image source="../objects/box.png" width="32" height="32"/>
  </tile>
  <tile id="1" type="Button">
   <properties>
+   <property name="color" value="red"/>
    <property name="trigger_type" value="trigger"/>
   </properties>
   <image source="../objects/red_button.png" width="32" height="32"/>
@@ -42,5 +43,33 @@
  </tile>
  <tile id="13">
   <image source="../objects/cargo_boxes/redcargo.png" width="128" height="80"/>
+ </tile>
+ <tile id="14" type="Button">
+  <properties>
+   <property name="color" value="purple"/>
+   <property name="trigger_type" value="trigger"/>
+  </properties>
+  <image source="../objects/purple_button.png" width="32" height="32"/>
+ </tile>
+ <tile id="15" type="Button">
+  <properties>
+   <property name="color" value="blue"/>
+   <property name="trigger_type" value="trigger"/>
+  </properties>
+  <image source="../objects/blue_button.png" width="32" height="32"/>
+ </tile>
+ <tile id="16" type="Button">
+  <properties>
+   <property name="color" value="green"/>
+   <property name="trigger_type" value="trigger"/>
+  </properties>
+  <image source="../objects/green_button.png" width="32" height="32"/>
+ </tile>
+ <tile id="17" type="Button">
+  <properties>
+   <property name="color" value="gray"/>
+   <property name="trigger_type" value="trigger"/>
+  </properties>
+  <image source="../objects/gray_button.png" width="32" height="32"/>
  </tile>
 </tileset>
