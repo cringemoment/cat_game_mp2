@@ -10,7 +10,7 @@ class Door(PhysicsObject, ActivatedObject):
 
         self.sprites = {
             "closed": "objects/door_closed.png",
-            "open": "objects/door_open.png"
+            "open": "objects/open_door_red.png"
         }
 
         self.set_sprites(self.sprites)

@@ -14,7 +14,7 @@
   <properties>
    <property name="trigger_type" value="trigger"/>
   </properties>
-  <image source="../objects/door_closed.png" width="32" height="64"/>
+  <image source="../objects/door_red.png" width="32" height="64"/>
  </tile>
  <tile id="3">
   <image source="../objects/heavybox.png" width="64" height="64"/>
@@ -35,7 +35,7 @@
   <image source="../objects/tablewithphone.png" width="96" height="64"/>
  </tile>
  <tile id="11" type="ReverseDoor">
-  <image source="../objects/door_open.png" width="32" height="64"/>
+  <image source="../objects/open_door_red.png" width="32" height="64"/>
  </tile>
  <tile id="12">
   <image source="../objects/cargo_boxes/bluecargo.png" width="128" height="80"/>
