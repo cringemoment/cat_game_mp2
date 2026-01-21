@@ -7,13 +7,25 @@ class Door(PhysicsObject, ActivatedObject):
         self.gravity = 0
         self.collision = True
         self.pushback_factor = 1
+        self.test = True
 
-        self.sprites = {
-            "closed": "objects/door_closed.png",
-            "open": "objects/open_door_red.png"
+
+    def update(self, *args, **kwargs):
+        super().update(*args, **kwargs)
+        if self.test:
+            self.test = False
+            self.load_color()
+
+
+    def load_color(self):
+        #color = getattr(self.properties, "color", "red")
+        color = self.properties["color"]
+        sprites = {
+            "closed": f"objects/door_{color}.png",
+            "open": f"objects/open_door_{color}.png"
         }
 
-        self.set_sprites(self.sprites)
+        self.set_sprites(sprites)
 
     def on_any_enter(self, player):
         self.change_image("open")
@@ -21,7 +33,7 @@ class Door(PhysicsObject, ActivatedObject):
         self.level.game.sound_handler.play_sound("door_open")
 
     def on_both_leave(self):
-        self.change_image("default")
+        self.change_image("closed")
         self.collision = True
         self.level.game.sound_handler.play_sound("door_close")
 

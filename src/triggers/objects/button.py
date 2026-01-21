@@ -14,14 +14,14 @@ class Button(Sprite, Trigger):
         self.load_color()
 
     def load_color(self):
-        color = getattr(self.properties, "color", "red")
+        #color = getattr(self.properties, "color", "red")
+        color = self.properties["color"]
         sprites = {
             "unpressed": f"objects/{color}_button.png",
             "pressed": f"objects/{color}_button_pressed.png"
         }
 
         self.set_sprites(sprites)
-        self.change_image("unpressed")
 
     def on_enter(self, player):
         if not self.on:
