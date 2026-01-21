@@ -9,7 +9,6 @@ class Door(PhysicsObject, ActivatedObject):
         self.pushback_factor = 1
         self.test = True
 
-
     def update(self, *args, **kwargs):
         super().update(*args, **kwargs)
         if self.test:
@@ -20,6 +19,7 @@ class Door(PhysicsObject, ActivatedObject):
     def load_color(self):
         #color = getattr(self.properties, "color", "red")
         color = self.properties["color"]
+
         sprites = {
             "closed": f"objects/door_{color}.png",
             "open": f"objects/open_door_{color}.png"
@@ -43,16 +43,25 @@ class ReverseDoor(PhysicsObject, ActivatedObject):
         self.gravity = 0
         self.collision = False
         self.pushback_factor = 1
+        self.test = True
 
-        self.sprites = {
-            "closed": "objects/door_closed.png",
-            "open": "objects/door_open.png"
+    def update(self, *args, **kwargs):
+        super().update(*args, **kwargs)
+        if self.test:
+            self.test = False
+            self.load_color()
+
+    def load_color(self):
+        #color = getattr(self.properties, "color", "red")
+        color = self.properties["color"]
+        sprites = {
+            "closed": f"objects/door_{color}.png",
+            "open": f"objects/open_door_{color}.png"
         }
-
-        self.set_sprites(self.sprites)
+        self.set_sprites(sprites)
 
     def on_any_enter(self, player):
-        self.change_image("default")
+        self.change_image("closed")
         self.collision = True
 
     def on_both_leave(self):
@@ -65,12 +74,25 @@ class ReverseTrapDoor(PhysicsObject, ActivatedObject):
         self.gravity = 0
         self.collision = False
         self.pushback_factor = 1
-        self.sprites = {
-            "closed": "objects/trapdoor_closed.png",
-            "open": "objects/trapdoor_open.png"
+        self.test = True
+
+    def update(self, *args, **kwargs):
+        super().update(*args, **kwargs)
+        if self.test:
+            self.test = False
+            self.load_color()
+
+
+    def load_color(self):
+        #color = getattr(self.properties, "color", "red")
+        color = self.properties["color"]
+
+        sprites = {
+            "closed": f"objects/trapdoor_{color}.png",
+            "open": f"objects/open_trapdoor_{color}.png"
         }
 
-        self.set_sprites(self.sprites)
+        self.set_sprites(sprites)
 
     def on_any_enter(self, player):
         self.change_image("closed")
@@ -86,18 +108,30 @@ class TrapDoor(PhysicsObject, ActivatedObject):
         self.gravity = 0
         self.collision = True
         self.pushback_factor = 1
+        self.test = True
 
-        self.sprites = {
-            "closed": "objects/trapdoor_closed.png",
-            "open": "objects/trapdoor_open.png"
+    def update(self, *args, **kwargs):
+        super().update(*args, **kwargs)
+        if self.test:
+            self.test = False
+            self.load_color()
+
+
+    def load_color(self):
+        #color = getattr(self.properties, "color", "red")
+        color = self.properties["color"]
+
+        sprites = {
+            "closed": f"objects/trapdoor_{color}.png",
+            "open": f"objects/open_trapdoor_{color}.png"
         }
 
-        self.set_sprites(self.sprites)
+        self.set_sprites(sprites)
 
     def on_any_enter(self, player):
         self.change_image("open")
         self.collision = False
 
     def on_both_leave(self):
-        self.change_image("default")
+        self.change_image("closed")
         self.collision = True
