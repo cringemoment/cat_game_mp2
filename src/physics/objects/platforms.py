@@ -48,10 +48,13 @@ class UpPlatform(PhysicsObject, ActivatedObject):
         self.air_resistance = 0
         self.friction = 0
         self.velysave = self.vely
+        self.original_y = None
 
     def update(self, *args, **kwargs):
         super().update(*args, **kwargs)
-        self.vely = self.velysave
+        if self.original_y == None:
+            self.original_y = self.y
+        self.vely = self.velysave if self.y > self.original_y-(int(self.properties["max_hight"])*32) else 0
 
     def collide_y(self, obj, iteration):
         super().collide_y(obj, iteration)
@@ -62,8 +65,7 @@ class UpPlatform(PhysicsObject, ActivatedObject):
 
     def on_any_enter(self, player):
         self.gravity = 0
-        self.velysave = -1
-        self.vely = -1
+        self.velysave = int(self.properties["speed"])
 
     def on_both_leave(self):
         self.velysave = 0
