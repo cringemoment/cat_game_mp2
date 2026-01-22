@@ -94,7 +94,7 @@
    <property name="color" value="orange"/>
    <property name="trigger_type" value="trigger"/>
   </properties>
-  <image source="../objects/orange_button_peramanent.png" width="32" height="32"/>
+  <image source="../objects/orange_button_permanent.png" width="32" height="32"/>
  </tile>
  <tile id="59" type="PermanentButton">
   <properties>

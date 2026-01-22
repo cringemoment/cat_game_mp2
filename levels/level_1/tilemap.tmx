@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="106">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="116">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
  <tileset firstgid="107" source="../../assets/tilesets/testplayer.tsx"/>
@@ -75,7 +75,7 @@
 196,0,0,0,0,0,0,0,0,0,196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
 196,0,0,0,0,0,0,0,0,0,196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
 196,0,0,0,0,0,0,0,107,0,196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
-196,0,0,0,0,196,196,196,196,196,196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
+196,0,0,0,0,0,196,196,196,196,196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
 196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
 196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
 196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,
@@ -149,7 +149,7 @@
   </object>
   <object id="87" name="door4" gid="57" x="128" y="1280" width="32" height="64"/>
   <object id="89" name="door3" gid="56" x="128" y="768" width="32" height="64"/>
-  <object id="66" name="platform" type="VerticalPlatform" gid="30" x="32" y="160" width="128" height="32">
+  <object id="66" name="platform" type="VerticalPlatform" gid="30" x="35" y="160" width="128" height="32">
    <properties>
     <property name="speed" value="1"/>
    </properties>
@@ -172,8 +172,8 @@
   <object id="97" name="door5" gid="71" x="768" y="1280" width="32" height="64"/>
   <object id="99" name="trapdoor4" gid="104" x="704" y="992" width="64" height="32"/>
   <object id="101" name="trapdoor3" gid="99" x="32" y="992" width="64" height="32"/>
-  <object id="103" name="door2" gid="69" x="160" y="1056" width="32" height="64"/>
-  <object id="105" name="trapdoor1" gid="102" x="704" y="1184" width="64" height="32"/>
+  <object id="112" name="door2" gid="80" x="160" y="1056" width="32" height="64"/>
+  <object id="115" name="trapdoor1" gid="103" x="704" y="1184" width="64" height="32"/>
  </objectgroup>
  <objectgroup id="3" name="positions and triggers" class="positions">
   <object id="13" name="trapdoor6" gid="27" x="64" y="640" width="32" height="32"/>
@@ -232,39 +232,44 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="71" name="platform" type="PlatformTrigger" x="32" y="352" width="63" height="32">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
-  <object id="74" name="platform" type="PlatformTrigger" x="418" y="352" width="123" height="32">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
-  <object id="75" name="platform" type="PlatformTrigger" x="864" y="352" width="65" height="32">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
-  <object id="76" name="platform" type="PlatformTrigger" x="832" y="608" width="64" height="32">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
-  <object id="77" name="platform" type="PlatformTrigger" x="32" y="96" width="64" height="32">
-   <properties>
-    <property name="trigger_type" value="trigger"/>
-   </properties>
-  </object>
   <object id="81" name="door3" gid="43" x="512" y="1280" width="32" height="32"/>
   <object id="83" name="door4" gid="42" x="416" y="960" width="32" height="32"/>
   <object id="90" name="trapdoor5" gid="27" x="237.901" y="1280" width="32" height="32"/>
   <object id="96" name="door5" gid="85" x="64" y="1280" width="32" height="32"/>
-  <object id="98" name="trapdoor4" gid="77" x="96" y="1152" width="32" height="32"/>
-  <object id="100" name="trapdoor3" gid="82" x="64" y="768" width="32" height="32"/>
-  <object id="102" name="door2" gid="87" x="32" y="1056" width="32" height="32"/>
-  <object id="104" name="trapdoor1" gid="79" x="864" y="1280" width="32" height="32"/>
+  <object id="98" name="trapdoor4" gid="77" x="160" y="1152" width="32" height="32"/>
+  <object id="100" name="trapdoor3" gid="82" x="65.0437" y="762.781" width="32" height="32"/>
+  <object id="106" name="platform" type="PlatformTrigger" x="32" y="96" width="64" height="32">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="108" name="platform" type="PlatformTrigger" x="416" y="352" width="64" height="32">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="109" name="platform" type="PlatformTrigger" x="480" y="352" width="64" height="32">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="110" name="platform" type="PlatformTrigger" x="864" y="352" width="64" height="32">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="111" name="platform" type="PlatformTrigger" x="832" y="608" width="64" height="32">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="107" name="platform" type="PlatformTrigger" x="32" y="352" width="64" height="32">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+  <object id="113" name="door2" gid="89" x="35.1429" y="1051.38" width="32" height="32"/>
+  <object id="114" name="trapdoor1" gid="78" x="864" y="1280" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="4" name="return triggers" class="positions">
   <object id="44" name="no_box" type="ReturnTrigger" x="608" y="1312" width="130.098" height="32.3319">
