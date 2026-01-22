@@ -38,11 +38,11 @@ class TileMap:
         self.level = level
 
         #separate sprite groups
-        self.backgrounds = pygame.sprite.Group()
         self.collision_tiles = pygame.sprite.Group()
         self.decorations = pygame.sprite.Group()
         self.physics_objects = pygame.sprite.Group()
         self.dialogue_triggers = pygame.sprite.Group()
+        self.foreground = pygame.sprite.Group()
 
         #positions
         self.area_triggers = []
@@ -69,11 +69,8 @@ class TileMap:
                         #collidable only if layer class is "level"
                         if getattr(layer, "class", None) == "level":
                             self.collision_tiles.add(tile)
-                        elif getattr(layer, "class", None) == "background":
-                            pl_x = layer.properties["pl_x"] if "pl_x" in layer.properties else 1
-                            pl_y = layer.properties["pl_y"] if "pl_y" in layer.properties else 1
-                            bg = Tile(tile_image, x, y, (tile_w, tile_h), pl_x, pl_y)
-                            self.backgrounds.add(bg)
+                        elif getattr(layer, "class", None) == "foreground":
+                            self.foreground.add(tile)
                         else:
                             self.decorations.add(tile)
 
@@ -124,10 +121,6 @@ class TileMap:
                     for obj in layer:
                         rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
                         self.dialogue_triggers.append(rect)
-
-
-        for i in self.backgrounds:
-            print(i.x , i.y)
 
     def get_size(self):
         return self.width, self.height

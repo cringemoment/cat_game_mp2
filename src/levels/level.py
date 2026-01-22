@@ -31,12 +31,12 @@ class Level:
         objects = []
 
         groups = [
-            self.tiles.backgrounds,
-            self.tiles.physics_objects,
             self.tiles.decorations,
+            self.tiles.physics_objects,
             self.tiles.collision_tiles,
             self.tiles.physics_objects,
-            self.tiles.area_triggers
+            self.tiles.area_triggers,
+            self.tiles.foreground
         ]
 
         for group in groups:
