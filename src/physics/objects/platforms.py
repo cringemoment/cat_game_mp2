@@ -54,7 +54,7 @@ class UpPlatform(PhysicsObject, ActivatedObject):
         super().update(*args, **kwargs)
         if self.original_y == None:
             self.original_y = self.y
-        self.vely = self.velysave if self.y > self.original_y-(int(self.properties["max_hight"])*32) else 0
+        self.vely = self.velysave if self.y > self.original_y-(int(self.properties["max_height"])*32) else 0
 
     def collide_y(self, obj, iteration):
         super().collide_y(obj, iteration)

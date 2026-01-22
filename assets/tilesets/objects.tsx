@@ -9,7 +9,7 @@
  </tile>
  <tile id="4" type="Platform">
   <properties>
-   <property name="max_hight" value=""/>
+   <property name="max_height" value=""/>
    <property name="speed" value=""/>
   </properties>
   <image source="../objects/platform.png" width="128" height="32"/>
