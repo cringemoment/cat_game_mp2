@@ -257,9 +257,9 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="81" name="door3" gid="43" x="416" y="1280" width="32" height="32"/>
+  <object id="81" name="door3" gid="43" x="512" y="1280" width="32" height="32"/>
   <object id="83" name="door4" gid="42" x="416" y="960" width="32" height="32"/>
-  <object id="90" name="trapdoor5" gid="27" x="288" y="1280" width="32" height="32"/>
+  <object id="90" name="trapdoor5" gid="27" x="237.901" y="1280" width="32" height="32"/>
   <object id="96" name="door5" gid="85" x="64" y="1280" width="32" height="32"/>
   <object id="98" name="trapdoor4" gid="77" x="96" y="1152" width="32" height="32"/>
   <object id="100" name="trapdoor3" gid="82" x="64" y="768" width="32" height="32"/>
@@ -328,7 +328,7 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="53" name="change1" type="RoomChange" x="170" y="1261" width="437" height="16">
+  <object id="53" name="change1" type="RoomChange" x="165.219" y="1260.52" width="437" height="16">
    <properties>
     <property name="room" value="one"/>
     <property name="trigger_type" value="trigger"/>
