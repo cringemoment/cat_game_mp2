@@ -8,7 +8,7 @@ class CameraPos(ActivatedObject):
         )
 
 class CameraPanPos(ActivatedObject):
-    def on_any_enter(self, _):
+    def on_enter(self, _):
         speed_ms = float(self.properties.get("speed", 0.1))
 
         self.level.camera.transition_to(self.x, self.y, int(self.properties["screen_width"]), speed_ms

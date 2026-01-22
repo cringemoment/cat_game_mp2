@@ -42,18 +42,15 @@
             "scaleInDock": 1
         },
         "assets/tilesets/WarehouseTileset_Metal_filled.tsx": {
-            "scaleInDock": 1
+            "dynamicWrapping": false,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
         },
         "assets/tilesets/WarehouseTileset_Wall_Gray.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "assets/tilesets/WarehouseTileset_Wall_Lightgray.tsx": {
-            "scaleInDock": 1
-        },
-        "assets/tilesets/autoscroller.tsx": {
-            "scaleInDock": 1
-        },
-        "assets/tilesets/cat_bg_test.tsx": {
             "scaleInDock": 1
         },
         "assets/tilesets/kidwithcandy.tsx": {
@@ -62,10 +59,8 @@
         },
         "assets/tilesets/objects.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 1
-        },
-        "assets/tilesets/sunset.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "assets/tilesets/testingtileset.tsx": {
             "dynamicWrapping": false,
@@ -81,14 +76,18 @@
             "scaleInEditor": 0.75
         },
         "assets/tilesets/warehouse_metal.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "assets/tilesets/warehouse_wood_1.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "assets/tilesets/warehouse_wood_2.tsx": {
-            "scaleInDock": 1
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "levels/__main_menu/tilemap.tmx": {
             "expandedObjectLayers": [
@@ -189,41 +188,33 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 710,
-                "y": 783.3333333333333
+                "x": 960,
+                "y": 640.6666666666667
             }
         },
         "levels/level_1/tilemap.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                2
             ],
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 257.5,
-                "y": 1090.5
+                "x": 480,
+                "y": 960.6666666666667
             }
         },
         "levels/level_2/tilemap.tmx": {
             "expandedObjectLayers": [
+                10,
                 4,
-                2,
-                3
+                6,
+                9
             ],
             "scale": 0.5,
-            "selectedLayer": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 805,
-                "y": 1191
-            }
-        },
-        "levels/level_3/tilemap.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 4,
-            "viewCenter": {
-                "x": 815,
-                "y": 761
+                "x": 428,
+                "y": 769
             }
         },
         "levels/main_menu/tilemap.tmx": {
@@ -308,28 +299,24 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 60,
     "openFiles": [
-        "assets/tilesets/warehouse_metal.tsx",
-        "assets/tilesets/warehouse_background.tsx",
         "levels/level_2/tilemap.tmx",
         "levels/level_0/tilemap.tmx",
-        "assets/tilesets/WarehouseTileset_Metal_filled.tsx",
-        "assets/tilesets/warehouse_wood_1.tsx",
-        "assets/tilesets/warehouse_wood_2.tsx"
+        "levels/level_1/tilemap.tmx"
     ],
     "project": "cat_game.tiled-project",
     "recentFiles": [
+        "levels/level_1/tilemap.tmx",
+        "levels/level_0/tilemap.tmx",
+        "levels/level_2/tilemap.tmx",
+        "assets/tilesets/objects.tsx",
         "assets/tilesets/warehouse_metal.tsx",
         "assets/tilesets/warehouse_background.tsx",
         "assets/tilesets/warehouse_wood_2.tsx",
         "assets/tilesets/warehouse_wood_1.tsx",
         "assets/tilesets/WarehouseTileset_Metal_filled.tsx",
-        "levels/level_0/tilemap.tmx",
-        "levels/level_2/tilemap.tmx",
         "levels/decorated_level_0/tilemap.tmx",
         "levels/button_test.tmx",
-        "levels/techdemo.tmx",
-        "levels/level_0.tmx",
-        "levels/test.tsx"
+        "levels/techdemo.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

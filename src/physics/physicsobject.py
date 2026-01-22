@@ -10,7 +10,7 @@ MAXX_VELO = 20
 MAXY_VELO = 50
 
 MAX_PHYSICS_CHECKS = 10
-MYSTERY_PHYSICS_CONSTANT = 0 #no comment needed
+MYSTERY_PHYSICS_CONSTANT = 0.1 #no comment needed
 SEARCH_RADIUS = 2 * 32 #32 is tile size, 8 is how many tiles is checked on the left/right side
 
 def minimum_push(n, x): #sometimes collision doesn't push out enough

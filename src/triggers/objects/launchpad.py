@@ -9,5 +9,8 @@ class LaunchPad(Sprite, Trigger):
         self.object_interactible = True
 
     def on_enter(self, player):
-        player.vely = -17
+        if "strength" in self.properties:
+            player.vely = int(self.properties["strength"])
+        else:
+            player.vely = -20
         self.level.game.sound_handler.play_sound("boing")
