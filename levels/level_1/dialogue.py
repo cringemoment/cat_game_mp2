@@ -22,7 +22,7 @@ default = Dialogue([
     DialogueBox("sprites/players/catdialogue.png", "fine")
 
 ])
-random_window = Dialogue([
+'''random_window = Dialogue([
     DialogueBox("sprites/player/__.png", "we gotta invest in this stuff early"),
     DialogueBox("sprites/player/__.png", "but the boss said not to spend money on this"),
     DialogueBox("sprites/player/__.png", "we are not spending we’ll be making"),
@@ -45,8 +45,8 @@ random_window = Dialogue([
     DialogueBox("sprites/player/catdialogue.png", "maybe we should invest, looks like it’s going to make a lot"),
     DialogueBox("sprites/player/missioncontrol.png", "WHAT?!?!?!?!?"),
     DialogueBox("sprites/player/missioncontrol.png", "IT’S A EVIL ORGANIZATION, WE CAN’T INVEST IN THAT")
-])
+])'''
 dialogues = {
     "default": default,
-    "random_window": random_window
+    #"random_window": random_window
 }
