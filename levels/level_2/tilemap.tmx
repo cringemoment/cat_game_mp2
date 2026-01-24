@@ -106,10 +106,10 @@
    </properties>
    <point/>
   </object>
-  <object id="3" name="player" x="736" y="1088">
+  <object id="3" name="player" x="544" y="1184">
    <point/>
   </object>
-  <object id="4" name="player_2" x="640" y="1088">
+  <object id="4" name="player_2" x="640" y="1184">
    <point/>
   </object>
   <object id="11" name="upper_level" type="Trigger" x="32" y="384" width="416" height="608">
@@ -153,7 +153,7 @@
    </properties>
    <point/>
   </object>
-  <object id="118" name="default" type="Trigger" x="480" y="1024" width="416" height="256">
+  <object id="118" name="default" type="Trigger" x="220.009" y="1666.68" width="416" height="256">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>

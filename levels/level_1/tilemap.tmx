@@ -177,7 +177,7 @@
  </objectgroup>
  <objectgroup id="3" name="positions and triggers" class="positions">
   <object id="13" name="trapdoor6" gid="27" x="64" y="640" width="32" height="32"/>
-  <object id="15" name="platform1" gid="27" x="608" y="1440" width="32" height="32"/>
+  <object id="15" name="platform1" gid="27" x="609.044" y="1435.83" width="32" height="32"/>
   <object id="20" name="door1" gid="27" x="896" y="1600" width="32" height="32"/>
   <object id="25" name="player" x="64" y="1504">
    <point/>
@@ -236,7 +236,7 @@
   <object id="83" name="door4" gid="42" x="416" y="960" width="32" height="32"/>
   <object id="90" name="trapdoor5" gid="27" x="237.901" y="1280" width="32" height="32"/>
   <object id="96" name="door5" gid="85" x="64" y="1280" width="32" height="32"/>
-  <object id="98" name="trapdoor4" gid="77" x="160" y="1152" width="32" height="32"/>
+  <object id="98" name="trapdoor4" gid="77" x="160" y="1146.78" width="32" height="32"/>
   <object id="100" name="trapdoor3" gid="82" x="65.0437" y="762.781" width="32" height="32"/>
   <object id="106" name="platform" type="PlatformTrigger" x="32" y="96" width="64" height="32">
    <properties>

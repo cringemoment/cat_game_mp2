@@ -58,8 +58,10 @@ class UpPlatform(PhysicsObject, ActivatedObject):
 
     def collide_y(self, obj, iteration):
         super().collide_y(obj, iteration)
+        if self.original_y != None:
+            self.vely = self.velysave if self.y > self.original_y - (int(self.properties["max_height"]) * 32) else 0
         if type(obj).__name__ == "Box" or type(obj).__name__ == "Player":
-            if obj.bottom == self.y:
+            if obj.bottom == self.y and self.vely != 0:
                 obj.on_ground = True
                 obj.vely = self.velysave - 0.5 if self.velysave < 0 else 0
 
@@ -68,5 +70,5 @@ class UpPlatform(PhysicsObject, ActivatedObject):
         self.velysave = int(self.properties["speed"])
 
     def on_both_leave(self):
+        self.gravity = -self.velysave
         self.velysave = 0
-        self.gravity = 0.7
