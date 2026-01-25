@@ -6,6 +6,7 @@
  <tileset firstgid="132" source="../../assets/tilesets/kidwithcandy.tsx"/>
  <tileset firstgid="136" source="../../assets/tilesets/new_buildingtileset.tsx"/>
  <tileset firstgid="200" source="../../assets/objects/racoons/racoons.tsx"/>
+ <tileset firstgid="207" source="../../assets/tilesets/WarehouseTileset_Metal_filled.tsx"/>
  <layer id="6" name="background" class="decoration" width="30" height="60">
   <data encoding="csv">
 197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,
@@ -180,10 +181,10 @@
   <object id="13" name="trapdoor6" gid="27" x="64" y="640" width="32" height="32"/>
   <object id="15" name="platform1" gid="27" x="609.044" y="1435.83" width="32" height="32"/>
   <object id="20" name="door1" gid="27" x="896" y="1600" width="32" height="32"/>
-  <object id="25" name="player" x="160" y="1472">
+  <object id="25" name="player" x="96" y="1472">
    <point/>
   </object>
-  <object id="26" name="player_2" x="256" y="1472">
+  <object id="26" name="player_2" x="160" y="1472">
    <point/>
   </object>
   <object id="27" name="default" type="CameraPos" x="0" y="1280">
