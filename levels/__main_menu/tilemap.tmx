@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="17">
  <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
  <tileset firstgid="26" source="../../assets/tilesets/objects.tsx"/>
- <tileset firstgid="38" source="../../assets/objects/tablewithphone.tsx"/>
+ <tileset firstgid="107" source="../../assets/objects/tablewithphone.tsx"/>
  <layer id="1" name="level" class="level" width="15" height="10">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -12,8 +12,8 @@
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,38,39,40,0,0,0,0,0,1,
-1,0,0,0,0,0,41,42,43,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
@@ -39,5 +39,8 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="4" name="table" class="physics_objects">
+  <object id="15" name="s" type="Stationary" gid="36" x="192" y="288" width="96" height="64"/>
  </objectgroup>
 </map>

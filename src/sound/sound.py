@@ -26,6 +26,7 @@ class Sound():
         self.load_sound("ringtone", "assets/sounds/ringtone.ogg")
         self.load_sound("dialogue", "assets/sounds/dialogue.ogg")
         self.load_sound("loading_in", "assets/sounds/loading_in.ogg")
+        self.load_sound("levelend", "assets/sounds/levelend.opus")
 
         self.load_bg_music("level0_bg", "assets/sounds/level0_bg.ogg")
 

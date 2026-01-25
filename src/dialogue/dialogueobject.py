@@ -155,7 +155,7 @@ class DialogueHandler:
 
     def set_dialogue(self, d):
         self.current_dialogue = d
-        self.game.sound_handler.play_sound("dialogue")
+        # self.game.sound_handler.play_sound("dialogue")
 
     def update(self, surface, dt):
         if self.current_dialogue is not None:
@@ -166,4 +166,5 @@ class DialogueHandler:
                 return
 
             self.dialogueinputhandler.check()
-            self.current_dialogue.update(surface, dt, self.game.menu_handler.open)
+            if self.current_dialogue is not None: # bruh
+                self.current_dialogue.update(surface, dt, self.game.menu_handler.open)

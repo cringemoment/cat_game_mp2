@@ -7,7 +7,7 @@ class PhoneBook(Trigger):
     #wildly jank but itll work
     def select(self, player):
         if self.players_inside[player.index]:
-            self.level.game.sound_handler.play_sound("ringtone")
+            # self.level.game.sound_handler.play_sound("ringtone")
             self.level.game.phone_book.play()
 
         self.level.game.phone_book.loading = False

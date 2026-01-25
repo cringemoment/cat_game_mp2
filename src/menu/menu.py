@@ -330,8 +330,7 @@ class PauseMenu(Menu):
             TextButton(self, 875, 75, text="Unpause", font=font, command=self.go_back, align="right"),
             TextButton(self, 875, 150, text="Restart Level", font=font, command=self.restart, align="right"),
             TextButton(self, 875, 225, text="Options", font=font, command=self.open_options, align="right"),
-            TextButton(self, 875, 300, text="Controls", font=font, command=self.open_controls, align="right"),
-            TextButton(self, 875, 375, text="Main Menu", font=font, command=self.main_menu, align="right")
+            TextButton(self, 875, 300, text="Main Menu", font=font, command=self.main_menu, align="right")
         ]
 
     def go_back(self):

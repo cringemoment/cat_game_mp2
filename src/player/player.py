@@ -112,7 +112,7 @@ class Player(PhysicsObject):
 
         for obj in colliders:
             if self.colliding(obj):
-                if getattr(obj, "pushback_factor", 1) != 1:
+                if getattr(obj, "pushback_factor", 1) != 1 and not type(obj).__name__ == "Player":
                     obj.y -= (obj.y + obj.rect.height) - self.y
                     obj.update_bounds()
                 else:
@@ -123,11 +123,11 @@ class Player(PhysicsObject):
 
         else:
             self.change_image("default")
-            self.update_bounds()
             self.accel = X_ACCEL
             self.current_velo = MAXX_VELO
             self.uncrouch_queued = False
             self.jump_power = JUMP_POWER
+            self.update_bounds()
 
     def select(self):
         good = False

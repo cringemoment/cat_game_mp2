@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="16">
+ <tileset firstgid="1" source="../../assets/tilesets/testingtileset.tsx"/>
+ <tileset firstgid="26" source="../../assets/tilesets/level_end.tsx"/>
+ <objectgroup id="3" name="bg" class="physics_objects">
+  <object id="6" type="Intangible" gid="27" x="0" y="320" width="480" height="320"/>
+ </objectgroup>
+ <layer id="1" name="Tile Layer 1" class="level" width="15" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,
+0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,
+0,0,0,1,0,0,1,1,1,0,0,1,0,0,0,
+0,0,0,1,0,0,1,1,1,0,0,1,0,0,0,
+0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="s" class="positions">
+  <object id="1" name="player_2" x="128" y="192">
+   <point/>
+  </object>
+  <object id="2" name="player" x="288" y="192">
+   <point/>
+  </object>
+  <object id="3" name="default" type="CameraPos" x="0" y="0">
+   <properties>
+    <property name="screen_height" value="10"/>
+    <property name="screen_width" value="15"/>
+    <property name="trigger_type" value="activated"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="7" name="trans_in" type="Trigger" x="96" y="128" width="288" height="160">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="ss" class="physics_objects">
+  <object id="13" type="Intangible" gid="27" x="67" y="-125" width="480" height="320"/>
+  <object id="14" type="Intangible" gid="27" x="101" y="-160" width="480" height="320"/>
+  <object id="15" name="trans_in" type="DoneIndicator" gid="28" x="111.5" y="128" width="242" height="51">
+   <properties>
+    <property name="trigger_type" value="trigger"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

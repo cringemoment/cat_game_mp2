@@ -47,6 +47,8 @@ class TransitionHandler:
             self._transition_state = None
             self._queued_func = None
 
+            # self.game.paused = False
+
     def update_timers(self, dt):
         if self.time > 0:
             self.time -= dt
