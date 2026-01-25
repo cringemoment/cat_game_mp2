@@ -288,7 +288,7 @@
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>
-  <object id="84" name="end" type="LevelEnd" x="256" y="1120" width="193" height="119">
+  <object id="84" name="end" type="LevelEnd" x="32" y="832" width="298.333" height="128.333">
    <properties>
     <property name="trigger_type" value="trigger"/>
    </properties>
