@@ -34,8 +34,10 @@ class VerticalPlatform(PhysicsObject, ActivatedObject):
         self.vely = self.velysave
     def collide_y(self, obj, iteration):
         super().collide_y(obj, iteration)
+        self.vely = self.velysave
         if type(obj).__name__ == "Box" or type(obj).__name__ == "Player":
             if obj.bottom == self.y:
+                #self.y -= obj.bottom - self.top
                 obj.on_ground = True
                 obj.vely = self.velysave - 0.5
 
