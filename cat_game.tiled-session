@@ -56,6 +56,9 @@
         "assets/tilesets/WarehouseTileset_Wall_Lightgray.tsx": {
             "scaleInDock": 1
         },
+        "assets/tilesets/decor objects.tsx": {
+            "dynamicWrapping": true
+        },
         "assets/tilesets/kidwithcandy.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1
@@ -197,30 +200,36 @@
                 2
             ],
             "scale": 0.75,
-            "selectedLayer": 6,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 439.33333333333326,
+                "x": 711.3333333333333,
                 "y": 813.3333333333333
             }
         },
         "levels/level_1/tilemap.tmx": {
             "expandedObjectLayers": [
+                4,
                 2,
                 3
             ],
-            "scale": 0.75,
-            "selectedLayer": 3,
+            "scale": 0.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 479.33333333333326,
-                "y": 100
+                "x": 671,
+                "y": 810
             }
         },
         "levels/level_2/tilemap.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                4,
+                6,
+                9
+            ],
+            "scale": 1,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 192.66666666666663,
-                "y": 546.6666666666665
+                "x": 711.5,
+                "y": 320
             }
         },
         "levels/level_end/tilemap.tmx": {

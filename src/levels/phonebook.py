@@ -7,7 +7,7 @@ from json import load
 level_0 = Dialogue([
     DialogueBox("sprites/players/catdialogue.png", "yello"),
     DialogueBox("sprites/players/missioncontrol.png", "hello, Agent Calico", 40),
-    DialogueBox("sprites/players/catdiaogue.png", "oh, hey it's been a while"),
+    DialogueBox("sprites/players/catdialogue.png", "oh, hey it's been a while"),
     DialogueBox("sprites/players/missioncontrol.png", "yes it has, listen, I know you've been out of the game for a while,"),
     DialogueBox("sprites/players/missioncontrol.png", "but this intel mission is too critical to put anyone else on the job"),
     DialogueBox("sprites/players/catdoubt.png", "we're out of the business now man"),

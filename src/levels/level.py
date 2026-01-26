@@ -64,8 +64,8 @@ class Level:
 
 main_menu = Level("levels/__main_menu", "", "", "main_menu_bg")
 level_0 = Level("levels/level_0", "Level 0", "1-800-HOW-PLAY", "level0_bg")
-level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
-level_2 = Level("levels/level_2", "Level 2", "613-THE-INFO")
+level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE", "level0_bg")
+level_2 = Level("levels/level_2", "Level 2", "613-THE-INFO", "level0_bg")
 train_station = Level("levels/train_station", "Level ?", "COM-ING-SOON!")
 train_level = Level("levels/level_3")
 level_end = Level("levels/level_end")

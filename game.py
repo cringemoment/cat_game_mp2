@@ -29,7 +29,7 @@ class Game:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        default_level = "main_menu"
+        default_level = "level_2"
         self.current_level = None
 
         self.menu_handler = MenuHandler(self)
@@ -72,6 +72,7 @@ class Game:
         self.mimimi = [0] * self.mi
 
         self.bruh = False
+        self.p_pushed = False
 
     def load_inputs(self, i1, i2, c1, c2):
         self.player1.load_inputs(i1, c1)
@@ -151,11 +152,21 @@ class Game:
         if self.keyboard.get_key(pygame.K_k)() and self.dialogue_handler.current_dialogue:
             self.dialogue_handler.current_dialogue.finished = True
 
-        if self.keyboard.get_key(pygame.K_j)():
-            self.transition_handler.close(self.player1, self.player2)
-
-        if self.keyboard.get_key(pygame.K_n)():
-            self.transition_handler.open(self.player1, self.player2)
-
         if self.keyboard.get_key(pygame.K_p)():
-            self.transition_load_level("main_menu")
+            if self.p_pushed: return
+            self.p_pushed = True
+            mx, my = pygame.mouse.get_pos()
+
+            cam = self.current_level.camera
+
+            # convert screen → world
+            world_x = mx / cam.scale_factor_x + cam.offset.x
+            world_y = my / cam.scale_factor_y + cam.offset.y
+
+            self.player1.x = world_x - 32
+            self.player1.y = world_y - 32
+            self.player2.x = world_x + 32
+            self.player2.y = world_y - 32
+
+        else:
+            self.p_pushed = False

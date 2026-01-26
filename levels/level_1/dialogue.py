@@ -87,5 +87,5 @@ end = Dialogue([
 dialogues = {
     "default": default,
     "random_window": random_window,
-    "end": end
+    "enddialogue": end
 }
