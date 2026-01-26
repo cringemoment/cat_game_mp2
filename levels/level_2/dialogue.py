@@ -48,7 +48,6 @@ end = Dialogue([
 
 ])
 
-
 dialogues = {
     ".default": default,
     "end": end

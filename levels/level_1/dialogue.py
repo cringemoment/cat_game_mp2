@@ -19,7 +19,13 @@ default = Dialogue([
     DialogueBox("sprites/players/missioncontrolmad.png","you will NOT be going through the front door, you'll be going up the side of the building to get to the top level"),
     DialogueBox("sprites/players/axolotldialogue.png", "sounds boring"),
     DialogueBox("sprites/players/missioncontrol.png","well to bad, you will go up the side of the building, and if anyone asks you two are just window cleaners, okay?"),
-    DialogueBox("sprites/players/catdialogue.png", "fine")
+    DialogueBox("sprites/players/catdialogue.png", "fine"),
+    DialogueBox("sprites/players/axolotldialogue.png", "what do we do if they ask about our guns?"),
+    DialogueBox("sprites/players/axolotldialogue.png", "the ones that we can shoot by pressing left click or right bumper on the controller?"),
+    DialogueBox("sprites/players/axolotldialogue.png", "and that helps us gets over walls we couldn't get over otherwise, by shooting each other over as a neat and interesting concept for a platforming game?"),
+    DialogueBox("sprites/players/catdoubt.png", "what"),
+    DialogueBox("sprites/players/missioncontrol.png", "what"),
+    DialogueBox("sprites/players/missioncontrol.png", "just dont show your guns if they ask you"),
 
 ])
 random_window = Dialogue([
@@ -53,7 +59,8 @@ end = Dialogue([
     DialogueBox("sprites/players/axolotldialogue.png", "window cleaners"),
     DialogueBox("sprites/players/racoondialoguetie.png", "oh i see, come to think of it we haven’t cleaned these windows in a long time"),
     DialogueBox("sprites/players/racoondialoguetie.png", "but um.. where are your tools?"),
-    DialogueBox("sprites/players/catsmalleye.png", "uh, right here, *shows gun*"),
+    DialogueBox("sprites/players/catsmalleye.png", "uh, right here"),
+    DialogueBox("sprites/players/catsmalleye.png", "*shows gun*"),
     DialogueBox("sprites/players/missioncontrol!!.png", "?!?!WHAT ARE YOU DOING"),
     DialogueBox("sprites/players/racoondialoguetie.png", "?"),
     DialogueBox("sprites/players/racoondialoguetie.png", "isn’t that a gun?"),

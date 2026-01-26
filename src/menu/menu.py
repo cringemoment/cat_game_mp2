@@ -309,6 +309,7 @@ class MenuHandler:
 
     def pause(self):
         self.game.paused = not self.game.paused
+        self.game.phone_book.close_book()
         self.open = not self.open
         self.change_menu("default")
 

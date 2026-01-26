@@ -39,6 +39,9 @@ class Gun(Sprite):
         return (tip_x, tip_y)
 
     def shoot(self):
+        if self.player.level.game.current_level.name == "Level 0":
+            return
+
         start_pos = self.get_tip_position()
         bullet = Bullet(self.level, start_pos, self.player.aim_angle)
         self.player.groups()[0].add(bullet) #adding it to the main sprites list

@@ -5,9 +5,29 @@ from src.renderer.fonts import title_font, subtitle_font
 from json import load
 
 level_0 = Dialogue([
-    DialogueBox("sprites/players/catdialogue.png", "Who is this?"),
-    # DialogueBox("sprites/players/missioncontrol.png", "Hello, Agent Calico.", 50),
-    # DialogueBox("sprites/players/missioncontrol.png", "I know you've been out of the game for a while."),
+    DialogueBox("sprites/players/catdialogue.png", "Yello?"),
+    DialogueBox("sprites/players/missioncontrol.png", "Hello, Agent Calico.", 40),
+    DialogueBox("sprites/players/missioncontrol.png", "I know you've been out of the game for a while,"),
+    DialogueBox("sprites/players/missioncontrol.png", "But this intel mission is too critical to put anyone else on the job."),
+    DialogueBox("sprites/players/catdoubt.png", "We're out of the business now, man."),
+    DialogueBox("sprites/players/catdoubt.png", "Go find someone else."),
+    DialogueBox("sprites/players/missioncontrol.png", "Five million dollars."),
+    DialogueBox("sprites/players/catdialogue.png", ".."),
+    DialogueBox("sprites/players/axolotldialogue.png", ".."),
+    DialogueBox("sprites/players/catdoubt.png", "..."),
+])
+
+level_1 = Dialogue([
+    DialogueBox("sprites/players/missioncontrol.png", "It's getting real now, Agent Calico."),
+    DialogueBox("sprites/players/missioncontrol.png", "We've got a real promising lead."),
+    DialogueBox("sprites/players/catdialogue.png", "Just say where, and I'll be there."),
+])
+
+level_2 = Dialogue([
+    DialogueBox("sprites/players/missioncontrol.png", "Agent Calico! No time to explain. We've got a new lead. Get there as soon as you can."),
+    DialogueBox("sprites/players/catdoubt.png", "You don't pay us enough for this..."),
+    DialogueBox("sprites/players/axolotldialogue.png", "He definitely does..."),
+    DialogueBox("sprites/players/catdoubt.png", "..."),
 ])
 
 left_align_x = 80
@@ -20,13 +40,6 @@ level_name_positions = {
 "level_1": 180,
 "level_2": 230,
 "level_3": 280
-}
-
-new_level_dialogues = {
-"level_0": level_0,
-"level_1": level_0,
-"level_2": level_0,
-"level_3": level_0,
 }
 
 class PhoneBookInputHandler():
@@ -68,9 +81,16 @@ class PhoneBookInputHandler():
 
 class PhoneBook:
     def __init__(self, game):
+        self.dialogues = {
+        "level_0": level_0,
+        "level_1": level_1,
+        "level_2": level_0,
+        "level_3": level_0,
+        }
+
         self.game = game
         self.open = False
-        self.current_popup = new_level_dialogues["level_0"]
+        self.current_popup = self.dialogues["level_0"]
         self.load_levels()
         self.oops = False
         self.loading = False
@@ -109,9 +129,11 @@ class PhoneBook:
 
     def open_book(self):
         if not self.loading:
+            self.load_levels()
             self.open = True
 
     def close_book(self):
+        self.oops = False #incredible
         self.open = False
 
     def play(self):

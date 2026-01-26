@@ -29,6 +29,7 @@ class Sound():
         self.load_sound("levelend", "assets/sounds/levelend.opus")
 
         self.load_bg_music("level0_bg", "assets/sounds/level0_bg.ogg")
+        self.load_bg_music("main_menu_bg", "assets/sounds/mainmenu_music.opus")
 
     def load_sound(self, file, file_path):
         self.sounds[file] = pygame.mixer.Sound(file_path)

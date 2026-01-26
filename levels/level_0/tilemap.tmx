@@ -290,6 +290,7 @@
   </object>
   <object id="84" name="end" type="LevelEnd" x="32" y="832" width="298.333" height="128.333">
    <properties>
+    <property name="next_level" value="1"/>
     <property name="trigger_type" value="trigger"/>
    </properties>
   </object>

@@ -23,14 +23,13 @@ MAX_FRAMES = 60
 
 background_color = (30, 30, 30)
 
-
 class Game:
     def __init__(self):
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED)
         pygame.display.set_caption(WINDOW_TITLE)
-        default_level = "level_2"
+        default_level = "main_menu"
         self.current_level = None
 
         self.menu_handler = MenuHandler(self)
@@ -85,9 +84,6 @@ class Game:
     def print_debugs(self):
         debugs = {
             "fps": lambda: sum(self.mimimi) // self.mi,
-            "open": lambda: self.phone_book.open,
-            "width": lambda: self.player1.rect.width,
-            "width2": lambda: self.player2.rect.width,
         }
 
         font = pygame.font.SysFont('Comic Sans MS', 20)

@@ -62,11 +62,11 @@ class Level:
         for trigger in self.tiles.area_triggers:
             trigger.update_players()
 
-main_menu = Level("levels/__main_menu", "", "")
+main_menu = Level("levels/__main_menu", "", "", "main_menu_bg")
 level_0 = Level("levels/level_0", "Level 0", "1-800-HOW-PLAY", "level0_bg")
 level_1 = Level("levels/level_1", "Level 1", "569-GET-FILE")
-level_2 = Level("levels/level_2", "s", "y813202171293")
-train_station = Level("levels/train_station", "Level 2", "OFF-THE-RAIL")
+level_2 = Level("levels/level_2", "Level 2", "613-THE-INFO")
+train_station = Level("levels/train_station", "Level ?", "COM-ING-SOON!")
 train_level = Level("levels/level_3")
 level_end = Level("levels/level_end")
 # platformtest = Level("levels/platformtest")
@@ -77,7 +77,6 @@ levels = {
 "level_1": level_1,
 "level_2": level_2,
 "level_3": train_station,
-"train_level": train_level,
 "level_end": level_end
 # "platformtest": platformtest
 }
@@ -86,5 +85,4 @@ phonebook_levels = {
     "level_0": level_0,
     "level_1": level_1,
     "level_2": train_station,
-    "level_3": level_1,
 }
