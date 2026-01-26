@@ -5,29 +5,37 @@ from src.renderer.fonts import title_font, subtitle_font
 from json import load
 
 level_0 = Dialogue([
-    DialogueBox("sprites/players/catdialogue.png", "Yello?"),
-    DialogueBox("sprites/players/missioncontrol.png", "Hello, Agent Calico.", 40),
-    DialogueBox("sprites/players/missioncontrol.png", "I know you've been out of the game for a while,"),
-    DialogueBox("sprites/players/missioncontrol.png", "But this intel mission is too critical to put anyone else on the job."),
-    DialogueBox("sprites/players/catdoubt.png", "We're out of the business now, man."),
-    DialogueBox("sprites/players/catdoubt.png", "Go find someone else."),
-    DialogueBox("sprites/players/missioncontrol.png", "Five million dollars."),
+    DialogueBox("sprites/players/catdialogue.png", "yello"),
+    DialogueBox("sprites/players/missioncontrol.png", "hello, Agent Calico", 40),
+    DialogueBox("sprites/players/catdiaogue.png", "oh, hey it's been a while"),
+    DialogueBox("sprites/players/missioncontrol.png", "yes it has, listen, I know you've been out of the game for a while,"),
+    DialogueBox("sprites/players/missioncontrol.png", "but this intel mission is too critical to put anyone else on the job"),
+    DialogueBox("sprites/players/catdoubt.png", "we're out of the business now man"),
+    DialogueBox("sprites/players/catdoubt.png", "you should find someone el-"),
+    DialogueBox("sprites/players/missioncontrol.png", "five million dollars."),
     DialogueBox("sprites/players/catdialogue.png", ".."),
     DialogueBox("sprites/players/axolotldialogue.png", ".."),
     DialogueBox("sprites/players/catdoubt.png", "..."),
+    DialogueBox("sprites/players/catdoubt.png", "when do we start")
 ])
 
 level_1 = Dialogue([
-    DialogueBox("sprites/players/missioncontrol.png", "It's getting real now, Agent Calico."),
-    DialogueBox("sprites/players/missioncontrol.png", "We've got a real promising lead."),
-    DialogueBox("sprites/players/catdialogue.png", "Just say where, and I'll be there."),
+    DialogueBox("sprites/players/catdialogue.png", "yello"),
+    DialogueBox("sprites/players/missioncontrol.png", "it's getting real now, Agent Calico."),
+    DialogueBox("sprites/players/missioncontrol.png", "we've got a real promising lead."),
+    DialogueBox("sprites/players/catdialogue.png", "do i have to?"),
+    DialogueBox("sprites/players/missioncontrol.png", "yes, yes you do, this is what you signed up for"),
+    DialogueBox("sprites/players/catdoubt.png", "fine")
 ])
 
 level_2 = Dialogue([
-    DialogueBox("sprites/players/missioncontrol.png", "Agent Calico! No time to explain. We've got a new lead. Get there as soon as you can."),
-    DialogueBox("sprites/players/catdoubt.png", "You don't pay us enough for this..."),
-    DialogueBox("sprites/players/axolotldialogue.png", "He definitely does..."),
+    DialogueBox("sprites/players/catdialogue.png", "yello"),
+    DialogueBox("sprites/players/missioncontrol.png", "Agent Calico! no time to explain. we've got a new lead. get there as soon as you can."),
+    DialogueBox("sprites/players/catdoubt.png", "we don't get paid us enough for this..."),
+    DialogueBox("sprites/players/axolotldialogue.png", "we kinda do..."),
     DialogueBox("sprites/players/catdoubt.png", "..."),
+    DialogueBox("sprites/players/catlookotherway.png", "we could be payed more"),
+    DialogueBox("sprites/players/axolotldialogue.png", "true"),
 ])
 
 left_align_x = 80
